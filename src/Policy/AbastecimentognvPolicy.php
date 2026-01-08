@@ -23,23 +23,39 @@ class AbastecimentognvPolicy implements BeforePolicyInterface
     }
     return null;
   }
-  
-  public function canAdd(IdentityInterface $userSession, Abastecimentognv $abastecimentognvData)
+    public function canIndex(IdentityInterface $identity, Abastecimentognv $abastecimentognvData)
   {
-    if ($userSession and ($userSession['operador_id'] || $userSession['supervisor_id'])) {
-      return new Result(true);
-    } else {
-      return new Result(false, 'Erro: abastecimentognv add policy not allowed');
+    if ($identity) {
+      $user_data = $identity->getOriginalData();
+      if ($user_data and ($user_data['operador_id'] || $user_data['supervisor_id'])) {
+        return new Result(true);
+      } else {
+        return new Result(false, 'Erro: abastecimento index policy not allowed');
+      }
     }
-    
   }
   
-  public function canView(IdentityInterface $userSession, Abastecimentognv $abastecimentognvData)
+  public function canAdd(IdentityInterface $identity, Abastecimentognv $abastecimentognvData)
   {
-    if ($userSession and ($userSession['operador_id'] || $userSession['supervisor_id'])) {
-      return new Result(true);
-    } else {
-      return new Result(false, 'Erro: abastecimentognv add policy not allowed');
+    if ($identity) {
+      $user_data = $identity->getOriginalData();
+      if ($user_data and ($user_data['operador_id'] || $user_data['supervisor_id'])) {
+        return new Result(true);
+      } else {
+        return new Result(false, 'Erro: abastecimento add policy not allowed');
+      }
+    }
+  }
+  
+  public function canView(IdentityInterface $identity, Abastecimentognv $abastecimentognvData)
+  {
+    if ($identity) {
+      $user_data = $identity->getOriginalData();
+      if ($user_data and ($user_data['operador_id'] || $user_data['supervisor_id'])) {
+        return new Result(true);
+      } else {
+        return new Result(false, 'Erro: abastecimento view policy not allowed');
+      }
     }
   }
   
@@ -48,7 +64,7 @@ class AbastecimentognvPolicy implements BeforePolicyInterface
     if ($userSession and ($userSession['operador_id'] && $this->sameUser($userSession, $abastecimentognvData) || $userSession['supervisor_id'])) {
       return new Result(true);
     } else {
-      return new Result(false, 'Erro: abastecimentognv add policy not allowed');
+      return new Result(false, 'Erro: abastecimentognv edit policy not allowed');
     }
   }
   

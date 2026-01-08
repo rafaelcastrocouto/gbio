@@ -24,38 +24,51 @@ class AbastecimentoPolicy implements BeforePolicyInterface
     return null;
   }
   
+  public function canIndex(IdentityInterface $identity, Abastecimento $abastecimentoData)
+  {
+    if ($identity) {
+      $user_data = $identity->getOriginalData();
+      if ($user_data and ($user_data['operador_id'] || $user_data['supervisor_id'])) {
+        return new Result(true);
+      } else {
+        return new Result(false, 'Erro: abastecimento index policy not allowed');
+      }
+    }
+  }
+
   public function canAdd(IdentityInterface $identity, Abastecimento $abastecimentoData)
   {
-    if ($identity and ($identity['operador_id'] || $identity['supervisor_id'])) {
-      return new Result(true);
-    } else {
-      return new Result(false, 'Erro: abastecimento add policy not allowed');
-    }
-    // if ($identity) {
-    //   $user_data = $identity->getOriginalData();
-    //   if ($user_data and ($user_data['operador_id'] || $user_data['supervisor_id'])) {
-    //     return new Result(true);
-    //   } else {
-    //     return new Result(false, 'Erro: abastecimento add policy not allowed');
-    //   }
-    // }
-  }
-  
-  public function canView(IdentityInterface $userSession, Abastecimento $abastecimentoData)
-  {
-    if ($userSession and ($userSession['operador_id'] || $userSession['supervisor_id'])) {
-      return new Result(true);
-    } else {
-      return new Result(false, 'Erro: abastecimento add policy not allowed');
+    if ($identity) {
+      $user_data = $identity->getOriginalData();
+      if ($user_data and ($user_data['operador_id'] || $user_data['supervisor_id'])) {
+        return new Result(true);
+      } else {
+        return new Result(false, 'Erro: abastecimento add policy not allowed');
+      }
     }
   }
   
-  public function canEdit(IdentityInterface $userSession, Abastecimento $abastecimentoData)
+  public function canView(IdentityInterface $identity, Abastecimento $abastecimentoData)
   {
-    if ($userSession and ($userSession['operador_id'] && $this->sameUser($userSession, $abastecimentoData) || $userSession['supervisor_id'])) {
-      return new Result(true);
-    } else {
-      return new Result(false, 'Erro: abastecimento add policy not allowed');
+    if ($identity) {
+      $user_data = $identity->getOriginalData();
+      if ($user_data and ($user_data['operador_id'] || $user_data['supervisor_id'])) {
+        return new Result(true);
+      } else {
+        return new Result(false, 'Erro: abastecimento view policy not allowed');
+      }
+    }
+  }
+  
+  public function canEdit(IdentityInterface $identity, Abastecimento $abastecimentoData)
+  {
+    if ($identity) {
+      $user_data = $identity->getOriginalData();
+      if ($user_data and ($user_data['operador_id'] && $this->sameUser($user_data, $abastecimentoData) || $user_data['supervisor_id'])) {
+        return new Result(true);
+      } else {
+        return new Result(false, 'Erro: abastecimento edit policy not allowed');
+      }
     }
   }
   

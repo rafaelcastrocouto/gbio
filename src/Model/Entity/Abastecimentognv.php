@@ -19,8 +19,6 @@ use Cake\ORM\Entity;
  * @property string|null $p_inicial
  * @property string|null $p_final
  * @property string|null $volume
- * @property string|null $valor
- * @property string|null $pureza
  * @property string|null $observacoes
  *
  * @property \App\Model\Entity\User[] $users
@@ -49,8 +47,6 @@ class Abastecimentognv extends Entity
      'p_inicial' => true,
      'p_final' => true,
      'volume' => true,
-     'valor' => true,
-     'pureza' => true,
      'observacoes' => true
     ];
 }

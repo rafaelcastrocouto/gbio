@@ -24,21 +24,21 @@ if ($user_session) { $user_data = $user_session->getOriginalData(); }
                 <h3><?= __('Adicionando Relatório') ?></h3>
                 <span id="clientes" class="hidden"><?= h(json_encode($clientes->toArray())) ?></span>
                 <?php
-                    echo $this->Form->control('user_id', ['label' => 'User_id', 'type' => 'number', 'value' => $user_session->get('id'), 'hidden' => !$user_data['administrador_id'] ]);
-                    echo $this->Form->control('instituicao_id', ['options' => $instituicoes, 'class' => 'form-control']);
+                    echo $this->Form->control('user_id', ['label' => 'ID de Usuário do Autor', 'type' => 'number', 'value' => $user_session->get('id'), 'hidden' => !$user_data['administrador_id'] ]);
+                    echo $this->Form->control('instituicao_id', ['label' => 'Instituição', 'options' => $instituicoes, 'class' => 'form-control']);
                     echo $this->Form->control('data');
-                    echo $this->Form->control('ch4_media_biogas');
-                    echo $this->Form->control('co2_media_biogas');
-                    echo $this->Form->control('o2_media_biogas');
-                    echo $this->Form->control('ch4_media_metano');
-                    echo $this->Form->control('co2_media_metano');
-                    echo $this->Form->control('o2_media_metano');
-                    echo $this->Form->control('n2_media_metano');
-                    echo $this->Form->control('volume_biogas_dia');
-                    echo $this->Form->control('volume_biogas_mes');
-                    echo $this->Form->control('consumo_clientes');
+                    echo $this->Form->control('ch4_media_biogas', ['label' => 'CH₄ Média Biogas (%)']);
+                    echo $this->Form->control('co2_media_biogas', ['label' => 'CO₂ Média Biogas (%)']);
+                    echo $this->Form->control('o2_media_biogas', ['label' => 'O₂ Média Biogas (%)']);
+                    echo $this->Form->control('ch4_media_metano', ['label' => 'CH₄ Média Metano (%)']);
+                    echo $this->Form->control('co2_media_metano', ['label' => 'CO₂ Média Metano (%)']);
+                    echo $this->Form->control('o2_media_metano', ['label' => 'O₂ Média Metano (%)']);
+                    echo $this->Form->control('n2_media_metano', ['label' => 'N₂ Média Metano (%)']);
+                    echo $this->Form->control('volume_biogas_dia', ['label' => 'Total Dia (m³)']);
+                    echo $this->Form->control('volume_biogas_mes', ['label' => 'Total Mês (m³)']);
+                    echo $this->Form->control('consumo_clientes', ['label' => 'Consumo Clientes (m³)']);
                 ?>    
-                        <h3>Clientes</h3>
+                        <h3>Clientes (m³)</h3>
                         <fieldset class="consumo_parsed input"></fieldset>
                         <span class="consumo"><?= h($relatorio->consumo_clientes) ?></span>
                         <script>
@@ -80,11 +80,10 @@ if ($user_session) { $user_data = $user_session->getOriginalData(); }
                             })()
                         </script>
                 <?php
-                    echo $this->Form->control('dispenser');
-                    echo $this->Form->control('energia');
-                    echo $this->Form->control('densidade');
-                    echo $this->Form->control('status');
-                    echo $this->Form->control('observacoes');
+                    echo $this->Form->control('dispenser', ['label' => 'Dispenser (m³)']);
+                    echo $this->Form->control('energia', ['label' => 'Energia (KW)']);
+                    echo $this->Form->control('densidade', ['label' => 'Densidade (Kg/m³)']);
+                    echo $this->Form->control('observacoes', ['label' => 'Observações']);
                 ?>
             </fieldset>
             <?= $this->Form->button(__('Adicionar Relatorio'), ['class' => 'button']) ?>

@@ -28,9 +28,16 @@ class AbastecimentosController extends AppController
      */
     public function index()
     {
-        $abastecimentos = $this->paginate($this->Abastecimentos->find('all')
-            ->contain(['Users', 'Instituicoes', 'Clientes']));
-        
+        $query = $this->Abastecimentos->find('all')
+            ->contain(['Users', 'Instituicoes', 'Clientes']);
+        try {
+            $this->Authorization->authorize($query->first());
+        } catch (ForbiddenException $error) {
+            $user_session = $this->request->getAttribute('identity');
+            $this->Flash->error('Authorization error: ' . $error->getMessage());
+            return $this->redirect(['controller' => 'Users', 'action' => 'view', $user_session->id]);
+        }
+        $abastecimentos = $this->paginate($query);
         $this->set(compact('abastecimentos'));
     }
 
@@ -44,6 +51,13 @@ class AbastecimentosController extends AppController
     public function view($id = null)
     {
         $abastecimento = $this->Abastecimentos->get($id, ['contain' => ['Users', 'Instituicoes', 'Clientes']]);
+        try {
+            $this->Authorization->authorize($abastecimento);
+        } catch (ForbiddenException $error) {
+            $user_session = $this->request->getAttribute('identity');
+            $this->Flash->error('Authorization error: ' . $error->getMessage());
+            return $this->redirect(['controller' => 'Users', 'action' => 'view', $user_session->id]);
+        }
         $this->set(compact('abastecimento'));
     }
 
@@ -61,7 +75,7 @@ class AbastecimentosController extends AppController
         } catch (ForbiddenException $error) {
             $user_session = $this->request->getAttribute('identity');
             $this->Flash->error('Authorization error: ' . $error->getMessage());
-            return $this->redirect(['action' => 'index']);
+            return $this->redirect(['controller' => 'Users', 'action' => 'view', $user_session->id]);
         }
         
         if ($this->request->is('post')) {
@@ -103,7 +117,7 @@ class AbastecimentosController extends AppController
         } catch (ForbiddenException $error) {
             $user_session = $this->request->getAttribute('identity');
             $this->Flash->error('Authorization error: ' . $error->getMessage());
-            return $this->redirect(['action' => 'index']);
+            return $this->redirect(['controller' => 'Users', 'action' => 'view', $user_session->id]);
         }
         
         if ($this->request->is(['patch', 'post', 'put'])) {
@@ -131,6 +145,15 @@ class AbastecimentosController extends AppController
     {
         $this->request->allowMethod(['post', 'delete']);
         $abastecimento = $this->Abastecimentos->get($id);
+        
+        try {
+            $this->Authorization->authorize($abastecimento);
+        } catch (ForbiddenException $error) {
+            $user_session = $this->request->getAttribute('identity');
+            $this->Flash->error('Authorization error: ' . $error->getMessage());
+            return $this->redirect(['controller' => 'Users', 'action' => 'view', $user_session->id]);
+        }
+        
         if ($this->Abastecimentos->delete($abastecimento)) {
             $this->Flash->success(__('The abastecimento has been deleted.'));
         } else {

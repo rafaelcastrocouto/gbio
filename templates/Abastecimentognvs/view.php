@@ -23,7 +23,7 @@
                  <?= h($abastecimentognv->id) ?></td>
                 </tr>
                 <tr>
-                    <th><?= __('Usuário') ?></th>
+                    <th><?= __('Autor') ?></th>
                     <td><?= $this->Html->link($abastecimentognv->user->nome, ['controller' => 'users', 'action' => 'view', $abastecimentognv->user->id]) ?></td>
                 </tr>
                 <tr>
@@ -35,7 +35,7 @@
                     <td><?= $this->Html->link($abastecimentognv->cliente->nome, ['controller' => 'clientes', 'action' => 'view', $abastecimentognv->cliente->id]) ?></td>
                 </tr>
                 <tr>
-                    <th><?= __('Saída') ?></th>
+                    <th><?= __('Data de Saída') ?></th>
                     <td><?= h($abastecimentognv->saida) ?></td>
                 </tr>
                 <tr>
@@ -51,24 +51,16 @@
                     <td><?= h($abastecimentognv->placa) ?></td>
                 </tr>
                 <tr>
-                    <th><?= __('Pressão Inicial') ?></th>
+                    <th><?= __('Pressão Inicial (bar)') ?></th>
                     <td><?= h($abastecimentognv->p_inicial) ?></td>
                 </tr>
                 <tr>
-                    <th><?= __('Pressão Final') ?></th>
+                    <th><?= __('Pressão Final (bar)') ?></th>
                     <td><?= h($abastecimentognv->p_final) ?></td>
                 </tr>
                 <tr>
-                    <th><?= __('Volume') ?></th>
+                    <th><?= __('Volume (m³)') ?></th>
                     <td><?= h($abastecimentognv->volume) ?></td>
-                </tr>
-                <tr>
-                    <th><?= __('Valor') ?></th>
-                    <td><?= h($abastecimentognv->valor) ?></td>
-                </tr>
-                <tr>
-                    <th><?= __('Pureza') ?></th>
-                    <td><?= h($abastecimentognv->pureza) ?></td>
                 </tr>
                 <tr>
                     <th><?= __('Observações') ?></th>

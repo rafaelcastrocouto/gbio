@@ -111,7 +111,7 @@ table p {
     margin: 0;
 } 
 table td, table th {
-    padding: 10px 5px;
+    padding: 10px;
     white-space:nowrap;
     text-align: center;
     border: 1px solid var(--color-lightgray);
@@ -121,10 +121,14 @@ table th {
     position: sticky;
     top: 50px;
     background: var(--color-main-bg);
+    white-space: normal;
 }
-table td {
+.relatorios.index table tr:nth-child(2) th,
+.relatorios.index table tr:last-child td {
+    font-weight: bold;
+    text-transform: uppercase;
 }
-table td:last-child {
+table td.obs {
     max-width: 400px;
     overflow: hidden;
     text-overflow: ellipsis;

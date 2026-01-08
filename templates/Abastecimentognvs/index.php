@@ -21,15 +21,13 @@
                     <!-- <th><?= $this->Paginator->sort('user_id') ?></th> -->
                     <!-- <th><?= $this->Paginator->sort('instituicao_id') ?></th> -->
                     <!-- <th><?= $this->Paginator->sort('cliente_id') ?></th> -->
-                    <th><?= $this->Paginator->sort('saida') ?></th>
+                    <th><?= $this->Paginator->sort('saida', ['label' => 'Data de Saída']) ?></th>
                     <th><?= $this->Paginator->sort('motorista') ?></th>
-                    <th><?= $this->Paginator->sort('rg') ?></th>
+                    <th><?= $this->Paginator->sort('rg', ['label' => 'RG']) ?></th>
                     <th><?= $this->Paginator->sort('placa') ?></th>
-                    <th><?= $this->Paginator->sort('p_inicial') ?></th>
-                    <th><?= $this->Paginator->sort('p_final') ?></th>
-                    <th><?= $this->Paginator->sort('volume') ?></th>
-                    <th><?= $this->Paginator->sort('valor') ?></th>
-                    <th><?= $this->Paginator->sort('pureza') ?></th>
+                    <th><?= $this->Paginator->sort('p_inicial', ['label' => 'Pressão Inicial (bar)']) ?></th>
+                    <th><?= $this->Paginator->sort('p_final', ['label' => 'Pressão Final (bar)']) ?></th>
+                    <th><?= $this->Paginator->sort('volume', ['label' => 'Volume (m³)']) ?></th>
                 </tr>
             </thead>
             <tbody>
@@ -51,8 +49,6 @@
                     <td><?= h($abastecimentognv->p_inicial) ?></td>
                     <td><?= h($abastecimentognv->p_final) ?></td>
                     <td><?= h($abastecimentognv->volume) ?></td>
-                    <td><?= h($abastecimentognv->valor) ?></td>
-                    <td><?= h($abastecimentognv->pureza) ?></td>
                 </tr>
                 <?php endforeach; ?>
             </tbody>

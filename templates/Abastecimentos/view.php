@@ -23,7 +23,7 @@
                  <?= h($abastecimento->id) ?></td>
                 </tr>
                 <tr>
-                    <th><?= __('Usuário') ?></th>
+                    <th><?= __('Autor') ?></th>
                     <td><?= $this->Html->link($abastecimento->user->nome, ['controller' => 'users', 'action' => 'view', $abastecimento->user->id]) ?></td>
                 </tr>
                 <tr>
@@ -35,7 +35,7 @@
                     <td><?= $this->Html->link($abastecimento->cliente->nome, ['controller' => 'clientes', 'action' => 'view', $abastecimento->cliente->id]) ?></td>
                 </tr>
                 <tr>
-                    <th><?= __('Controle') /* todo */ ?></th>
+                    <th><?= __('Nº de Controle') /* todo */ ?></th>
                     <td><?= h($abastecimento->controle) ?></td> 
                 </tr>
                 <tr>
@@ -55,72 +55,72 @@
                     <td><?= h($abastecimento->fim) ?></td>
                 </tr>
                 <tr>
-                    <th><?= __('Saída') ?></th>
+                    <th><?= __('Data de Saída') ?></th>
                     <td><?= h($abastecimento->saida) ?></td>
                 </tr>
                 <tr>
-                    <th><?= __('Placa') ?></th>
+                    <th><?= __('Placa Carreta') ?></th>
                     <td><?= h($abastecimento->placa) ?></td>
                 </tr>
                 <tr>
-                    <th><?= __('Pressão Inicial') ?></th>
+                    <th><?= __('Pressão Inicial (bar)') ?></th>
                     <td><?= h($abastecimento->p_inicial) ?></td>
                 </tr>
                 <tr>
-                    <th><?= __('Pressão Final') ?></th>
+                    <th><?= __('Pressão Final (bar)') ?></th>
                     <td><?= h($abastecimento->p_final) ?></td>
                 </tr>
                 <tr>
-                    <th><?= __('Carregamento') ?></th>
+                    <th><?= __('Volume do Carregamento (m³)') ?></th>
                     <td><?= h($abastecimento->carregamento) ?></td>
                 </tr>
                 <tr>
-                    <th><?= __('O2') ?></th>
+                    <th><?= __('O₂ (%)') ?></th>
                     <td><?= h($abastecimento->o2) ?></td>
                 </tr>
                 <tr>
-                    <th><?= __('N2') ?></th>
+                    <th><?= __('N₂ (%)') ?></th>
                     <td><?= h($abastecimento->n2) ?></td>
                 </tr>
                 <tr>
-                    <th><?= __('CH4') ?></th>
+                    <th><?= __('CH₄ (%)') ?></th>
                     <td><?= h($abastecimento->ch4) ?></td>
                 </tr>
                 <tr>
-                    <th><?= __('CO2') ?></th>
+                    <th><?= __('CO₂ (%)') ?></th>
                     <td><?= h($abastecimento->co2) ?></td>
                 </tr>
                 <tr>
-                    <th><?= __('Soma') ?></th>
+                    <th><?= __('Soma (%) CO₂ O₂ N₂') ?></th>
                     <td><?= h($abastecimento->soma) ?></td>
                 </tr>
                 <tr>
-                    <th><?= __('Densidade') ?></th>
+                    <th><?= __('Densidade (kg/m³)') ?></th>
                     <td><?= h($abastecimento->densidade) ?></td>
                 </tr>
                 <tr>
-                    <th><?= __('Ponto') ?></th>
+                    <th><?= __('Ponto de orvalho (°C)') ?></th>
                     <td><?= h($abastecimento->ponto) ?></td>
                 </tr>
                 <tr>
-                    <th><?= __('Wobbe') ?></th>
-                    <td><?= h($abastecimento->ponto) ?></td>
+                    <th><?= __('Wobbe (KJ/m³)') ?></th>
+                    <td><?= h($abastecimento->wobbe) ?></td>
                 </tr>
                 <tr>
-                    <th><?= __('Pcs') ?></th>
-                    <td><?= h($abastecimento->ponto) ?></td>
+                    <th><?= __('PCS (Kcal/m³)') ?></th>
+                    <td><?= h($abastecimento->pcs) ?></td>
                 </tr>
                 <tr>
-                    <th><?= __('CH4 media') ?></th>
-                    <td><?= h($abastecimento->ponto) ?></td>
+                    <th><?= __('O₂ (%) Média Biogás') ?></th>
+                    <td><?= h($abastecimento->o2_media) ?></td>
                 </tr>
                 <tr>
-                    <th><?= __('CO2 media') ?></th>
-                    <td><?= h($abastecimento->ponto) ?></td>
+                    <th><?= __('CH₄ (%) Média Biogás') ?></th>
+                    <td><?= h($abastecimento->ch4_media) ?></td>
                 </tr>
                 <tr>
-                    <th><?= __('O2 media') ?></th>
-                    <td><?= h($abastecimento->ponto) ?></td>
+                    <th><?= __('CO₂ (%) Média Biogás') ?></th>
+                    <td><?= h($abastecimento->co2_media) ?></td>
                 </tr>
                 <tr>
                     <th><?= __('Observações') ?></th>

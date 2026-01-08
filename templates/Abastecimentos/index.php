@@ -21,28 +21,28 @@
                     <!-- <th><?= $this->Paginator->sort('user_id') ?></th> -->
                     <!-- <th><?= $this->Paginator->sort('instituicao_id') ?></th> -->
                     <!-- <th><?= $this->Paginator->sort('cliente_id') ?></th> -->
-                    <th><?= $this->Paginator->sort('controle') ?></th>
-                    <th><?= $this->Paginator->sort('nf') ?></th>
+                    <th><?= $this->Paginator->sort('controle', ['label' => 'Nº de Controle']) ?></th>
+                    <th><?= $this->Paginator->sort('nf', ['label' => 'NF']) ?></th>
                     <th><?= $this->Paginator->sort('certificado') ?></th>
                     <th><?= $this->Paginator->sort('inicio') ?></th>
                     <th><?= $this->Paginator->sort('fim') ?></th>
                     <th><?= $this->Paginator->sort('saida') ?></th>
                     <th><?= $this->Paginator->sort('placa') ?></th>
-                    <th><?= $this->Paginator->sort('p_inicial') ?></th>
-                    <th><?= $this->Paginator->sort('p_final') ?></th>
-                    <th><?= $this->Paginator->sort('carregamento') ?></th>
-                    <th><?= $this->Paginator->sort('o2') ?></th>
-                    <th><?= $this->Paginator->sort('n2') ?></th>
-                    <th><?= $this->Paginator->sort('ch4') ?></th>
-                    <th><?= $this->Paginator->sort('co2') ?></th>
-                    <th><?= $this->Paginator->sort('soma') ?></th>
-                    <th><?= $this->Paginator->sort('densidade') ?></th>
-                    <th><?= $this->Paginator->sort('ponto') ?></th>
-                    <th><?= $this->Paginator->sort('wobbe') ?></th>
-                    <th><?= $this->Paginator->sort('pcs') ?></th>
-                    <th><?= $this->Paginator->sort('o2_media') ?></th>
-                    <th><?= $this->Paginator->sort('ch4_media') ?></th>
-                    <th><?= $this->Paginator->sort('co2_media') ?></th>
+                    <th><?= $this->Paginator->sort('p_inicial', ['label' => 'Pressão Inicial (bar)']) ?></th>
+                    <th><?= $this->Paginator->sort('p_final', ['label' => 'Pressão Final (bar)']) ?></th>
+                    <th><?= $this->Paginator->sort('carregamento', ['label' => 'Volume do Carregamento (m³)']) ?></th>
+                    <th><?= $this->Paginator->sort('o2', ['label' => 'O₂ (%)']) ?></th>
+                    <th><?= $this->Paginator->sort('n2', ['label' => 'N₂ (%)']) ?></th>
+                    <th><?= $this->Paginator->sort('ch4', ['label' => 'CH₄ (%)']) ?></th>
+                    <th><?= $this->Paginator->sort('co2', ['label' => 'CO₂ (%)']) ?></th>
+                    <th><?= $this->Paginator->sort('soma', ['label' => 'Soma (%) CO₂ O₂ N₂']) ?></th>
+                    <th><?= $this->Paginator->sort('densidade', ['label' => 'Densidade (kg/m³)']) ?></th>
+                    <th><?= $this->Paginator->sort('ponto', ['label' => 'Ponto de orvalho (°C)']) ?></th>
+                    <th><?= $this->Paginator->sort('wobbe', ['label' => 'Wobbe (KJ/m³)']) ?></th>
+                    <th><?= $this->Paginator->sort('pcs', ['label' => 'PCS (Kcal/m³)']) ?></th>
+                    <th><?= $this->Paginator->sort('o2_media', ['label' => 'O₂ (%) Média Biogás']) ?></th>
+                    <th><?= $this->Paginator->sort('ch4_media', ['label' => 'CH₄ (%) Média Biogás']) ?></th>
+                    <th><?= $this->Paginator->sort('co2_media', ['label' => 'CO₂ (%) Média Biogás']) ?></th>
                 </tr>
             </thead>
             <tbody>

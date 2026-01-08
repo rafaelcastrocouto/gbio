@@ -23,19 +23,17 @@ if ($user_session) { $user_data = $user_session->getOriginalData(); }
             <fieldset>
                 <h3><?= __('Adicionando Abastecimento GNV') ?></h3>
                 <?php
-                    echo $this->Form->control('user_id', ['type' => 'number', 'value' => $user_session->get('id'), 'hidden' => !$user_data['administrador_id'] ]);
+                    echo $this->Form->control('user_id', ['label' => 'ID de Usuário do Autor', 'type' => 'number', 'value' => $user_session->get('id'), 'hidden' => !$user_data['administrador_id'] ]);
                     echo $this->Form->control('instituicao_id', ['options' => $instituicoes, 'class' => 'form-control']);
                     echo $this->Form->control('cliente_id', ['options' => $clientes, 'class' => 'form-control']);
-                    echo $this->Form->control('saida');
+                    echo $this->Form->control('saida', ['label' => 'Data de Saída']);
                     echo $this->Form->control('motorista');
-                    echo $this->Form->control('rg');
+                    echo $this->Form->control('rg', ['label' => 'RG']);
                     echo $this->Form->control('placa');
-                    echo $this->Form->control('p_inicial');
-                    echo $this->Form->control('p_final');
-                    echo $this->Form->control('volume');
-                    echo $this->Form->control('valor');
-                    echo $this->Form->control('pureza');
-                    echo $this->Form->control('observacoes');
+                    echo $this->Form->control('p_inicial', ['label' => 'Pressão Inicial (bar)']);
+                    echo $this->Form->control('p_final', ['label' => 'Pressão Final (bar)']);
+                    echo $this->Form->control('volume', ['label' => 'Volume (m³)']);
+                    echo $this->Form->control('observacoes', ['label' => 'Observações']);
                 ?>
             </fieldset>
             <?= $this->Form->button(__('Adicionar Abastecimento GNV'), ['class' => 'button']) ?>

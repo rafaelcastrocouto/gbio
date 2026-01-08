@@ -28,9 +28,15 @@ class AbastecimentognvsController extends AppController
      */
     public function index()
     {
-        $abastecimentognvs = $this->paginate($this->Abastecimentognvs->find('all')                
-            ->contain(['Users', 'Instituicoes', 'Clientes']));
-        
+        $query = $this->Abastecimentognvs->find('all')->contain(['Users', 'Instituicoes', 'Clientes']);
+        try {
+            $this->Authorization->authorize($query->first());
+        } catch (ForbiddenException $error) {
+            $user_session = $this->request->getAttribute('identity');
+            $this->Flash->error('Authorization error: ' . $error->getMessage());
+            return $this->redirect(['controller' => 'Users', 'action' => 'view', $user_session->id]);
+        }
+        $abastecimentognvs = $this->paginate($query);
         $this->set(compact('abastecimentognvs'));
     }
 
@@ -130,6 +136,14 @@ class AbastecimentognvsController extends AppController
     {
         $this->request->allowMethod(['post', 'delete']);
         $abastecimentognv = $this->Abastecimentognvs->get($id);
+        try {
+            $this->Authorization->authorize($abastecimentognv);
+        } catch (ForbiddenException $error) {
+            $user_session = $this->request->getAttribute('identity');
+            $this->Flash->error('Authorization error: ' . $error->getMessage());
+            return $this->redirect(['controller' => 'Users', 'action' => 'view', $user_session->id]);
+        }
+        
         if ($this->Abastecimentognvs->delete($abastecimentognv)) {
             $this->Flash->success(__('The abastecimentognv has been deleted.'));
         } else {

@@ -24,7 +24,6 @@ use Cake\ORM\Entity;
  * @property string|null $dispenser
  * @property string|null $energia
  * @property string|null $densidade
- * @property string|null $status
  * @property string|null $observacoes
  *
  * @property \App\Model\Entity\User[] $users
@@ -57,7 +56,6 @@ class Cliente extends Entity
         'dispenser' => true,
         'energia' => true,
         'densidade' => true,
-        'status' => true,
         'observacoes' => true
     ];
 }

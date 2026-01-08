@@ -23,6 +23,11 @@ class ClientePolicy implements BeforePolicyInterface
     }
     return null;
   }
+    
+  public function canIndex()
+  {
+    return new Result(false, 'Erro: cliente index policy not allowed');
+  }
   
   public function canAdd()
   {

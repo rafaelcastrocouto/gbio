@@ -27,32 +27,32 @@ if ($user_session) { $user_data = $user_session->getOriginalData(); }
             <fieldset>
                 <h3><?= __('Editando Abastecimento Controle ') . $abastecimento->controle ?></h3>
                 <?php
-                    echo $this->Form->control('user_id', ['type' => 'number', 'value' => $user_session->get('id'), 'hidden' => !$user_data['administrador_id'] ]);
-                    echo $this->Form->control('instituicao_id', ['options' => $instituicoes, 'class' => 'form-control']);
+                    echo $this->Form->control('user_id', ['label' => 'ID de Usuário do Autor', 'type' => 'number', 'value' => $user_session->get('id'), 'hidden' => !$user_data['administrador_id'] ]);
+                    echo $this->Form->control('instituicao_id', ['label' => 'Instituição', 'options' => $instituicoes, 'class' => 'form-control']);
                     echo $this->Form->control('cliente_id', ['options' => $clientes, 'class' => 'form-control']);
-                    echo $this->Form->control('controle');
-                    echo $this->Form->control('nf');
+                    echo $this->Form->control('controle', ['label' => 'Nº de Controle']);
+                    echo $this->Form->control('nf', ['label' => 'NF']);
                     echo $this->Form->control('certificado');
                     echo $this->Form->control('inicio');
                     echo $this->Form->control('fim');
-                    echo $this->Form->control('saida');
-                    echo $this->Form->control('placa');
-                    echo $this->Form->control('p_inicial');
-                    echo $this->Form->control('p_final');
-                    echo $this->Form->control('carregamento');
-                    echo $this->Form->control('o2');
-                    echo $this->Form->control('n2');
-                    echo $this->Form->control('ch4');
-                    echo $this->Form->control('co2');
-                    echo $this->Form->control('soma');
-                    echo $this->Form->control('densidade');
-                    echo $this->Form->control('ponto');
-                    echo $this->Form->control('wobbe');
-                    echo $this->Form->control('pcs');
-                    echo $this->Form->control('ch4_media');
-                    echo $this->Form->control('co2_media');
-                    echo $this->Form->control('o2_media');
-                    echo $this->Form->control('observacoes');
+                    echo $this->Form->control('saida', ['label' => 'Data de Saída']);
+                    echo $this->Form->control('placa', ['label' => 'Placa Carreta']);
+                    echo $this->Form->control('p_inicial', ['label' => 'Pressão Inicial (bar)']);
+                    echo $this->Form->control('p_final', ['label' => 'Pressão Final (bar)']);
+                    echo $this->Form->control('carregamento', ['label' => 'Volume do Carregamento (m³)']);
+                    echo $this->Form->control('o2', ['label' => 'O₂ (%)']);
+                    echo $this->Form->control('n2', ['label' => 'N₂ (%)']);
+                    echo $this->Form->control('ch4', ['label' => 'CH₄ (%)']);
+                    echo $this->Form->control('co2', ['label' => 'CO₂ (%)']);
+                    echo $this->Form->control('soma', ['label' => 'Soma (%) CO₂ O₂ N₂']);
+                    echo $this->Form->control('densidade', ['label' => 'Densidade (kg/m³)']);
+                    echo $this->Form->control('ponto', ['label' => 'Ponto de orvalho (°C)']);
+                    echo $this->Form->control('wobbe', ['label' => 'Wobbe (KJ/m³)']);
+                    echo $this->Form->control('pcs', ['label' => 'PCS (Kcal/m³)']);
+                    echo $this->Form->control('o2_media', ['label' => 'O₂ (%) Média Biogás']);
+                    echo $this->Form->control('ch4_media', ['label' => 'CH₄ (%) Média Biogás']);
+                    echo $this->Form->control('co2_media', ['label' => 'CO₂ (%) Média Biogás']);
+                    echo $this->Form->control('observacoes', ['label' => 'Observações']);
                 ?>
             </fieldset>
             <?= $this->Form->button(__('Salvar Edição'), ['class' => 'button']) ?>

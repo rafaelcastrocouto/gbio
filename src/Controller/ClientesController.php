@@ -28,8 +28,15 @@ class ClientesController extends AppController
      */
     public function index()
     {
-        $clientes = $this->paginate($this->Clientes->find('all'));
-        
+        $query = $this->Clientes->find('all');
+        try {
+            $this->Authorization->authorize($query->first());
+        } catch (ForbiddenException $error) {
+            $user_session = $this->request->getAttribute('identity');
+            $this->Flash->error('Authorization error: ' . $error->getMessage());
+            return $this->redirect(['controller' => 'Users', 'action' => 'view', $user_session->id]);
+        }
+        $clientes = $this->paginate($query);
         $this->set(compact('clientes'));
     }
 
@@ -43,7 +50,13 @@ class ClientesController extends AppController
     public function view($id = null)
     {
         $cliente = $this->Clientes->get($id);
-
+        try {
+            $this->Authorization->authorize($cliente);
+        } catch (ForbiddenException $error) {
+            $user_session = $this->request->getAttribute('identity');
+            $this->Flash->error('Authorization error: ' . $error->getMessage());
+            return $this->redirect(['controller' => 'Users', 'action' => 'view', $user_session->id]);
+        }
         $this->set(compact('cliente'));
     }
 
@@ -55,6 +68,14 @@ class ClientesController extends AppController
     public function add()
     {
         $cliente = $this->Clientes->newEmptyEntity();
+        try {
+            $this->Authorization->authorize($cliente);
+        } catch (ForbiddenException $error) {
+            $user_session = $this->request->getAttribute('identity');
+            $this->Flash->error('Authorization error: ' . $error->getMessage());
+            return $this->redirect(['controller' => 'Users', 'action' => 'view', $user_session->id]);
+        }
+        
         if ($this->request->is('post')) {
             $cliente = $this->Clientes->patchEntity($cliente, $this->request->getData());
             
@@ -83,6 +104,13 @@ class ClientesController extends AppController
     public function edit($id = null)
     {
         $cliente = $this->Clientes->get($id);
+        try {
+            $this->Authorization->authorize($cliente);
+        } catch (ForbiddenException $error) {
+            $user_session = $this->request->getAttribute('identity');
+            $this->Flash->error('Authorization error: ' . $error->getMessage());
+            return $this->redirect(['controller' => 'Users', 'action' => 'view', $user_session->id]);
+        }
         if ($this->request->is(['patch', 'post', 'put'])) {
             $cliente = $this->Clientes->patchEntity($cliente, $this->request->getData());
             if ($this->Clientes->save($cliente)) {
