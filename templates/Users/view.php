@@ -99,7 +99,7 @@ if ($user_session) { $user_data = $user_session->getOriginalData(); }
                 </div>
             </div>
             <?php else: ?>
-                <p><?= $this->Html->link('Adicionar Operador', ['controller' => 'operadores', 'action' => 'add'], ['class' => 'button btn-info']) ?></p>
+                <p><?= $this->Html->link('Adicionar Operador', ['controller' => 'operadores', 'action' => 'add', $user->id], ['class' => 'button btn-info']) ?></p>
             <?php endif; ?>
             
 
@@ -133,7 +133,7 @@ if ($user_session) { $user_data = $user_session->getOriginalData(); }
             </div>
             <?php else: ?>
                 <?php if ($user_data['administrador_id']): ?>
-                    <p><?= $this->Html->link('Adicionar Supervisor', ['controller' => 'supervisores', 'action' => 'add'], ['class' => 'button btn-info']) ?></p>
+                    <p><?= $this->Html->link('Adicionar Supervisor', ['controller' => 'supervisores', 'action' => 'add', $user->id], ['class' => 'button btn-info']) ?></p>
                 <?php endif; ?>
             <?php endif; ?>
         </div>

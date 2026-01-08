@@ -1,4 +1,4 @@
-# Metagas
+# GBio CMS
 
 Ferramenta de controle de produção e controle de abastecimento GBio
 

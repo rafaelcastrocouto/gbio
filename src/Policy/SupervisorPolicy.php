@@ -24,38 +24,47 @@ class SupervisorPolicy implements BeforePolicyInterface
     return null;
   }
   
-  public function canAdd(IdentityInterface $userSession, Supervisor $supervisorData)
+  public function canIndex(IdentityInterface $user_data, Supervisor $operadorData)
   {
-    if ($this->sameUser($userSession, $supervisorData)) {
+    if ($user_data['supervisor_id']) {
       return new Result(true);
     } else {
-      return new Result(false, 'Erro: operador edit policy not authorized');
+      return new Result(false, 'Erro: supervisor index policy not authorized');
     }
   }
   
-  public function canView()
+  public function canAdd(IdentityInterface $user_data, Supervisor $supervisorData)
   {
-    return new Result(true);
+    return new Result(false, 'Erro: operador add policy not authorized');
   }
   
-  public function canEdit(IdentityInterface $userSession, Supervisor $supervisorData)
+  public function canView(IdentityInterface $user_data, Supervisor $supervisorData)
   {
-    if ($this->sameUser($userSession, $supervisorData)) {
+    if ($this->sameUser($user_data, $supervisorData)) {
+      return new Result(true);
+    } else {
+      return new Result(false, 'Erro: operador view policy not authorized');
+    }
+  }
+  
+  public function canEdit(IdentityInterface $user_data, Supervisor $supervisorData)
+  {
+    if ($this->sameUser($user_data, $supervisorData)) {
       return new Result(true);
     } else {
       return new Result(false, 'Erro: supervisor edit policy not authorized');
     }
   }
   
-  public function canDelete(IdentityInterface $userSession, Supervisor $supervisorData)
+  public function canDelete(IdentityInterface $user_data, Supervisor $supervisorData)
   {
     return new Result(false, 'Erro: supervisor delete policy not allowed');
   }
 
   
-  protected function sameUser(IdentityInterface $userSession, Supervisor $supervisorData)
+  protected function sameUser(IdentityInterface $user_data, Supervisor $supervisorData)
   {
-    return ($userSession->id == $supervisorData->user_id);
+    return ($user_data->id == $supervisorData->user_id);
   }
   
 }

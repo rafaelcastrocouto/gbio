@@ -29,6 +29,14 @@ class RelatoriosController extends AppController
     
     public function index()
     {
+        try {
+            $this->Authorization->authorize($this->Relatorios->newEmptyEntity());
+        } catch (ForbiddenException $error) {
+            $user_session = $this->request->getAttribute('identity');
+            $this->Flash->error('Authorization error: ' . $error->getMessage());
+            return $this->redirect(['controller' => 'Users', 'action' => 'view', $user_session->id]);
+        }
+        
         $query = $this->Relatorios->find('all');
 
         $ym = $query
@@ -74,6 +82,13 @@ class RelatoriosController extends AppController
         $relatorio = $this->Relatorios->get($id, [
             'contain' => ['Users', 'Instituicoes'],
         ]);
+        try {
+            $this->Authorization->authorize($relatorio);
+        } catch (ForbiddenException $error) {
+            $user_session = $this->request->getAttribute('identity');
+            $this->Flash->error('Authorization error: ' . $error->getMessage());
+            return $this->redirect(['controller' => 'Users', 'action' => 'view', $user_session->id]);
+        }
         $clientes = $this->fetchTable('Clientes')->find()->all();
         $this->set(compact('relatorio', 'clientes'));
     }
@@ -86,6 +101,13 @@ class RelatoriosController extends AppController
     public function add()
     {
         $relatorio = $this->Relatorios->newEmptyEntity();
+        try {
+            $this->Authorization->authorize($relatorio);
+        } catch (ForbiddenException $error) {
+            $user_session = $this->request->getAttribute('identity');
+            $this->Flash->error('Authorization error: ' . $error->getMessage());
+            return $this->redirect(['controller' => 'Users', 'action' => 'view', $user_session->id]);
+        }
         if ($this->request->is('post')) {
             $relatorio = $this->Relatorios->patchEntity($relatorio, $this->request->getData());
             
@@ -118,6 +140,13 @@ class RelatoriosController extends AppController
         $relatorio = $this->Relatorios->get($id, [
             'contain' => ['Instituicoes'],
         ]);
+        try {
+            $this->Authorization->authorize($relatorio);
+        } catch (ForbiddenException $error) {
+            $user_session = $this->request->getAttribute('identity');
+            $this->Flash->error('Authorization error: ' . $error->getMessage());
+            return $this->redirect(['controller' => 'Users', 'action' => 'view', $user_session->id]);
+        }
         if ($this->request->is(['patch', 'post', 'put'])) {
             $relatorio = $this->Relatorios->patchEntity($relatorio, $this->request->getData());
             if ($this->Relatorios->save($relatorio)) {
@@ -143,6 +172,13 @@ class RelatoriosController extends AppController
     {
         $this->request->allowMethod(['post', 'delete']);
         $relatorio = $this->Relatorios->get($id);
+        try {
+            $this->Authorization->authorize($relatorio);
+        } catch (ForbiddenException $error) {
+            $user_session = $this->request->getAttribute('identity');
+            $this->Flash->error('Authorization error: ' . $error->getMessage());
+            return $this->redirect(['controller' => 'Users', 'action' => 'view', $user_session->id]);
+        }
         if ($this->Relatorios->delete($relatorio)) {
             $this->Flash->success(__('The relatorio has been deleted.'));
         } else {

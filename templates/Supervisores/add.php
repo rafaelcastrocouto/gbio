@@ -25,7 +25,7 @@ if ($user_session) { $user_data = $user_session->getOriginalData(); }
                 <?php
                     if ($user_data['administrador_id']):
                         $val = $this->request->getParam('pass') ? $this->request->getParam('pass')[0] : '';
-                        echo $this->Form->control('user_id', ['type' => 'number', 'value' => $val ]); 
+                        echo $this->Form->control('user_id', ['label' => 'ID do usuário', 'type' => 'number', 'value' => $val ]); 
                     else:
                         echo $this->Form->control('user_id', ['type' => 'number', 'value' => $user_session->get('id'), 'hidden' => true ]); 
                     endif;

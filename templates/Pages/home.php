@@ -87,7 +87,7 @@ $user_session = $this->request->getAttribute('identity');
             <div class="home">
                 <div class="col">
                     <h1 class="text-center">Boas vindas ao <?= $this->Html->link('GBio CMS', '/',['full'=>true]); ?></h1>
-                    <p class="text-center"><img src="img/logo.png" width="350"></p>
+                    <p class="text-center"><img src="img/logo.png" width="400"></p>
                     <h2 class="text-center">
                         <?php if (!$user_session) : ?>
                             <?= $this->Html->link(__('Login'), ['controller' => 'users', 'action' => 'login'], ['class' => 'button btn-info']) ?>

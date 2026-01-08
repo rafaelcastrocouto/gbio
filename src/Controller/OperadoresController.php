@@ -28,9 +28,15 @@ class OperadoresController extends AppController
      */
     public function index()
     {
-        $operadores = $this->paginate($this->Operadores->find('all', [
-            'contain' => ['Users'],
-        ]));
+        try {
+            $this->Authorization->authorize($this->Operadores->newEmptyEntity());
+        } catch (ForbiddenException $error) {
+            $user_session = $this->request->getAttribute('identity');
+            $this->Flash->error('Authorization error: ' . $error->getMessage());
+            return $this->redirect(['controller' => 'Users', 'action' => 'view', $user_session->id]);
+        }
+        $query = $this->Operadores->find('all', ['contain' => ['Users'] ]);
+        $operadores = $this->paginate($query);
         $this->set(compact('operadores'));
     }
 
@@ -46,7 +52,13 @@ class OperadoresController extends AppController
         $operador = $this->Operadores->get($id, [
             'contain' => ['Users'],
         ]);
-
+        try {
+            $this->Authorization->authorize($operador);
+        } catch (ForbiddenException $error) {
+            $user_session = $this->request->getAttribute('identity');
+            $this->Flash->error('Authorization error: ' . $error->getMessage());
+            return $this->redirect(['controller' => 'Users', 'action' => 'view', $user_session->id]);
+        }
         $this->set(compact('operador'));
     }
 
@@ -58,6 +70,13 @@ class OperadoresController extends AppController
     public function add()
     {
         $operador = $this->Operadores->newEmptyEntity();
+        try {
+            $this->Authorization->authorize($operador);
+        } catch (ForbiddenException $error) {
+            $user_session = $this->request->getAttribute('identity');
+            $this->Flash->error('Authorization error: ' . $error->getMessage());
+            return $this->redirect(['controller' => 'Users', 'action' => 'view', $user_session->id]);
+        }
         if ($this->request->is('post')) {
             $operador = $this->Operadores->patchEntity($operador, $this->request->getData());
             
@@ -88,6 +107,13 @@ class OperadoresController extends AppController
         $operador = $this->Operadores->get($id, [
             'contain' => ['Users'],
         ]);
+        try {
+            $this->Authorization->authorize($operador);
+        } catch (ForbiddenException $error) {
+            $user_session = $this->request->getAttribute('identity');
+            $this->Flash->error('Authorization error: ' . $error->getMessage());
+            return $this->redirect(['controller' => 'Users', 'action' => 'view', $user_session->id]);
+        }
         if ($this->request->is(['patch', 'post', 'put'])) {
             $operador = $this->Operadores->patchEntity($operador, $this->request->getData());
             if ($this->Operadores->save($operador)) {
@@ -111,6 +137,13 @@ class OperadoresController extends AppController
     {
         $this->request->allowMethod(['post', 'delete']);
         $operador = $this->Operadores->get($id);
+        try {
+            $this->Authorization->authorize($operador);
+        } catch (ForbiddenException $error) {
+            $user_session = $this->request->getAttribute('identity');
+            $this->Flash->error('Authorization error: ' . $error->getMessage());
+            return $this->redirect(['controller' => 'Users', 'action' => 'view', $user_session->id]);
+        }
         if ($this->Operadores->delete($operador)) {
             $this->Flash->success(__('The operador has been deleted.'));
         } else {

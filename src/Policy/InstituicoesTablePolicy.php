@@ -27,12 +27,12 @@ class InstituicoesTablePolicy implements BeforePolicyInterface
 
   public function canIndex()
   {
-    return new Result(true);
+    return new Result(false, 'Erro: instituicoes index policy not authorized');
   }
 
   public function canView()
   {
-    return new Result(true);
+    return new Result(false, 'Erro: instituicoes view policy not authorized');
   }
   
   public function canEdit()

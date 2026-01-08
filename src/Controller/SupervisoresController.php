@@ -28,6 +28,13 @@ class SupervisoresController extends AppController
      */
     public function index()
     {
+        try {
+            $this->Authorization->authorize($this->Supervisores->newEmptyEntity());
+        } catch (ForbiddenException $error) {
+            $user_session = $this->request->getAttribute('identity');
+            $this->Flash->error('Authorization error: ' . $error->getMessage());
+            return $this->redirect(['controller' => 'Users', 'action' => 'view', $user_session->id]);
+        }
         $supervisores = $this->paginate($this->Supervisores->find('all', [
             'contain' => ['Users']
         ]));
@@ -46,7 +53,13 @@ class SupervisoresController extends AppController
         $supervisor = $this->Supervisores->get($id, [
             'contain' => ['Users']
         ]);
-
+        try {
+            $this->Authorization->authorize($supervisor);
+        } catch (ForbiddenException $error) {
+            $user_session = $this->request->getAttribute('identity');
+            $this->Flash->error('Authorization error: ' . $error->getMessage());
+            return $this->redirect(['controller' => 'Users', 'action' => 'view', $user_session->id]);
+        }
         $this->set(compact('supervisor'));
     }
 
@@ -58,6 +71,13 @@ class SupervisoresController extends AppController
     public function add()
     {
         $supervisor = $this->Supervisores->newEmptyEntity();
+        try {
+            $this->Authorization->authorize($supervisor);
+        } catch (ForbiddenException $error) {
+            $user_session = $this->request->getAttribute('identity');
+            $this->Flash->error('Authorization error: ' . $error->getMessage());
+            return $this->redirect(['controller' => 'Users', 'action' => 'view', $user_session->id]);
+        }
         if ($this->request->is('post')) {
             $supervisor = $this->Supervisores->patchEntity($supervisor, $this->request->getData());
             
@@ -88,6 +108,13 @@ class SupervisoresController extends AppController
         $supervisor = $this->Supervisores->get($id, [
             'contain' => ['Users'],
         ]);
+        try {
+            $this->Authorization->authorize($supervisor);
+        } catch (ForbiddenException $error) {
+            $user_session = $this->request->getAttribute('identity');
+            $this->Flash->error('Authorization error: ' . $error->getMessage());
+            return $this->redirect(['controller' => 'Users', 'action' => 'view', $user_session->id]);
+        }
         if ($this->request->is(['patch', 'post', 'put'])) {
             $supervisor = $this->Supervisores->patchEntity($supervisor, $this->request->getData());
             if ($this->Supervisores->save($supervisor)) {
@@ -111,6 +138,13 @@ class SupervisoresController extends AppController
     {
         $this->request->allowMethod(['post', 'delete']);
         $supervisor = $this->Supervisores->get($id);
+        try {
+            $this->Authorization->authorize($supervisor);
+        } catch (ForbiddenException $error) {
+            $user_session = $this->request->getAttribute('identity');
+            $this->Flash->error('Authorization error: ' . $error->getMessage());
+            return $this->redirect(['controller' => 'Users', 'action' => 'view', $user_session->id]);
+        }
         if ($this->Supervisores->delete($supervisor)) {
             $this->Flash->success(__('The supervisor has been deleted.'));
         } else {

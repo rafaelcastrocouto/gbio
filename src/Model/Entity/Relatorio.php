@@ -6,7 +6,7 @@ namespace App\Model\Entity;
 use Cake\ORM\Entity;
 
 /**
- * Cliente Entity
+ * Relatorio Entity
  *
  * @property int $id
  * @property int $user_id
@@ -29,7 +29,7 @@ use Cake\ORM\Entity;
  * @property \App\Model\Entity\User[] $users
  * @property \App\Model\Entity\Instituicao[] $instituicoes
  */
-class Cliente extends Entity
+class Relatorio extends Entity
 {
     /**
      * Fields that can be mass assigned using newEntity() or patchEntity().

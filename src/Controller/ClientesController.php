@@ -28,14 +28,14 @@ class ClientesController extends AppController
      */
     public function index()
     {
-        $query = $this->Clientes->find('all');
         try {
-            $this->Authorization->authorize($query->first());
+            $this->Authorization->authorize($this->Clientes->newEmptyEntity());
         } catch (ForbiddenException $error) {
             $user_session = $this->request->getAttribute('identity');
             $this->Flash->error('Authorization error: ' . $error->getMessage());
             return $this->redirect(['controller' => 'Users', 'action' => 'view', $user_session->id]);
         }
+        $query = $this->Clientes->find('all');
         $clientes = $this->paginate($query);
         $this->set(compact('clientes'));
     }

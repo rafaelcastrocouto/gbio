@@ -23,43 +23,49 @@ class OperadorPolicy implements BeforePolicyInterface
     }
     return null;
   }
-  
-  public function canAdd()
+
+
+  public function canIndex(IdentityInterface $user_data, Operador $operadorData)
   {
-    if ($this->sameUser($userSession, $operadorData)) {
+    if ($user_data['supervisor_id']) {
       return new Result(true);
     } else {
-      return new Result(false, 'Erro: operador add policy not authorized');
+      return new Result(false, 'Erro: operador index policy not authorized');
     }
   }
   
-  public function canView(IdentityInterface $userSession, Operador $operadorData)
+  public function canAdd(IdentityInterface $user_data, Operador $operadorData)
   {
-    if ($this->sameUser($userSession, $operadorData)) {
+    return new Result(true);
+  }
+  
+  public function canView(IdentityInterface $user_data, Operador $operadorData)
+  {
+    if ($this->sameUser($user_data, $operadorData) || $user_data['supervisor_id']) {
       return new Result(true);
     } else {
       return new Result(false, 'Erro: operador view policy not authorized');
     }
   }
   
-  public function canEdit(IdentityInterface $userSession, Operador $operadorData)
+  public function canEdit(IdentityInterface $user_data, Operador $operadorData)
   {
-    if ($this->sameUser($userSession, $operadorData)) {
+    if ($this->sameUser($user_data, $operadorData) || $user_data['supervisor_id']) {
       return new Result(true);
     } else {
       return new Result(false, 'Erro: operador edit policy not authorized');
     }
   }
   
-  public function canDelete(IdentityInterface $userSession, Operador $operadorData)
+  public function canDelete()
   {
     return new Result(false, 'Erro: operador delete policy not allowed');
   }
 
   
-  protected function sameUser(IdentityInterface $userSession, Operador $operadorData)
+  protected function sameUser(IdentityInterface $user_data, Operador $operadorData)
   {
-    return ($userSession->id == $operadorData->user_id);
+    return ($user_data->id == $operadorData->user_id);
   }
   
 }

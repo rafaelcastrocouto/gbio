@@ -23,35 +23,44 @@ class RelatorioPolicy implements BeforePolicyInterface
     }
     return null;
   }
-  
-  public function canAdd(IdentityInterface $userSession, Relatorio $relatorioData)
+
+  public function canIndex(IdentityInterface $user_data, Relatorio $relatorioData)
   {
-    if ($userSession and $userSession['supervisor_id']) {
+    if ($user_data['supervisor_id']) {
       return new Result(true);
     } else {
       return new Result(false, 'Erro: relatorio add policy not allowed');
     }
   }
   
-  public function canView()
+  public function canAdd(IdentityInterface $user_data, Relatorio $relatorioData)
   {
-    if ($userSession and $userSession['supervisor_id']) {
+    if ($user_data['supervisor_id']) {
       return new Result(true);
     } else {
       return new Result(false, 'Erro: relatorio add policy not allowed');
     }
   }
   
-  public function canEdit()
+  public function canView(IdentityInterface $user_data, Relatorio $relatorioData)
   {
-    if ($userSession and $userSession['supervisor_id']) {
+    if ($user_data['supervisor_id']) {
       return new Result(true);
     } else {
-      return new Result(false, 'Erro: relatorio add policy not allowed');
+      return new Result(false, 'Erro: relatorio view policy not allowed');
     }
   }
   
-  public function canDelete()
+  public function canEdit(IdentityInterface $user_data, Relatorio $relatorioData)
+  {
+    if ($user_data['supervisor_id']) {
+      return new Result(true);
+    } else {
+      return new Result(false, 'Erro: relatorio edit policy not allowed');
+    }
+  }
+  
+  public function canDelete(IdentityInterface $user_data, Relatorio $relatorioData)
   {
     return new Result(false, 'Erro: relatorio delete policy not allowed');
   }

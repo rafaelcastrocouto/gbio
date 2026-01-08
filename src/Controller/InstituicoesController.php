@@ -23,8 +23,9 @@ class InstituicoesController extends AppController
         try {
             $this->Authorization->authorize($this->Instituicoes);
         } catch (ForbiddenException $error) {
+            $user_session = $this->request->getAttribute('identity');
             $this->Flash->error('Authorization error: ' . $error->getMessage());
-            return $this->redirect('/');
+            return $this->redirect(['controller' => 'Users', 'action' => 'view', $user_session->id]);
         }
     }
     

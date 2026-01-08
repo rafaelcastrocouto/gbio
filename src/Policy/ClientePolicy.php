@@ -24,27 +24,35 @@ class ClientePolicy implements BeforePolicyInterface
     return null;
   }
     
-  public function canIndex()
+  public function canIndex(IdentityInterface $user_data, Cliente $clienteData)
   {
-    return new Result(false, 'Erro: cliente index policy not allowed');
+    if ($user_data['supervisor_id']) {
+      return new Result(true);
+    } else {
+      return new Result(false, 'Erro: cliente index policy not allowed');
+    }
   }
   
-  public function canAdd()
+  public function canAdd(IdentityInterface $user_data, Cliente $clienteData)
   {
     return new Result(false, 'Erro: cliente add policy not allowed');
   }
   
-  public function canView()
+  public function canView(IdentityInterface $user_data, Cliente $clienteData)
+  {
+    if ($user_data['supervisor_id']) {
+      return new Result(true);
+    } else {
+      return new Result(false, 'Erro: cliente view policy not allowed');
+    }
+  }
+  
+  public function canEdit(IdentityInterface $user_data, Cliente $clienteData)
   {
     return new Result(false, 'Erro: cliente edit policy not allowed');
   }
   
-  public function canEdit()
-  {
-    return new Result(false, 'Erro: cliente edit policy not allowed');
-  }
-  
-  public function canDelete()
+  public function canDelete(IdentityInterface $user_data, Cliente $clienteData)
   {
     return new Result(false, 'Erro: cliente delete policy not allowed');
   }

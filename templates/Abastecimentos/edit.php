@@ -40,18 +40,20 @@ if ($user_session) { $user_data = $user_session->getOriginalData(); }
                     echo $this->Form->control('p_inicial', ['label' => 'Pressão Inicial (bar)']);
                     echo $this->Form->control('p_final', ['label' => 'Pressão Final (bar)']);
                     echo $this->Form->control('carregamento', ['label' => 'Volume do Carregamento (m³)']);
-                    echo $this->Form->control('o2', ['label' => 'O₂ (%)']);
-                    echo $this->Form->control('n2', ['label' => 'N₂ (%)']);
-                    echo $this->Form->control('ch4', ['label' => 'CH₄ (%)']);
-                    echo $this->Form->control('co2', ['label' => 'CO₂ (%)']);
-                    echo $this->Form->control('soma', ['label' => 'Soma (%) CO₂ O₂ N₂']);
-                    echo $this->Form->control('densidade', ['label' => 'Densidade (kg/m³)']);
-                    echo $this->Form->control('ponto', ['label' => 'Ponto de orvalho (°C)']);
-                    echo $this->Form->control('wobbe', ['label' => 'Wobbe (KJ/m³)']);
-                    echo $this->Form->control('pcs', ['label' => 'PCS (Kcal/m³)']);
-                    echo $this->Form->control('o2_media', ['label' => 'O₂ (%) Média Biogás']);
-                    echo $this->Form->control('ch4_media', ['label' => 'CH₄ (%) Média Biogás']);
-                    echo $this->Form->control('co2_media', ['label' => 'CO₂ (%) Média Biogás']);
+                    if ($user_data['administrador_id'] || $user_data['supervisor_id']):
+                        echo $this->Form->control('o2', ['label' => 'O₂ (%)']);
+                        echo $this->Form->control('n2', ['label' => 'N₂ (%)']);
+                        echo $this->Form->control('ch4', ['label' => 'CH₄ (%)']);
+                        echo $this->Form->control('co2', ['label' => 'CO₂ (%)']);
+                        echo $this->Form->control('soma', ['label' => 'Soma (%) CO₂ O₂ N₂']);
+                        echo $this->Form->control('densidade', ['label' => 'Densidade (kg/m³)']);
+                        echo $this->Form->control('ponto', ['label' => 'Ponto de orvalho (°C)']);
+                        echo $this->Form->control('wobbe', ['label' => 'Wobbe (KJ/m³)']);
+                        echo $this->Form->control('pcs', ['label' => 'PCS (Kcal/m³)']);
+                        echo $this->Form->control('o2_media', ['label' => 'O₂ (%) Média Biogás']);
+                        echo $this->Form->control('ch4_media', ['label' => 'CH₄ (%) Média Biogás']);
+                        echo $this->Form->control('co2_media', ['label' => 'CO₂ (%) Média Biogás']);
+                    endif;
                     echo $this->Form->control('observacoes', ['label' => 'Observações']);
                 ?>
             </fieldset>

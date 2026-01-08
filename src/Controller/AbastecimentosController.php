@@ -28,15 +28,14 @@ class AbastecimentosController extends AppController
      */
     public function index()
     {
-        $query = $this->Abastecimentos->find('all')
-            ->contain(['Users', 'Instituicoes', 'Clientes']);
         try {
-            $this->Authorization->authorize($query->first());
+            $this->Authorization->authorize($this->Abastecimentos->newEmptyEntity());
         } catch (ForbiddenException $error) {
             $user_session = $this->request->getAttribute('identity');
             $this->Flash->error('Authorization error: ' . $error->getMessage());
             return $this->redirect(['controller' => 'Users', 'action' => 'view', $user_session->id]);
         }
+        $query = $this->Abastecimentos->find('all')->contain(['Users', 'Instituicoes', 'Clientes']);
         $abastecimentos = $this->paginate($query);
         $this->set(compact('abastecimentos'));
     }
