@@ -23,7 +23,7 @@ if ($user_session) { $user_data = $user_session->getOriginalData(); }
 <nav>
     <?php 
         $logo = $this->Html->image('icon.png', ['height' => '32', 'width' => '32', 'alt' => 'GBio']);
-        echo $this->Html->link($logo . '<h1>GBio</h1>', '/',['escape' => false, 'full'=>true]); //$this->getRequest()->getRequestTarget() == '/' ? "http://www.gbio.com.br" : '/', ['escape' => false, 'full'=>true]
+        echo $this->Html->link($logo . '<h1>GBio Gás Verde</h1>', '/',['escape' => false, 'full'=>true]); //$this->getRequest()->getRequestTarget() == '/' ? "http://www.gbio.com.br" : '/', ['escape' => false, 'full'=>true]
 
     ?>
 

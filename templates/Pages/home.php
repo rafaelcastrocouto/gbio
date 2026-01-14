@@ -86,7 +86,7 @@ $user_session = $this->request->getAttribute('identity');
         <header>
             <div class="home">
                 <div class="col">
-                    <h1 class="text-center">Boas vindas ao <?= $this->Html->link('GBio CMS', '/',['full'=>true]); ?></h1>
+                    <h1 class="text-center">Boas vindas ao <?= $this->Html->link('GBio Gás Verde', '/',['full'=>true]); ?></h1>
                     <p class="text-center"><img src="img/logo.png" width="400"></p>
                     <h2 class="text-center">
                         <?php if (!$user_session) : ?>
