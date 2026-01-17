@@ -229,20 +229,38 @@
             const start = 4;
             const rows = document.querySelectorAll('#tabela_relatorio_formula .ch4_media_metano');
             const last = start + rows.length - 1;
+            
+            const dispenser_pad = 11;
+            const media_clientes_pad = 12;
+            const energia_pad = 14;
 
-            const alpha = 'JKLMNOPQRSTUVWXYZ'; 
-            const dispenser_pad = 1;
-            const media_clientes_pad = 2;
-            const energia_pad = 4;
-
-            const DI = alpha[dispenser_pad + window.parsedClientsLength];
-            const CI = alpha[media_clientes_pad + window.parsedClientsLength];
-            const EI = alpha[energia_pad + window.parsedClientsLength];
+            const DI = getExcelColumnName(dispenser_pad + window.parsedClientsLength);
+            const CI = getExcelColumnName(media_clientes_pad + window.parsedClientsLength);
+            const EI = getExcelColumnName(energia_pad + window.parsedClientsLength);
             
             document.querySelector('#tabela_relatorio_formula .ch4_media_metano_sum').innerHTML = '=AVERAGE(E'+start+':E'+last+')';
             document.querySelector('#tabela_relatorio_formula .media_clientes').innerHTML = '=AVERAGE('+CI+start+':'+CI+last+')';
             document.querySelector('#tabela_relatorio_formula .dispenser_total').innerHTML = '=SUM('+DI+start+':'+DI+last+')';
             document.querySelector('#tabela_relatorio_formula .energia_total').innerHTML = '=SUM('+EI+start+':'+EI+last+')';
+        
+            function getExcelColumnName(n) {
+              let result = ''; // Initialize the result variable to store the Excel column title
+            
+              if (n < 1) {
+                throw new Error("Column number must be a positive integer.");
+              }
+            
+              while (n > 0) {
+                // Calculate the character corresponding to the current digit, adjusting for 1-based indexing
+                let el = String.fromCharCode(65 + (n - 1) % 26);
+                // Prepend the character to the result
+                result = el + result;
+                // Update n for the next digit (using bitwise OR ~~ for integer division)
+                n = ~~((n - 1) / 26);
+              }
+            
+              return result; // Return the Excel column title
+            }
         </script>
         
     </div>
