@@ -35,7 +35,6 @@ $cakeDescription = $configuracao['descricao'] . ' - ' . $configuracao['instituic
         <?= $this->fetch('meta') ?>
         <?= $this->fetch('css') ?>
         <?= $this->fetch('script') ?>
-        <?= $this->Html->script('excellentexport') ?>
     </head>
     <body>
         <?= $this->element('submenu_navegacao'); ?>

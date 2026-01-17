@@ -67,7 +67,7 @@ class RelatoriosController extends AppController
         
         $clientes = $this->fetchTable('Clientes')->find()->all();
         
-        $this->set(compact('relatorios', 'clientes', 'meses', 'month'));
+        $this->set(compact('relatorios', 'clientes', 'meses', 'month', 'year'));
     }
 
     /**
