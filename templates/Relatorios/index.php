@@ -13,11 +13,6 @@
         <?= $this->element('paginator'); ?>
     </div>
     
-    <?php
-        //pr($meses->toArray());
-        //die();
-    ?>
-    
     <div class="inline-block">
         <span id="date" class="hidden"><?= $month.'_'.$year ?></span>
         <span id="clientes" class="hidden"><?= h(json_encode($clientes->toArray())) ?></span>
@@ -121,17 +116,17 @@
                             (function () { 
                                 // calcula o volume cumulativo de biogas no mes
                                 const parent = document.currentScript.parentElement;
-                                const volume_biogas_dia = parent.querySelector('.td_volume_biogas_dia');
-                                const volume_biogas_mes = parent.querySelector('.td_volume_biogas_mes');
+                                const volume_biogas_dia = parent.querySelector('#tabela_relatorio .td_volume_biogas_dia');
+                                const volume_biogas_mes = parent.querySelector('#tabela_relatorio .td_volume_biogas_mes');
                                 const previous_tr = parent.previousElementSibling;
                                 if (!previous_tr) volume_biogas_mes.textContent = volume_biogas_dia.textContent;
                                 else {
-                                    const previous_td = previous_tr.querySelector('.td_volume_biogas_mes');
+                                    const previous_td = previous_tr.querySelector('#tabela_relatorio .td_volume_biogas_mes');
                                     volume_biogas_mes.textContent = Number(previous_td.textContent) + Number(volume_biogas_dia.textContent);
                                 }
                                 
                                 // divide as celulas para incluir os clientes
-                                const consumo = parent.querySelector('.td_consumo .consumo');
+                                const consumo = parent.querySelector('#tabela_relatorio .td_consumo .consumo');
                                 const consumoData = new Function('return {'+consumo.textContent+'}')();
                                 const consumo_td =  parent.querySelector('.td_consumo');
                                 for (let clienteId in window.parsedClients) {
@@ -153,7 +148,7 @@
                                 const volume_mes= parent.querySelector('.td_volume_total_mes');
                                 if (!previous_tr) volume_mes.textContent = volume_dia.textContent;
                                 else {
-                                    const previous_td = previous_tr.querySelector('.td_volume_total_mes');
+                                    const previous_td = previous_tr.querySelector('#tabela_relatorio .td_volume_total_mes');
                                     volume_mes.textContent = Number(previous_td.textContent) + Number(volume_dia.textContent);
                                 }
                             })()
@@ -224,9 +219,46 @@
             th_clientes.remove();
             const td_cliente = document.querySelectorAll('#tabela_relatorio_formula .td_consumo');
             for (let td of td_cliente) td.remove();
-
-            // substitui valores por formulas 
+            
+            // substitui formulas 
             const start = 4;
+            
+            // formula biogas cumulativo do mes
+            const volume_biogas_dia = document.querySelectorAll('#tabela_relatorio_formula .td_volume_biogas_dia');
+            for (let td of volume_biogas_dia) {
+                const volume_biogas_mes = td.nextElementSibling;
+                const previous_tr = td.parentElement.previousElementSibling;
+                const previous_td = previous_tr?.querySelector('.td_volume_biogas_mes');
+                if (!previous_td) volume_biogas_mes.textContent = '=I'+start; 
+                else {
+                    const index = start + Array.prototype.indexOf.call(td.parentElement.parentElement.children, td.parentElement);
+                    volume_biogas_mes.textContent = '=I'+index+' + J'+(index-1);
+                }
+            }
+            
+            // formula biometano cumulativo do mes
+            const volume_biometano_dia = document.querySelectorAll('#tabela_relatorio_formula .td_volume_total_dia');
+            for (let td of volume_biometano_dia) {
+                const volume_biometano_mes = td.nextElementSibling;
+                const previous_tr = td.parentElement.previousElementSibling;
+                const previous_td = previous_tr?.querySelector('.td_volume_total_mes');
+                if (!previous_td) volume_biometano_mes.textContent = '=O'+start; 
+                else {
+                    const index = start + Array.prototype.indexOf.call(td.parentElement.parentElement.children, td.parentElement);
+                    volume_biometano_mes.textContent = '=O'+index+' + P'+(index-1);
+                }
+            }
+            
+            // formula biometano total dia
+            const clientes_pad = 11;
+            for (let td of volume_biometano_dia) {
+                const index = start + Array.prototype.indexOf.call(td.parentElement.parentElement.children, td.parentElement);
+                const SI = getExcelColumnName(clientes_pad);
+                const LI = getExcelColumnName(clientes_pad + window.parsedClientsLength - 1);
+                td.textContent = '=SUM('+ SI + index +':'+ LI + index +')'
+            }
+            
+            // substitui valores finais
             const rows = document.querySelectorAll('#tabela_relatorio_formula .ch4_media_metano');
             const last = start + rows.length - 1;
             
@@ -242,7 +274,7 @@
             document.querySelector('#tabela_relatorio_formula .media_clientes').innerHTML = '=AVERAGE('+CI+start+':'+CI+last+')';
             document.querySelector('#tabela_relatorio_formula .dispenser_total').innerHTML = '=SUM('+DI+start+':'+DI+last+')';
             document.querySelector('#tabela_relatorio_formula .energia_total').innerHTML = '=SUM('+EI+start+':'+EI+last+')';
-        
+            
             function getExcelColumnName(n) {
               let result = ''; // Initialize the result variable to store the Excel column title
             
