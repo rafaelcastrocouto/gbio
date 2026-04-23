@@ -28,7 +28,7 @@ if ($user_session) { $user_data = $user_session->getOriginalData(); }
                     echo $this->Form->control('cliente_id', ['options' => $clientes, 'class' => 'form-control']);
                     echo $this->Form->control('controle', ['label' => 'Nº de Controle', 'placeholder' => '1234']);
                     echo $this->Form->control('nf', ['label' => 'NF', 'placeholder' => '123456']);
-                    echo $this->Form->control('certificado', 'placeholder' => 'AB123456-123');
+                    echo $this->Form->control('certificado', ['placeholder' => 'AB123456-123']);
                     echo $this->Form->control('inicio');
                     echo $this->Form->control('fim');
                     echo $this->Form->control('saida', ['label' => 'Data de Saída']);
