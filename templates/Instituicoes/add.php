@@ -16,12 +16,12 @@
             <fieldset>
                 <h3><?= __('Adicionando Instituição') ?></h3>
                 <?php
-                    echo $this->Form->control('nome');
-                    echo $this->Form->control('cnpj');
-                    echo $this->Form->control('email');
-                    echo $this->Form->control('url');
-                    echo $this->Form->control('endereco');
-                    echo $this->Form->control('telefone');
+                    echo $this->Form->control('nome', ['placeholder' => 'Empresa Nome Fantasia']);
+                    echo $this->Form->control('cnpj', ['placeholder' => '12.345.678/1234-00']);
+                    echo $this->Form->control('email', ['placeholder' => 'joao@email.com']);
+                    echo $this->Form->control('url', ['placeholder' => 'www.sitedaempresa.com.br']);
+                    echo $this->Form->control('endereco', ['placeholder' => 'Rua ABCD nº 123, Cidade - Estado']);
+                    echo $this->Form->control('telefone', ['placeholder' => '(21)98765-4321']);
                     echo $this->Form->control('observacoes');
                 ?>
             </fieldset>

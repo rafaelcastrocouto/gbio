@@ -23,11 +23,11 @@ if ($user_session) { $user_data = $user_session->getOriginalData(); }
             <fieldset>
                 <h3><?= __('Adicionando Cliente') ?></h3>
                 <?php
-                    echo $this->Form->control('nome');
-                    echo $this->Form->control('cpf');
-                    echo $this->Form->control('email');
-                    echo $this->Form->control('endereco');
-                    echo $this->Form->control('celular');
+                    echo $this->Form->control('nome', ['placeholder' => 'João da Silva']);
+                    echo $this->Form->control('cpf', ['placeholder' => '123.456.789-00']);
+                    echo $this->Form->control('email', ['placeholder' => 'joao@email.com']);
+                    echo $this->Form->control('endereco', ['placeholder' => 'Rua ABCD nº 123, Cidade - Estado']);
+                    echo $this->Form->control('celular', ['placeholder' => '(21)98765-4321']);
                     echo $this->Form->control('observacoes');
                 ?>
             </fieldset>

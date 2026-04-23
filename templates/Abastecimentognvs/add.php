@@ -27,12 +27,12 @@ if ($user_session) { $user_data = $user_session->getOriginalData(); }
                     echo $this->Form->control('instituicao_id', ['options' => $instituicoes, 'class' => 'form-control']);
                     echo $this->Form->control('cliente_id', ['options' => $clientes, 'class' => 'form-control']);
                     echo $this->Form->control('saida', ['label' => 'Data de Saída']);
-                    echo $this->Form->control('motorista');
-                    echo $this->Form->control('rg', ['label' => 'RG']);
-                    echo $this->Form->control('placa');
-                    echo $this->Form->control('p_inicial', ['label' => 'Pressão Inicial (bar)']);
-                    echo $this->Form->control('p_final', ['label' => 'Pressão Final (bar)']);
-                    echo $this->Form->control('volume', ['label' => 'Volume (m³)']);
+                    echo $this->Form->control('motorista', ['placeholder' => 'João da Silva']);
+                    echo $this->Form->control('rg', ['label' => 'RG', 'placeholder' => '12.345.678-9']);
+                    echo $this->Form->control('placa', ['placeholder' => 'ABC-DEFG']);
+                    echo $this->Form->control('p_inicial', ['label' => 'Pressão Inicial (bar)', 'placeholder' => '12']);
+                    echo $this->Form->control('p_final', ['label' => 'Pressão Final (bar)', 'placeholder' => '123']);
+                    echo $this->Form->control('volume', ['label' => 'Volume (m³)', 'placeholder' => '123.4']);
                     echo $this->Form->control('observacoes', ['label' => 'Observações']);
                 ?>
             </fieldset>

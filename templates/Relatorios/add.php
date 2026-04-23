@@ -27,16 +27,16 @@ if ($user_session) { $user_data = $user_session->getOriginalData(); }
                     echo $this->Form->control('user_id', ['label' => 'ID de Usuário do Autor', 'type' => 'number', 'value' => $user_session->get('id'), 'hidden' => !$user_data['administrador_id'] ]);
                     echo $this->Form->control('instituicao_id', ['label' => 'Instituição', 'options' => $instituicoes, 'class' => 'form-control']);
                     echo $this->Form->control('data');
-                    echo $this->Form->control('ch4_media_biogas', ['label' => 'CH₄ Média Biogas (%)']);
-                    echo $this->Form->control('co2_media_biogas', ['label' => 'CO₂ Média Biogas (%)']);
-                    echo $this->Form->control('o2_media_biogas', ['label' => 'O₂ Média Biogas (%)']);
-                    echo $this->Form->control('ch4_media_metano', ['label' => 'CH₄ Média Metano (%)']);
-                    echo $this->Form->control('co2_media_metano', ['label' => 'CO₂ Média Metano (%)']);
-                    echo $this->Form->control('o2_media_metano', ['label' => 'O₂ Média Metano (%)']);
-                    echo $this->Form->control('n2_media_metano', ['label' => 'N₂ Média Metano (%)']);
-                    echo $this->Form->control('volume_biogas_dia', ['label' => 'Total Dia (m³)']);
-                    echo $this->Form->control('volume_biogas_mes', ['label' => 'Total Mês (m³)']);
-                    echo $this->Form->control('consumo_clientes', ['label' => 'Consumo Clientes (m³)']);
+                    echo $this->Form->control('ch4_media_biogas', ['label' => 'CH₄ Média Biogas (%)', 'placeholder' => '12.34']);
+                    echo $this->Form->control('co2_media_biogas', ['label' => 'CO₂ Média Biogas (%)', 'placeholder' => '12.34']);
+                    echo $this->Form->control('o2_media_biogas', ['label' => 'O₂ Média Biogas (%)', 'placeholder' => '12.34']);
+                    echo $this->Form->control('ch4_media_metano', ['label' => 'CH₄ Média Metano (%)', 'placeholder' => '12.34']);
+                    echo $this->Form->control('co2_media_metano', ['label' => 'CO₂ Média Metano (%)', 'placeholder' => '12.34']);
+                    echo $this->Form->control('o2_media_metano', ['label' => 'O₂ Média Metano (%)', 'placeholder' => '12.34']);
+                    echo $this->Form->control('n2_media_metano', ['label' => 'N₂ Média Metano (%)', 'placeholder' => '12.34']);
+                    echo $this->Form->control('volume_biogas_dia', ['label' => 'Total Dia (m³)', 'placeholder' => '12345']);
+                    echo $this->Form->control('volume_biogas_mes', ['label' => 'Total Mês (m³)', 'placeholder' => '123456']);
+                    echo $this->Form->control('consumo_clientes', ['label' => 'Consumo Clientes (m³)', 'placeholder' => '12345']);
                 ?>    
                         <h3>Clientes (m³)</h3>
                         <fieldset class="consumo_parsed input"></fieldset>
@@ -52,7 +52,7 @@ if ($user_session) { $user_data = $user_session->getOriginalData(); }
                                 let parsedText = [];
                                 for (let clienteId in parsedClients) {
                                     const labelEl = '<label for="cliente_' + clienteId + '">Cliente ' + parsedClients[clienteId].nome + '</label>';
-                                    const inputEl = '<input type="text" name="cliente_' + clienteId + '" value="" class="cliente_input">';
+                                    const inputEl = '<input type="text" name="cliente_' + clienteId + '" value="" class="cliente_input" placeholder="1234">';
                                     const text = labelEl + ' ' + inputEl;
                                     parsedText.push(text);
                                 }
@@ -80,9 +80,9 @@ if ($user_session) { $user_data = $user_session->getOriginalData(); }
                             })()
                         </script>
                 <?php
-                    echo $this->Form->control('dispenser', ['label' => 'Dispenser (m³)']);
-                    echo $this->Form->control('energia', ['label' => 'Energia (KW)']);
-                    echo $this->Form->control('densidade', ['label' => 'Densidade (Kg/m³)']);
+                    echo $this->Form->control('dispenser', ['label' => 'Dispenser (m³)', 'placeholder' => '123.45']);
+                    echo $this->Form->control('energia', ['label' => 'Energia (KW)', 'placeholder' => '12345']);
+                    echo $this->Form->control('densidade', ['label' => 'Densidade (Kg/m³)', 'placeholder' => '0.1']);
                     echo $this->Form->control('observacoes', ['label' => 'Observações']);
                 ?>
             </fieldset>

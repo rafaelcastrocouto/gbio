@@ -29,9 +29,9 @@ if ($user_session) { $user_data = $user_session->getOriginalData(); }
                      else:
                         echo $this->Form->control('user_id', ['type' => 'number', 'value' => $user_session->get('id'), 'hidden' => true ]); 
                     endif;
-                    echo $this->Form->control('cpf');
-                    echo $this->Form->control('endereco');
-                    echo $this->Form->control('celular');
+                    echo $this->Form->control('cpf', ['placeholder' => '123.456.789-00']);
+                    echo $this->Form->control('endereco', ['placeholder' => 'Rua ABCD nº 123, Cidade - Estado']);
+                    echo $this->Form->control('celular', ['placeholder' => '(21)98765-4321']);
                     echo $this->Form->control('observacoes');
                 ?>
             </fieldset>
