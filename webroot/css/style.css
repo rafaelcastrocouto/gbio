@@ -238,6 +238,7 @@ label,legend {
 }
 footer {
     background: #149ad7;
+    background: linear-gradient(90deg, #149ad7 90%, transparent);
     color: #fff;
     padding: 8px 0 2px;
     height: 36px;

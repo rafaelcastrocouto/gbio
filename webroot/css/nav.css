@@ -17,7 +17,7 @@ nav {
   left: 0;
   display: grid;
   grid-template-columns: 210px 1fr;
-  grid-gap: 20px;
+  grid-gap: 0.5em;
   z-index: 1;
 }
 nav,
