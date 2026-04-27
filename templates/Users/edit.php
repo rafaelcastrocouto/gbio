@@ -29,6 +29,7 @@ if ($user_session) { $user_data = $user_session->getOriginalData(); }
     <fieldset>
         <h3><?= __('Editando Usuário ') . $user->nome ?></h3>
         <?php
+            echo $this->Form->control('nome', ['label' => 'Novo nome']);
             echo $this->Form->control('email', ['type' => 'email', 'label' => 'Novo email']);
         ?>
     </fieldset>

@@ -15,7 +15,7 @@ if ($user_session) { $user_data = $user_session->getOriginalData(); }
         <div class="users view content">
             <aside>
                 <div class="nav">
-                    <?= $this->Html->link(__('Editar Email'), ['action' => 'edit', $user->id], ['class' => 'button']) ?>
+                    <?= $this->Html->link(__('Editar Usuário'), ['action' => 'edit', $user->id], ['class' => 'button']) ?>
                     <?= $this->Html->link(__('Editar Senha'), ['action' => 'editpassword', $user->id], ['class' => 'button']) ?>
                     
                     <?php if ($user_data['administrador_id']): ?>
