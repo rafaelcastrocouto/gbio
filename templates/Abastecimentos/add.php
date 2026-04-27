@@ -58,3 +58,7 @@ if ($user_session) { $user_data = $user_session->getOriginalData(); }
         </div>
     </div>
 </div>
+
+<script>
+    document.getElementById('saida').valueAsDate = new Date(); 
+</script>

@@ -91,3 +91,8 @@ if ($user_session) { $user_data = $user_session->getOriginalData(); }
         </div>
     </div>
 </div>
+
+<script>
+    document.getElementById('data').valueAsDate = new Date(); 
+</script>
+

@@ -41,3 +41,9 @@ if ($user_session) { $user_data = $user_session->getOriginalData(); }
         </div>
     </div>
 </div>
+
+<script>
+    const now = new Date();
+    now.setMinutes(now.getMinutes() - now.getTimezoneOffset());
+    document.getElementById('saida').value = now.toISOString().slice(0, 16);
+</script>
