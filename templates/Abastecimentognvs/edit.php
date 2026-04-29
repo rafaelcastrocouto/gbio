@@ -34,6 +34,7 @@ if ($user_session) { $user_data = $user_session->getOriginalData(); }
                     echo $this->Form->control('motorista');
                     echo $this->Form->control('rg', ['label' => 'RG']);
                     echo $this->Form->control('placa');
+                    echo $this->Form->control('prefixo');
                     echo $this->Form->control('p_inicial', ['label' => 'Pressão Inicial (bar)']);
                     echo $this->Form->control('p_final', ['label' => 'Pressão Final (bar)']);
                     echo $this->Form->control('volume', ['label' => 'Volume (m³)']);

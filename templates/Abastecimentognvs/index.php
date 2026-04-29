@@ -13,21 +13,23 @@
         <?= $this->element('paginator'); ?>
     </div>
     <div class="inline-block">
-        <table>
+        <table id="tabela_abastecimentognv">
             <thead>
                 <tr>
                     <th class="actions"><?= __('Ações') ?></th>
-                    <!-- <th><?= $this->Paginator->sort('id') ?></th> -->
-                    <!-- <th><?= $this->Paginator->sort('user_id') ?></th> -->
-                    <!-- <th><?= $this->Paginator->sort('instituicao_id') ?></th> -->
-                    <!-- <th><?= $this->Paginator->sort('cliente_id') ?></th> -->
+                    <th><?= $this->Paginator->sort('id') ?></th>
+                    <th><?= $this->Paginator->sort('user_id', ['label' => 'Autor']) ?></th>
+                    <th><?= $this->Paginator->sort('instituicao_id') ?></th>
+                    <th><?= $this->Paginator->sort('cliente_id') ?></th>
                     <th><?= $this->Paginator->sort('saida', ['label' => 'Data de Saída']) ?></th>
                     <th><?= $this->Paginator->sort('motorista') ?></th>
                     <th><?= $this->Paginator->sort('rg', ['label' => 'RG']) ?></th>
                     <th><?= $this->Paginator->sort('placa') ?></th>
+                    <th><?= $this->Paginator->sort('prefixo') ?></th>
                     <th><?= $this->Paginator->sort('p_inicial', ['label' => 'Pressão Inicial (bar)']) ?></th>
                     <th><?= $this->Paginator->sort('p_final', ['label' => 'Pressão Final (bar)']) ?></th>
                     <th><?= $this->Paginator->sort('volume', ['label' => 'Volume (m³)']) ?></th>
+                    <th><?= $this->Paginator->sort('observacoes') ?></th>
                 </tr>
             </thead>
             <tbody>
@@ -38,21 +40,36 @@
                         <?= $this->Html->link(__('✏️'), ['action' => 'edit', $abastecimentognv->id]) ?>
                         <?= $this->Form->postLink(__('❌'), ['action' => 'delete', $abastecimentognv->id], ['confirm' => __('Tem certeza que deseja deletar o abastecimentognv {0}?', $abastecimentognv->controle)]) ?>
                     </td>
-                    <!-- <td><?= $this->Html->link((string)$abastecimentognv->id, ['action' => 'view', $abastecimentognv->id]) ?></td> -->
-                    <!-- <td><?= $this->Html->link((string)$abastecimentognv->user->id, ['controller' => 'users', 'action' => 'view', $abastecimentognv->user->id]) ?></td> -->
-                    <!-- <td><?= $this->Html->link($abastecimentognv->instituicao->nome, ['controller' => 'instituicoes', 'action' => 'view', $abastecimentognv->instituicao->id]) ?></td> -->
-                    <!-- <td><?= $this->Html->link($abastecimentognv->cliente->nome, ['controller' => 'clientes', 'action' => 'view', $abastecimentognv->cliente->id]) ?></td> -->
+                    <td><?= $this->Html->link((string)$abastecimentognv->id, ['action' => 'view', $abastecimentognv->id]) ?></td>
+                    <td><?= $this->Html->link($abastecimentognv->user->nome, ['controller' => 'users', 'action' => 'view', $abastecimentognv->user->id]) ?></td>
+                    <td><?= $this->Html->link($abastecimentognv->instituicao->nome, ['controller' => 'instituicoes', 'action' => 'view', $abastecimentognv->instituicao->id]) ?></td>
+                    <td><?= $this->Html->link($abastecimentognv->cliente->nome, ['controller' => 'clientes', 'action' => 'view', $abastecimentognv->cliente->id]) ?></td>
                     <td><?= h($abastecimentognv->saida) ?></td>
                     <td><?= h($abastecimentognv->motorista) ?></td>
                     <td><?= h($abastecimentognv->rg) ?></td>
                     <td><?= h($abastecimentognv->placa) ?></td>
+                    <td><?= h($abastecimentognv->prefixo) ?></td>
                     <td><?= h($abastecimentognv->p_inicial) ?></td>
                     <td><?= h($abastecimentognv->p_final) ?></td>
                     <td><?= h($abastecimentognv->volume) ?></td>
+                    <td><?= $abastecimentognv->observacoes ?></td>
                 </tr>
                 <?php endforeach; ?>
             </tbody>
         </table>
+        <?= $this->Html->script('excellentexport') ?>
+        <a id="excelexport" download="abastecimentognv.xls" class="button" href="#" onclick="return ExcellentExport.excel(this, 'tabela_abastecimentognv_export', 'Relatorio');">Exportar para Excel</a>
+        <script>
+            // formata uma copia da tabela para exportar para excel
+            const formula_table = document.querySelector('#tabela_abastecimentognv').cloneNode(true);
+            formula_table.id = 'tabela_abastecimentognv_export';
+            formula_table.classList.add('hidden');
+            document.currentScript.before(formula_table);
+            
+            //remove a 1a coluna de acoes
+            const actions = document.querySelectorAll('#tabela_abastecimentognv_export .actions');
+            for (let a of actions) a.remove();
+        </script>
     </div>
     <div class="paginator">
         <?= $this->element('paginator'); ?>

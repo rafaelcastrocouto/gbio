@@ -16,6 +16,7 @@ use Cake\ORM\Entity;
  * @property string|null $motorista
  * @property string|null $rg
  * @property string|null $placa
+ * @property string|null $prefixo
  * @property string|null $p_inicial
  * @property string|null $p_final
  * @property string|null $volume
@@ -44,6 +45,7 @@ class Abastecimentognv extends Entity
      'motorista' => true,
      'rg' => true,
      'placa' => true,
+     'prefixo' => true,
      'p_inicial' => true,
      'p_final' => true,
      'volume' => true,

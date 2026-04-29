@@ -199,11 +199,11 @@
         </table>
         
         <?= $this->Html->script('excellentexport') ?>
-        <a id="excelexport" download="relatorio.xls" class="button" href="#" onclick="return ExcellentExport.excel(this, 'tabela_relatorio_formula', 'Relatorio');">Exportar para Excel</a>
+        <a id="excelexport" download="relatorio.xls" class="button" href="#" onclick="return ExcellentExport.excel(this, 'tabela_relatorio_export', 'Relatorio');">Exportar para Excel</a>
         <script>
             // formata uma copia da tabela para exportar para excel
             const formula_table = document.querySelector('#tabela_relatorio').cloneNode(true);
-            formula_table.id = 'tabela_relatorio_formula';
+            formula_table.id = 'tabela_relatorio_export';
             formula_table.classList.add('hidden');
             document.currentScript.before(formula_table);
             document.querySelector('#excelexport').download = 'relatorio_'+document.querySelector('#date').textContent+'.xls';
@@ -250,15 +250,17 @@
             }
             
             // formula biometano total dia
+            const sum_str = 'SOMA';
             const clientes_pad = 11;
             for (let td of volume_biometano_dia) {
                 const index = start + Array.prototype.indexOf.call(td.parentElement.parentElement.children, td.parentElement);
                 const SI = getExcelColumnName(clientes_pad);
                 const LI = getExcelColumnName(clientes_pad + window.parsedClientsLength - 1);
-                td.textContent = '=SUM('+ SI + index +':'+ LI + index +')'
+                td.textContent = '='+sum_str+'('+ SI + index +':'+ LI + index +')'
             }
             
             // substitui valores finais
+            const average_str = 'MEDIA';
             const rows = document.querySelectorAll('#tabela_relatorio_formula .ch4_media_metano');
             const last = start + rows.length - 1;
             
@@ -270,10 +272,10 @@
             const CI = getExcelColumnName(media_clientes_pad + window.parsedClientsLength);
             const EI = getExcelColumnName(energia_pad + window.parsedClientsLength);
             
-            document.querySelector('#tabela_relatorio_formula .ch4_media_metano_sum').innerHTML = '=AVERAGE(E'+start+':E'+last+')';
-            document.querySelector('#tabela_relatorio_formula .media_clientes').innerHTML = '=AVERAGE('+CI+start+':'+CI+last+')';
-            document.querySelector('#tabela_relatorio_formula .dispenser_total').innerHTML = '=SUM('+DI+start+':'+DI+last+')';
-            document.querySelector('#tabela_relatorio_formula .energia_total').innerHTML = '=SUM('+EI+start+':'+EI+last+')';
+            document.querySelector('#tabela_relatorio_formula .ch4_media_metano_sum').innerHTML = '='+average_str+'(E'+start+':E'+last+')';
+            document.querySelector('#tabela_relatorio_formula .media_clientes').innerHTML = '='+average_str+'('+CI+start+':'+CI+last+')';
+            document.querySelector('#tabela_relatorio_formula .dispenser_total').innerHTML = '='+sum_str+'('+DI+start+':'+DI+last+')';
+            document.querySelector('#tabela_relatorio_formula .energia_total').innerHTML = '='+sum_str+'('+EI+start+':'+EI+last+')';
             
             function getExcelColumnName(n) {
               let result = ''; // Initialize the result variable to store the Excel column title

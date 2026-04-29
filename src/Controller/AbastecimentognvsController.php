@@ -35,7 +35,7 @@ class AbastecimentognvsController extends AppController
             $this->Flash->error('Authorization error: ' . $error->getMessage());
             return $this->redirect(['controller' => 'Users', 'action' => 'view', $user_session->id]);
         }
-        $query = $this->Abastecimentognvs->find('all')->contain(['Users', 'Instituicoes', 'Clientes']);
+        $query = $this->Abastecimentognvs->find('all')->contain(['Users' => ['Operadores', 'Supervisores'], 'Instituicoes', 'Clientes']);
         $abastecimentognvs = $this->paginate($query);
         $this->set(compact('abastecimentognvs'));
     }

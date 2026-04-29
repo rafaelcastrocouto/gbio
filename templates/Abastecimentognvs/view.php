@@ -51,6 +51,10 @@
                     <td><?= h($abastecimentognv->placa) ?></td>
                 </tr>
                 <tr>
+                    <th><?= __('Prefixo') ?></th>
+                    <td><?= h($abastecimentognv->prefixo) ?></td>
+                </tr>
+                <tr>
                     <th><?= __('Pressão Inicial (bar)') ?></th>
                     <td><?= h($abastecimentognv->p_inicial) ?></td>
                 </tr>
