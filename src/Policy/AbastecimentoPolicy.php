@@ -61,7 +61,16 @@ class AbastecimentoPolicy implements BeforePolicyInterface
     }
   }
   
-  public function canDelete()
+  public function canSearch(IdentityInterface $user_data, Abastecimento $abastecimentoData)
+  {
+    if ($user_data and ($user_data['supervisor_id'])) {
+      return new Result(true);
+    } else {
+      return new Result(false, 'Erro: abastecimento search policy not allowed');
+    }
+  }
+  
+  public function canDelete(IdentityInterface $user_data, Abastecimento $abastecimentoData)
   {
     return new Result(false, 'Erro: abastecimento delete policy not allowed');
   }

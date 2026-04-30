@@ -7,6 +7,7 @@
 <div class="abastecimentognvs index content">
     
     <?= $this->Html->link(__('Novo Abastecimento GNV'), ['action' => 'add'], ['class' => 'button']) ?>
+    <?= $this->Html->link(__('Buscar Abastecimento GNV'), ['action' => 'search'], ['class' => 'button']) ?>
     
     <h3><?= __('Lista de Abastecimentos GNV') ?></h3>
     <div class="paginator">

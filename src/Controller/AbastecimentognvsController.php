@@ -152,4 +152,45 @@ class AbastecimentognvsController extends AppController
 
         return $this->redirect(['action' => 'index']);
     }
+    
+    /**
+     * Search method
+     *
+     * @return \Cake\Http\Response|null|void Renders view
+     */
+    public function search () 
+    {
+        try {
+            $this->Authorization->authorize($this->Abastecimentognvs->newEmptyEntity());
+        } catch (ForbiddenException $error) {
+            $this->Flash->error('Erro de authorização: ' . $error->getMessage());
+            return $this->redirect('/');
+        }
+        $condition = ['Abastecimentognvs.id' => ''];
+        
+        $nome = $this->getRequest()->getQuery('nome');
+        if ($nome) { $condition = ['Users.nome LIKE' => '%' . $nome . '%']; }
+        
+        $email = $this->getRequest()->getQuery('email');
+        if ($email) { $condition = ['Users.email' => $email]; }
+
+        $motorista = $this->getRequest()->getQuery('motorista');
+        if ($motorista) { $condition = ['Abastecimentognvs.motorista LIKE' => '%' . $motorista . '%']; }
+
+        $rg = $this->getRequest()->getQuery('rg');
+        if ($rg) { $condition = ['Abastecimentognvs.rg' => $rg]; }
+                
+        $placa = $this->getRequest()->getQuery('placa');
+        if ($placa) { $condition = ['Abastecimentognvs.placa' => $placa]; }
+                
+        $prefixo = $this->getRequest()->getQuery('prefixo');
+        if ($prefixo) { $condition = ['Abastecimentognvs.prefixo' => $prefixo]; }
+                
+        $observacoes = $this->getRequest()->getQuery('observacoes');
+        if ($observacoes) { $condition = ['Abastecimentognvs.observacoes LIKE' => '%' . $observacoes . '%']; }
+        
+        $result = $this->Abastecimentognvs->find('all',  ['conditions' => $condition ])->contain(['Users']);
+        $abastecimentognvs = $this->paginate($result);
+        $this->set(compact('abastecimentognvs'));
+    }
 }

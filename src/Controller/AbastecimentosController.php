@@ -161,4 +161,46 @@ class AbastecimentosController extends AppController
 
         return $this->redirect(['action' => 'index']);
     }
+
+
+    /**
+     * Search method
+     *
+     * @return \Cake\Http\Response|null|void Renders view
+     */
+    public function search () 
+    {
+        try {
+            $this->Authorization->authorize($this->Abastecimentos->newEmptyEntity());
+        } catch (ForbiddenException $error) {
+            $this->Flash->error('Erro de authorização: ' . $error->getMessage());
+            return $this->redirect('/');
+        }
+        $condition = ['Abastecimentos.id' => ''];
+        
+        $nome = $this->getRequest()->getQuery('nome');
+        if ($nome) { $condition = ['Users.nome LIKE' => '%' . $nome . '%']; }
+        
+        $email = $this->getRequest()->getQuery('email');
+        if ($email) { $condition = ['Users.email' => $email]; }
+
+        $controle = $this->getRequest()->getQuery('controle');
+        if ($controle) { $condition = ['Abastecimentos.controle' => $controle]; }
+
+        $nf = $this->getRequest()->getQuery('nf');
+        if ($nf) { $condition = ['Abastecimentos.nf' => $nf]; }
+                
+        $certificado = $this->getRequest()->getQuery('certificado');
+        if ($certificado) { $condition = ['Abastecimentos.certificado' => $certificado]; }
+                
+        $placa = $this->getRequest()->getQuery('placa');
+        if ($placa) { $condition = ['Abastecimentos.placa' => $placa]; }
+                
+        $observacoes = $this->getRequest()->getQuery('observacoes');
+        if ($observacoes) { $condition = ['Abastecimentos.observacoes LIKE' => '%' . $observacoes . '%']; }
+        
+        $result = $this->Abastecimentos->find('all',  ['conditions' => $condition ])->contain(['Users']);
+        $abastecimentos = $this->paginate($result);
+        $this->set(compact('abastecimentos'));
+    }
 }

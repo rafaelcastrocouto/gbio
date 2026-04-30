@@ -7,6 +7,7 @@
 <div class="abastecimentos index content">
     
     <?= $this->Html->link(__('Novo Abastecimento'), ['action' => 'add'], ['class' => 'button']) ?>
+    <?= $this->Html->link(__('Buscar Abastecimento'), ['action' => 'search'], ['class' => 'button']) ?>
     
     <h3><?= __('Lista de Abastecimentos') ?></h3>
     <div class="paginator">

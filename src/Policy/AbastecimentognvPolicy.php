@@ -59,6 +59,15 @@ class AbastecimentognvPolicy implements BeforePolicyInterface
     }
   }
   
+  public function canSearch(IdentityInterface $user_data, Abastecimentognv $abastecimentognvData)
+  {
+    if ($user_data and ($user_data['supervisor_id'])) {
+      return new Result(true);
+    } else {
+      return new Result(false, 'Erro: abastecimentognv search policy not allowed');
+    }
+  }
+  
   public function canDelete(IdentityInterface $user_data, Abastecimentognv $abastecimentognvData)
   {
     return new Result(false, 'Erro: abastecimentognv delete policy not allowed');
