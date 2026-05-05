@@ -18,9 +18,9 @@
             <thead>
                 <tr>
                     <th class="actions"><?= __('Ações') ?></th>
-                    <th><?= $this->Paginator->sort('id') ?></th>
+                    <th><?= $this->Paginator->sort('id', 'ID') ?></th>
                     <th><?= $this->Paginator->sort('user_id', ['label' => 'Autor']) ?></th>
-                    <th><?= $this->Paginator->sort('instituicao_id') ?></th>
+                    <th><?= $this->Paginator->sort('instituicao_id', ['label' => 'Instituição']) ?></th>
                     <th><?= $this->Paginator->sort('cliente_id') ?></th>
                     <th><?= $this->Paginator->sort('saida', ['label' => 'Data de Saída']) ?></th>
                     <th><?= $this->Paginator->sort('motorista') ?></th>

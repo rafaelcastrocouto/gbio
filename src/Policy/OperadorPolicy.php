@@ -57,6 +57,15 @@ class OperadorPolicy implements BeforePolicyInterface
     }
   }
   
+  public function canSearch(IdentityInterface $user_data, Operador $operadorData)
+  {
+    if ($user_data['supervisor_id']) {
+      return new Result(true);
+    } else {
+      return new Result(false, 'Erro: operador search policy not allowed');
+    }
+  }
+  
   public function canDelete()
   {
     return new Result(false, 'Erro: operador delete policy not allowed');

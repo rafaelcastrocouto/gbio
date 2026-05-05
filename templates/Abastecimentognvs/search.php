@@ -17,13 +17,15 @@ $observacoes = $this->getRequest()->getQuery('observacoes');
 ?>
 
 <div class="abastecimentognvs busca content">
+    
+    <?= $this->Html->link(__('Listar Abastecimentos GNV'), ['action' => 'index'], ['class' => 'button']) ?>
 
     <div class="tabset">
         
         <input type="radio" name="tabs" id="tab_nome" <?= ($nome or (!$email and !$motorista and !$rg and !$placa and !$prefixo and !$observacoes)) ? 'checked' : '' ?> >
         <label for="tab_nome">Busca por nome</label>
         <div class="tab-content">
-            <?php echo $this->Form->create(null, ['type' => 'get', 'valueSources' => ['query', 'context']]) ?>
+            <?php echo $this->Form->create($abastecimentognv_vazio, ['type' => 'get', 'valueSources' => ['query', 'context']]) ?>
             <?php echo $this->Form->control('nome', ['label' => ['text' => 'Digite o nome do autor do abastecimento'], 'class' => 'form-control']); ?>
             <?php echo $this->Form->submit('Buscar', ['type' => 'Submit', 'class' => 'button']); ?>
             <?php echo $this->Form->end(); ?>
@@ -32,7 +34,7 @@ $observacoes = $this->getRequest()->getQuery('observacoes');
         <input type="radio" name="tabs" id="tab_email" <?= ($email) ? 'checked' : '' ?> >
         <label for="tab_email">Busca por email</label>
         <div class="tab-content">
-            <?php echo $this->Form->create(null, ['type' => 'get', 'valueSources' => ['query', 'context']]) ?>
+            <?php echo $this->Form->create($abastecimentognv_vazio, ['type' => 'get', 'valueSources' => ['query', 'context']]) ?>
             <?php echo $this->Form->control('email', ['label' => ['text' => 'Digite o email do autor do abastecimento'], 'class' => 'form-control']); ?>
             <?php echo $this->Form->submit('Buscar', ['type' => 'Submit', 'class' => 'button']); ?>
             <?php echo $this->Form->end(); ?>
@@ -41,7 +43,7 @@ $observacoes = $this->getRequest()->getQuery('observacoes');
         <input type="radio" name="tabs" id="tab_motorista" <?= ($motorista) ? 'checked' : '' ?> >
         <label for="tab_motorista">Busca por motorista</label>
         <div class="tab-content">
-            <?php echo $this->Form->create(null, ['type' => 'get', 'valueSources' => ['query', 'context']]) ?>
+            <?php echo $this->Form->create($abastecimentognv_vazio, ['type' => 'get', 'valueSources' => ['query', 'context']]) ?>
             <?php echo $this->Form->control('motorista', ['label' => ['text' => 'Digite o nome do motorista do veículo'], 'class' => 'form-control']); ?>
             <?php echo $this->Form->submit('Buscar', ['type' => 'Submit', 'class' => 'button']); ?>
             <?php echo $this->Form->end(); ?>
@@ -50,7 +52,7 @@ $observacoes = $this->getRequest()->getQuery('observacoes');
         <input type="radio" name="tabs" id="tab_rg" <?= ($rg) ? 'checked' : '' ?> >
         <label for="tab_rg">Busca por RG</label>
         <div class="tab-content">
-            <?php echo $this->Form->create(null, ['type' => 'get', 'valueSources' => ['query', 'context']]) ?>
+            <?php echo $this->Form->create($abastecimentognv_vazio, ['type' => 'get', 'valueSources' => ['query', 'context']]) ?>
             <?php echo $this->Form->control('rg', ['label' => ['text' => 'Digite o RG do motorista do veículo'], 'class' => 'form-control']); ?>
             <?php echo $this->Form->submit('Buscar', ['type' => 'Submit', 'class' => 'button']); ?>
             <?php echo $this->Form->end(); ?>
@@ -59,7 +61,7 @@ $observacoes = $this->getRequest()->getQuery('observacoes');
         <input type="radio" name="tabs" id="tab_placa" <?= ($placa) ? 'checked' : '' ?> >
         <label for="tab_placa">Busca por placa</label>
         <div class="tab-content">
-            <?php echo $this->Form->create(null, ['type' => 'get', 'valueSources' => ['query', 'context']]) ?>
+            <?php echo $this->Form->create($abastecimentognv_vazio, ['type' => 'get', 'valueSources' => ['query', 'context']]) ?>
             <?php echo $this->Form->control('placa', ['label' => ['text' => 'Digite a placa do veículo'], 'class' => 'form-control']); ?>
             <?php echo $this->Form->submit('Buscar', ['type' => 'Submit', 'class' => 'button']); ?>
             <?php echo $this->Form->end(); ?>
@@ -68,7 +70,7 @@ $observacoes = $this->getRequest()->getQuery('observacoes');
         <input type="radio" name="tabs" id="tab_prefixo" <?= ($prefixo) ? 'checked' : '' ?> >
         <label for="tab_prefixo">Busca por prefixo</label>
         <div class="tab-content">
-            <?php echo $this->Form->create(null, ['type' => 'get', 'valueSources' => ['query', 'context']]) ?>
+            <?php echo $this->Form->create($abastecimentognv_vazio, ['type' => 'get', 'valueSources' => ['query', 'context']]) ?>
             <?php echo $this->Form->control('prefixo', ['label' => ['text' => 'Digite o prefixo do abastecimento'], 'class' => 'form-control']); ?>
             <?php echo $this->Form->submit('Buscar', ['type' => 'Submit', 'class' => 'button']); ?>
             <?php echo $this->Form->end(); ?>
@@ -77,7 +79,7 @@ $observacoes = $this->getRequest()->getQuery('observacoes');
         <input type="radio" name="tabs" id="tab_observacoes" <?= ($observacoes) ? 'checked' : '' ?> >
         <label for="tab_observacoes">Busca por observações</label>
         <div class="tab-content">
-            <?php echo $this->Form->create(null, ['type' => 'get', 'valueSources' => ['query', 'context']]) ?>
+            <?php echo $this->Form->create($abastecimentognv_vazio, ['type' => 'get', 'valueSources' => ['query', 'context']]) ?>
             <?php echo $this->Form->control('observacoes', ['label' => ['text' => 'Digite o termo na observação do abastecimento'], 'class' => 'form-control']); ?>
             <?php echo $this->Form->submit('Buscar', ['type' => 'Submit', 'class' => 'button']); ?>
             <?php echo $this->Form->end(); ?>
@@ -105,7 +107,7 @@ $observacoes = $this->getRequest()->getQuery('observacoes');
                     <thead class='thead-light'>
                         <tr>
                             <th class="actions"><?= __('Ações') ?></th>
-                            <th><?= $this->Paginator->sort('id'); ?></th>
+                            <th><?= $this->Paginator->sort('id', 'ID'); ?></th>
                             <th><?= $this->Paginator->sort('nome', 'Nome'); ?></th>
                             <th><?= $this->Paginator->sort('email', 'E-mail'); ?></th>
                             <th><?= $this->Paginator->sort('motorista', 'Motorista'); ?></th>

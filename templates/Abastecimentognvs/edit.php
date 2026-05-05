@@ -28,7 +28,7 @@ if ($user_session) { $user_data = $user_session->getOriginalData(); }
                 <h3><?= __('Editando Abastecimento GNV ') . $abastecimentognv->id ?></h3>
                 <?php
                     echo $this->Form->control('user_id', ['label' => 'ID de Usuário do Autor', 'type' => 'number', 'value' => $user_session->get('id'), 'hidden' => !$user_data['administrador_id'] ]);
-                    echo $this->Form->control('instituicao_id', ['options' => $instituicoes, 'class' => 'form-control']);
+                    echo $this->Form->control('instituicao_id', ['label' => 'Instituição', 'options' => $instituicoes, 'class' => 'form-control']);
                     echo $this->Form->control('cliente_id', ['options' => $clientes, 'class' => 'form-control']);
                     echo $this->Form->control('saida', ['label' => 'Data de Saída']);
                     echo $this->Form->control('motorista');

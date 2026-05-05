@@ -170,8 +170,9 @@ class AbastecimentosController extends AppController
      */
     public function search () 
     {
+        $abastecimento_vazio = $this->Abastecimentos->newEmptyEntity();
         try {
-            $this->Authorization->authorize($this->Abastecimentos->newEmptyEntity());
+            $this->Authorization->authorize($abastecimento_vazio);
         } catch (ForbiddenException $error) {
             $this->Flash->error('Erro de authorização: ' . $error->getMessage());
             return $this->redirect('/');
@@ -202,5 +203,7 @@ class AbastecimentosController extends AppController
         $result = $this->Abastecimentos->find('all',  ['conditions' => $condition ])->contain(['Users']);
         $abastecimentos = $this->paginate($result);
         $this->set(compact('abastecimentos'));
+        
+        $this->set(compact('abastecimento_vazio'));
     }
 }

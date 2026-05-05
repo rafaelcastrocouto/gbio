@@ -34,7 +34,7 @@
                     <td><?= $instituicao->email ? $this->Text->autoLinkEmails($instituicao->email) : '' ?></td>
                 </tr>
                 <tr>
-                    <th><?= __('Url') ?></th>
+                    <th><?= __('Link') ?></th>
                     <td><?= $instituicao->url ? $this->Html->link($instituicao->url, $instituicao->url, ['target' => '_blank', '_full' => true]) : '' ?></td>
                 </tr>
                 <tr>

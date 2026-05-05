@@ -160,8 +160,9 @@ class AbastecimentognvsController extends AppController
      */
     public function search () 
     {
+        $abastecimentognv_vazio = $this->Abastecimentognvs->newEmptyEntity();
         try {
-            $this->Authorization->authorize($this->Abastecimentognvs->newEmptyEntity());
+            $this->Authorization->authorize($abastecimentognv_vazio);
         } catch (ForbiddenException $error) {
             $this->Flash->error('Erro de authorização: ' . $error->getMessage());
             return $this->redirect('/');
@@ -192,5 +193,7 @@ class AbastecimentognvsController extends AppController
         $result = $this->Abastecimentognvs->find('all',  ['conditions' => $condition ])->contain(['Users']);
         $abastecimentognvs = $this->paginate($result);
         $this->set(compact('abastecimentognvs'));
+        
+        $this->set(compact('abastecimentognv_vazio'));
     }
 }

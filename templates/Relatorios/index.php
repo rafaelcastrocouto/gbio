@@ -6,7 +6,8 @@
 ?>
 <div class="relatorios index content">
     
-    <?= $this->Html->link(__('Novo Relatorio'), ['action' => 'add'], ['class' => 'button']) ?>
+    <?= $this->Html->link(__('Novo Relatório'), ['action' => 'add'], ['class' => 'button']) ?>
+    <?= $this->Html->link(__('Buscar Relatórios'), ['action' => 'search'], ['class' => 'button']) ?>
     
     <h3><?= __('Lista de Relatorios') ?></h3>
     <div class="paginator">

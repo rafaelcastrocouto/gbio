@@ -152,4 +152,50 @@ class OperadoresController extends AppController
 
         return $this->redirect(['controller' => 'Users', 'action' => 'view', $operador->user_id]);
     }
+
+    
+    /**
+     * Search method
+     *
+     * @return \Cake\Http\Response|null|void Renders view
+     */
+    public function search () 
+    {
+        $operador_vazio = $this->Operadores->newEmptyEntity();
+        try {
+            $this->Authorization->authorize($operador_vazio);
+        } catch (ForbiddenException $error) {
+            $this->Flash->error('Erro de authorização: ' . $error->getMessage());
+            return $this->redirect('/');
+        }
+        $condition = ['Operadores.id' => ''];
+        
+        $nome = $this->getRequest()->getQuery('nome');
+        if ($nome) { $condition = ['Users.nome LIKE' => '%' . $nome . '%']; }
+        
+        $email = $this->getRequest()->getQuery('email');
+        if ($email) { $condition = ['Users.email' => $email]; }
+
+        $id = $this->getRequest()->getQuery('id');
+        if ($id) { $condition = ['Operadores.id' => (int)$id]; }
+
+        $cpf = $this->getRequest()->getQuery('cpf');
+        if ($cpf) { $condition = ['Operadores.cpf' => $cpf]; }
+                
+        $endereco = $this->getRequest()->getQuery('endereco');
+        if ($endereco) { $condition = ['Operadores.endereco LIKE' => '%' . $endereco . '%']; }
+                
+        $celular = $this->getRequest()->getQuery('celular');
+        if ($celular) { $condition = ['Operadores.celular LIKE' => '%' . $celular . '%']; }
+                
+        $observacoes = $this->getRequest()->getQuery('observacoes');
+        if ($observacoes) { $condition = ['Operadores.observacoes LIKE' => '%' . $observacoes . '%']; }
+        
+        $result = $this->Operadores->find('all',  ['conditions' => $condition ])->contain(['Users']);
+        //pr($result); die();
+        $operadores = $this->paginate($result);
+        $this->set(compact('operadores'));
+        
+        $this->set(compact('operador_vazio'));
+    }
 }

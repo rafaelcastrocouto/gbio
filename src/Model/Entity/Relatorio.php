@@ -41,6 +41,7 @@ class Relatorio extends Entity
      * @var array
      */
     protected array $_accessible = [
+        'id' => true,
         'user_id' => true,
         'instituicao_id' => true,
         'data' => true,

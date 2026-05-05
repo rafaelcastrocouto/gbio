@@ -18,7 +18,7 @@
             <thead>
                 <tr>
                     <th class="actions"><?= __('Ações') ?></th>
-                    <th><?= $this->Paginator->sort('id') ?></th>
+                    <th><?= $this->Paginator->sort('id', 'ID') ?></th>
                     <!-- <th><?= $this->Paginator->sort('user_id') ?></th> -->
                     <!-- <th><?= $this->Paginator->sort('instituicao_id') ?></th> -->
                     <!-- <th><?= $this->Paginator->sort('cliente_id') ?></th> -->

@@ -60,6 +60,15 @@ class RelatorioPolicy implements BeforePolicyInterface
     }
   }
   
+  public function canSeach(IdentityInterface $user_data, Relatorio $relatorioData)
+  {
+    if ($user_data['supervisor_id']) {
+      return new Result(true);
+    } else {
+      return new Result(false, 'Erro: relatorio search policy not allowed');
+    }
+  }
+  
   public function canDelete(IdentityInterface $user_data, Relatorio $relatorioData)
   {
     return new Result(false, 'Erro: relatorio delete policy not allowed');

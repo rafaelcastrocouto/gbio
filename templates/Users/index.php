@@ -15,6 +15,7 @@ if ($user_session) { $user_data = $user_session->getOriginalData(); }
 	<aside>
 		<div class="nav">
             <?= $this->Html->link(__('Novo Usuário'), ['action' => 'add'], ['class' => 'button']) ?>
+            <?= $this->Html->link(__('Buscar Usuário'), ['action' => 'search'], ['class' => 'button']) ?>
 		</div>
 	</aside>
     
@@ -24,14 +25,14 @@ if ($user_session) { $user_data = $user_session->getOriginalData(); }
         <?= $this->element('paginator'); ?>
     </div>
     <div class="inline-block">
-        <table>
+        <table id="tabela_usuarios">
             <thead>
                 <tr>
                     <th class="actions"><?= __('Ações') ?></th>
-                    <th><?= $this->Paginator->sort('id') ?></th>
-                    <th><?= $this->Paginator->sort('nome') ?></th>
-                    <th><?= $this->Paginator->sort('email') ?></th>
-                    <!--th><?= h('Categorias') ?></th-->
+                    <th><?= $this->Paginator->sort('id', 'ID') ?></th>
+                    <th><?= $this->Paginator->sort('nome', 'Nome') ?></th>
+                    <th><?= $this->Paginator->sort('email', 'E-mail') ?></th>
+                    <th><?= $this->Paginator->sort('categorias', 'Categorias') ?></th>
                     <th><?= $this->Paginator->sort('created', 'Criado') ?></th>
                     <th><?= $this->Paginator->sort('modified', 'Modificado') ?></th>
                 </tr>
@@ -51,12 +52,32 @@ if ($user_session) { $user_data = $user_session->getOriginalData(); }
                     <td><?= $this->Html->link((string)$user->id, ['action' => 'view', $user->id]) ?></td>
                     <td><?= $this->Html->link($user->nome, ['action' => 'view', $user->id]) ?></td>
                     <td><?= $user->email ? $this->Text->autoLinkEmails($user->email) : '' ?></td>
+                    <td><?php 
+                        $roles = [];
+                        if ($user->administrador) array_push($roles, 'Administrador');
+                        if ($user->supervisor) array_push($roles, 'Supervisor');
+                        if ($user->operador) array_push($roles, 'Operador');
+                        echo implode(', ', $roles);
+                    ?></td>
                     <td><?= $user->created ? h($user->created) : '' ?></td>
                     <td><?= $user->modified ? h($user->modified) : '' ?></td>
                 </tr>
                 <?php endforeach; ?>
             </tbody>
         </table>
+        <?= $this->Html->script('excellentexport') ?>
+        <a id="excelexport" download="usuarios.xls" class="button" href="#" onclick="return ExcellentExport.excel(this, 'tabela_usuarios_export', 'Usuarios');">Exportar para Excel</a>
+        <script>
+            // formata uma copia da tabela para exportar para excel
+            const formula_table = document.querySelector('#tabela_usuarios').cloneNode(true);
+            formula_table.id = 'tabela_usuarios_export';
+            formula_table.classList.add('hidden');
+            document.currentScript.before(formula_table);
+            
+            //remove a 1a coluna de acoes
+            const actions = document.querySelectorAll('#tabela_usuarios_export .actions');
+            for (let a of actions) a.remove();
+        </script>
     </div>
     <div class="paginator">
         <?= $this->element('paginator'); ?>

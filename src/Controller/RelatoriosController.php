@@ -187,4 +187,44 @@ class RelatoriosController extends AppController
 
         return $this->redirect(['action' => 'index']);
     }
+    
+
+    /**
+     * Search method
+     *
+     * @return \Cake\Http\Response|null|void Renders view
+     */
+    public function search () 
+    {
+        $relatorio_vazio = $this->Relatorios->newEmptyEntity();
+        try {
+            $this->Authorization->authorize($relatorio_vazio);
+        } catch (ForbiddenException $error) {
+            $this->Flash->error('Erro de authorização: ' . $error->getMessage());
+            return $this->redirect('/');
+        }
+        $condition = ['Relatorios.id' => ''];
+        
+        $nome = $this->getRequest()->getQuery('nome');
+        if ($nome) { $condition = ['Users.nome LIKE' => '%' . $nome . '%']; }
+        
+        $email = $this->getRequest()->getQuery('email');
+        if ($email) { $condition = ['Users.email' => $email]; }
+
+        $id = $this->getRequest()->getQuery('id');
+        if ($id) { $condition = ['Relatorios.id' => (int)$id]; }
+
+        $data = $this->getRequest()->getQuery('data');
+        if ($data) { $condition = ['Relatorios.data' => $data]; }
+                
+        $observacoes = $this->getRequest()->getQuery('observacoes');
+        if ($observacoes) { $condition = ['Relatorios.observacoes LIKE' => '%' . $observacoes . '%']; }
+        
+        $result = $this->Relatorios->find('all',  ['conditions' => $condition ])->contain(['Users']);
+        $relatorios = $this->paginate($result);
+        $this->set(compact('relatorios'));
+
+        $this->set(compact('relatorio_vazio'));
+        
+    }
 }

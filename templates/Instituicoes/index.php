@@ -25,18 +25,16 @@ if ($user_session) { $user_data = $user_session->getOriginalData(); }
         <?= $this->element('paginator'); ?>
     </div>
     <div class="inline-block">
-        <table>
+        <table id="tabela_instituicoes">
             <thead>
                 <tr>
-		    <?php if ($user_data['administrador_id']): ?>
-                        <th class="actions"><?= __('Ações') ?></th>
-                        <th><?= $this->Paginator->sort('id') ?></th>
-                    <?php endif; ?>
-                    <th><?= $this->Paginator->sort('nome') ?></th>
-                    <th><?= $this->Paginator->sort('cnpj') ?></th>
-                    <th><?= $this->Paginator->sort('email') ?></th>
-                    <th><?= $this->Paginator->sort('url') ?></th>
-                    <th><?= $this->Paginator->sort('observacoes') ?></th>
+                    <th class="actions"><?= __('Ações') ?></th>
+                    <th><?= $this->Paginator->sort('id', 'ID') ?></th>
+                    <th><?= $this->Paginator->sort('nome', 'Nome') ?></th>
+                    <th><?= $this->Paginator->sort('cnpj', 'CNPJ') ?></th>
+                    <th><?= $this->Paginator->sort('email', 'E-mail') ?></th>
+                    <th><?= $this->Paginator->sort('url', 'Link') ?></th>
+                    <th><?= $this->Paginator->sort('observacoes', 'Observações') ?></th>
                 </tr>
             </thead>
             <tbody>
@@ -59,6 +57,19 @@ if ($user_session) { $user_data = $user_session->getOriginalData(); }
                 <?php endforeach; ?>
             </tbody>
         </table>
+        <?= $this->Html->script('excellentexport') ?>
+        <a id="excelexport" download="instituicoes.xls" class="button" href="#" onclick="return ExcellentExport.excel(this, 'tabela_instituicoes_export', 'Supervisores');">Exportar para Excel</a>
+        <script>
+            // formata uma copia da tabela para exportar para excel
+            const formula_table = document.querySelector('#tabela_instituicoes').cloneNode(true);
+            formula_table.id = 'tabela_instituicoes_export';
+            formula_table.classList.add('hidden');
+            document.currentScript.before(formula_table);
+            
+            //remove a 1a coluna de acoes
+            const actions = document.querySelectorAll('#tabela_instituicoes_export .actions');
+            for (let a of actions) a.remove();
+        </script>
     </div>
     <div class="paginator">
         <?= $this->element('paginator'); ?>

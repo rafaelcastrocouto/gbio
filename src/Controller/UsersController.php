@@ -46,7 +46,7 @@ class UsersController extends AppController {
         if ($user_session) { $user_data = $user_session->getOriginalData(); }
         
         if ($user_data['administrador_id']) {
-            $query = $this->Users->find('all');//->contain($contained)
+            $query = $this->Users->find('all')->contain(['Administradores', 'Operadores', 'Supervisores']);
         } else {
             $query = $this->Authorization->applyScope($this->Users->find('all'));
         }
@@ -232,17 +232,47 @@ class UsersController extends AppController {
     }
 
 
+
+    /**
+     * Search method
+     *
+     * @return \Cake\Http\Response|null|void Renders view
+     */
+    public function search () 
+    {
+        $user_vazio = $this->Users->newEmptyEntity();
+        try {
+            $this->Authorization->authorize($user_vazio);
+        } catch (ForbiddenException $error) {
+            $this->Flash->error('Erro de authorização: ' . $error->getMessage());
+            return $this->redirect('/');
+        }
+        $condition = ['Users.id' => ''];
+        
+        $nome = $this->getRequest()->getQuery('nome');
+        if ($nome) { $condition = ['Users.nome LIKE' => '%' . $nome . '%']; }
+        
+        $email = $this->getRequest()->getQuery('email');
+        if ($email) { $condition = ['Users.email' => $email]; }
+        
+        $id = $this->getRequest()->getQuery('id');
+        if ($id) { $condition = ['Users.id' => (int)$id]; }
+        
+        $result = $this->Users->find('all',  ['conditions' => $condition ])->contain(['Administradores', 'Operadores', 'Supervisores']);
+        $users = $this->paginate($result);
+        $this->set(compact('users'));
+        
+        $this->set(compact('user_vazio'));
+    }
+
     /*
      * Alternarusuario method
      * https://book.cakephp.org/authentication/3/en/impersonation.html
      */
-    public function alternarusuario() 
-    {
-
+    //public function alternarusuario() 
+    //{
         // pr($this->data);
         // die();
-        
- 
-    }
+    //}
     
 }

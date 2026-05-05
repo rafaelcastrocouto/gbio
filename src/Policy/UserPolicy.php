@@ -43,10 +43,19 @@ class UserPolicy implements BeforePolicyInterface
   }
   public function canEditpassword(IdentityInterface $userSession, User $userData)
   {
-    if ($this->sameUser($userSession, $userData)) {
+    if ($this->sameUser($userSession, $userData) OR $user_data['supervisor_id']) {
       return new Result(true);
     } else {
       return new Result(false, 'Erro: user edit policy not authorized');
+    }
+  }
+  
+  public function canSearch(IdentityInterface $userSession, User $userData)
+  {
+    if ($user_data['supervisor_id']) {
+      return new Result(true);
+    } else {
+      return new Result(false, 'Erro: user delete policy not allowed');
     }
   }
   

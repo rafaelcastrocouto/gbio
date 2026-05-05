@@ -137,16 +137,16 @@ $user_session = $this->request->getAttribute('identity');
 
                     <h3>Mapa do site</h3>
                     <p>
-                        <a href="./abastecimentos">abastecimentos</a> | <a href="./abastecimentos/view/1">view</a> | <a href="./abastecimentos/edit/1">edit</a> | <a href="./abastecimentos/add">add</a><br />
-                        <a href="./abastecimentognvs">abastecimentognvs</a> | <a href="./abastecimentognvs/view/1">view</a> | <a href="./abastecimentognvs/edit/1">edit</a> | <a href="./abastecimentognvs/add">add</a><br />
+                        <a href="./abastecimentos">abastecimentos</a> | <a href="./abastecimentos/view/1">view</a> | <a href="./abastecimentos/edit/1">edit</a> | <a href="./abastecimentos/add">add</a> | <a href="./abastecimentos/search">search</a><br />
+                        <a href="./abastecimentognvs">abastecimentognvs</a> | <a href="./abastecimentognvs/view/1">view</a> | <a href="./abastecimentognvs/edit/1">edit</a> | <a href="./abastecimentognvs/add">add</a> | <a href="./abastecimentognvs/search">search</a><br />
                         <a href="./administradores">administradores</a> | <a href="./administradores/view/1">view</a><br />
                         <a href="./clientes">clientes</a> | <a href="./clientes/view/1">view</a> | <a href="./clientes/edit/1">edit</a> | <a href="./clientes/add">add</a><br />
                         <a href="./configuracoes">configuracoes</a> | <a href="./configuracoes/edit/1">edit</a><br />
                         <a href="./instituicoes">instituicoes</a> | <a href="./instituicoes/view/1">view</a> | <a href="./instituicoes/edit/1">edit</a> | <a href="./instituicoes/add">add</a><br />
-                        <a href="./operadores">operadores</a> | <a href="./operadores/view/1">view</a> | <a href="./operadores/edit/1">edit</a> | <a href="./operadores/add">add</a><br />
-                        <a href="./relatorios">relatorios</a> | <a href="./relatorios/view/1">view</a> | <a href="./relatorios/edit/1">edit</a> | <a href="./relatorios/add">add</a><br />
+                        <a href="./operadores">operadores</a> | <a href="./operadores/view/1">view</a> | <a href="./operadores/edit/1">edit</a> | <a href="./operadores/add">add</a> | <a href="./operadores/search">search</a><br />
+                        <a href="./relatorios">relatorios</a> | <a href="./relatorios/view/1">view</a> | <a href="./relatorios/edit/1">edit</a> | <a href="./relatorios/add">add</a> | <a href="./relatorios/search">search</a><br />
                         <a href="./supervisores">supervisores</a> | <a href="./supervisores/view/1">view</a> | <a href="./supervisores/edit/1">edit</a> | <a href="./supervisores/add">add</a><br />
-                        <a href="./users">users</a> | <a href="./users/view/1">view</a> | <a href="./users/edit/1">edit</a> | <a href="./users/add">add</a> | <a href="./users/login">login</a><br />
+                        <a href="./users">users</a> | <a href="./users/view/1">view</a> | <a href="./users/edit/1">edit</a> | <a href="./users/add">add</a> | <a href="./users/login">login</a> | <a href="./users/search">search</a><br />
                     </p>
 
                     

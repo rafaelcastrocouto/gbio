@@ -16,9 +16,9 @@
             <thead>
                 <tr>
                     <th class="actions"><?= __('Ações') ?></th>
-                    <th><?= $this->Paginator->sort('id') ?></th>
-                    <th><?= $this->Paginator->sort('nome') ?></th>
-                    <th><?= $this->Paginator->sort('email') ?></th>
+                    <th><?= $this->Paginator->sort('id', 'ID') ?></th>
+                    <th><?= $this->Paginator->sort('nome', 'Nome') ?></th>
+                    <th><?= $this->Paginator->sort('email', 'E-mail') ?></th>
                 </tr>
             </thead>
             <tbody>
