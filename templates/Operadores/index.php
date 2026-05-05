@@ -35,7 +35,7 @@
                         <?= $this->Form->postLink(__('❌'), ['action' => 'delete', $operador->id], ['confirm' => __('Tem certeza que deseja deletar o operador {0}?', $operador->nome)]) ?>
                     </td>
                     <td><?= $this->Html->link((string)$operador->id, ['action' => 'view', $operador->id]) ?></td>
-                    <td><?= $this->Html->link($operador->user->nome ? $operador->user->nome : '', ['action' => 'view', $operador->id]) ?></td>
+                    <td><?= $this->Html->link($operador->user ? $operador->user->nome : '', ['action' => 'view', $operador->id]) ?></td>
                     <td><?= h($operador->cpf) ?></td>
                     <td><?= ($operador->user and $operador->user->email) ? $this->Text->autoLinkEmails($operador->user->email) : '' ?></td>
                     <td><?= h($operador->celular) ?></td>
