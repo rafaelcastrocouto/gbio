@@ -45,6 +45,8 @@ use Cake\Routing\Router;
 use Cake\Utility\Security;
 use Cake\Utility\Inflector;
 use Cake\I18n\I18n;
+// use Cake\I18n\DateTime;
+// use Cake\I18n\Date;
 
 /**
  * Load global functions.
@@ -203,6 +205,12 @@ ServerRequest::addDetector('tablet', function ($request) {
  */
 
 I18n::setLocale('pt-BR');
+
+// Set default format for all DateTime objects
+// DateTime::setToStringFormat('dd-M-y HH:mm:ss');
+
+// Set default format for all Date objects
+// Date::setToStringFormat('dd-M-y');
 
 // Cake\Database\TypeFactory::build('time')
 //    ->useLocaleParser();

@@ -259,7 +259,7 @@ class UsersController extends AppController {
         if ($id) { $condition = ['Users.id' => (int)$id]; }
         
         $result = $this->Users->find('all',  ['conditions' => $condition ])->contain(['Administradores', 'Operadores', 'Supervisores']);
-        $users = $this->paginate($result);
+        $users = $this->paginate($result, ['limit' => 200]);
         $this->set(compact('users'));
         
         $this->set(compact('user_vazio'));

@@ -6,11 +6,14 @@
 
 declare(strict_types=1);
 
+use Cake\I18n\Date;
+
 $nome = $this->getRequest()->getQuery('nome');
 $email = $this->getRequest()->getQuery('email');
 $controle = $this->getRequest()->getQuery('controle');
 $nf = $this->getRequest()->getQuery('nf');
 $certificado = $this->getRequest()->getQuery('certificado');
+$saida = $this->getRequest()->getQuery('saida');
 $placa = $this->getRequest()->getQuery('placa');
 $observacoes = $this->getRequest()->getQuery('observacoes');
      
@@ -22,7 +25,7 @@ $observacoes = $this->getRequest()->getQuery('observacoes');
 
     <div class="tabset">
         
-        <input type="radio" name="tabs" id="tab_nome" <?= ($nome or (!$email and !$controle and !$nf and !$certificado and !$placa and !$observacoes)) ? 'checked' : '' ?> >
+        <input type="radio" name="tabs" id="tab_nome" <?= ($nome or (!$email and !$controle and !$nf and !$certificado and !$saida and !$placa and !$observacoes)) ? 'checked' : '' ?> >
         <label for="tab_nome">Busca por nome</label>
         <div class="tab-content">
             <?php echo $this->Form->create($abastecimento_vazio, ['type' => 'get', 'valueSources' => ['query', 'context']]) ?>
@@ -67,6 +70,15 @@ $observacoes = $this->getRequest()->getQuery('observacoes');
             <?php echo $this->Form->end(); ?>
         </div>
         
+        <input type="radio" name="tabs" id="tab_saida" <?= ($saida) ? 'checked' : '' ?> >
+        <label for="tab_saida">Busca por data</label>
+        <div class="tab-content">
+            <?php echo $this->Form->create($abastecimento_vazio, ['type' => 'get', 'valueSources' => ['query', 'context']]) ?>
+            <?php echo $this->Form->control('saida', ['label' => ['text' => 'Digite a data do abastecimento'], 'class' => 'form-control']); ?>
+            <?php echo $this->Form->submit('Buscar', ['type' => 'Submit', 'class' => 'button']); ?>
+            <?php echo $this->Form->end(); ?>
+        </div>
+        
         <input type="radio" name="tabs" id="tab_placa" <?= ($placa) ? 'checked' : '' ?> >
         <label for="tab_placa">Busca por placa</label>
         <div class="tab-content">
@@ -96,6 +108,7 @@ $observacoes = $this->getRequest()->getQuery('observacoes');
             <?php if ($controle):  ?><h3>Resultado da busca para o número de controle <?= $controle ?></h3><?php endif; ?>
             <?php if ($nf):  ?><h3>Resultado da busca para o NF <?= $nf ?></h3><?php endif; ?>
             <?php if ($certificado):  ?><h3>Resultado da busca para o certificado <?= $certificado ?></h3><?php endif; ?>
+            <?php if ($saida):  ?><h3>Resultado da busca para a data <?= Date::parse($saida)->i18nFormat('dd/MM/yyyy') ?></h3><?php endif; ?>
             <?php if ($placa):  ?><h3>Resultado da busca para a placa <?= $placa ?></h3><?php endif; ?>
             <?php if ($observacoes):  ?><h3>Resultado da busca em observações para o termo "<?= $observacoes ?>"</h3><?php endif; ?>
     
@@ -113,6 +126,7 @@ $observacoes = $this->getRequest()->getQuery('observacoes');
                             <th><?= $this->Paginator->sort('controle', 'Controle'); ?></th>
                             <th><?= $this->Paginator->sort('nf', 'NF'); ?></th>
                             <th><?= $this->Paginator->sort('certificado', 'Certificado'); ?></th>
+                            <th><?= $this->Paginator->sort('saida', 'Data'); ?></th>
                             <th><?= $this->Paginator->sort('placa', 'Placa'); ?></th>
                             <th><?= $this->Paginator->sort('observacoes', 'Observações'); ?></th>
                         </tr>
@@ -134,6 +148,7 @@ $observacoes = $this->getRequest()->getQuery('observacoes');
                             <td><?= $abastecimento->controle; ?></td>
                             <td><?= $abastecimento->nf; ?></td>
                             <td><?= $abastecimento->certificado; ?></td>
+                            <td><?= $abastecimento->saida; ?></td>
                             <td><?= $abastecimento->placa; ?></td>
                             <td><?= $abastecimento->observacoes; ?></td>
                         </tr>
@@ -151,6 +166,7 @@ $observacoes = $this->getRequest()->getQuery('observacoes');
             <?php if ($controle):  ?><h3>Nenhum resultado encontrado para o número de controle <?= $controle ?></h3><?php endif; ?>
             <?php if ($nf):  ?><h3>Nenhum resultado encontrado para o NF <?= $nf ?></h3><?php endif; ?>
             <?php if ($certificado):  ?><h3>Nenhum resultado encontrado para o certificado <?= $certificado ?></h3><?php endif; ?>
+            <?php if ($saida):  ?><h3>Nenhum resultado encontrado para a data <?= Date::parse($saida)->i18nFormat('dd/MM/yyyy') ?></h3><?php endif; ?>
             <?php if ($placa):  ?><h3>Nenhum resultado encontrado para a placa <?= $placa ?></h3><?php endif; ?>
             <?php if ($observacoes):  ?><h3>Nenhum resultado encontrado para em observacoes para o termo <?= $observacoes ?></h3><?php endif; ?>
         <?php endif; ?>

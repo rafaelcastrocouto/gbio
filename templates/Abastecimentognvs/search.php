@@ -6,10 +6,14 @@
 
 declare(strict_types=1);
 
+
+use Cake\I18n\DateTime;
+
 $nome = $this->getRequest()->getQuery('nome');
 $email = $this->getRequest()->getQuery('email');
 $motorista = $this->getRequest()->getQuery('motorista');
 $rg = $this->getRequest()->getQuery('rg');
+$saida = $this->getRequest()->getQuery('saida');
 $placa = $this->getRequest()->getQuery('placa');
 $prefixo = $this->getRequest()->getQuery('prefixo');
 $observacoes = $this->getRequest()->getQuery('observacoes');
@@ -22,7 +26,7 @@ $observacoes = $this->getRequest()->getQuery('observacoes');
 
     <div class="tabset">
         
-        <input type="radio" name="tabs" id="tab_nome" <?= ($nome or (!$email and !$motorista and !$rg and !$placa and !$prefixo and !$observacoes)) ? 'checked' : '' ?> >
+        <input type="radio" name="tabs" id="tab_nome" <?= ($nome or (!$email and !$motorista and !$rg and !$saida and !$placa and !$prefixo and !$observacoes)) ? 'checked' : '' ?> >
         <label for="tab_nome">Busca por nome</label>
         <div class="tab-content">
             <?php echo $this->Form->create($abastecimentognv_vazio, ['type' => 'get', 'valueSources' => ['query', 'context']]) ?>
@@ -54,6 +58,15 @@ $observacoes = $this->getRequest()->getQuery('observacoes');
         <div class="tab-content">
             <?php echo $this->Form->create($abastecimentognv_vazio, ['type' => 'get', 'valueSources' => ['query', 'context']]) ?>
             <?php echo $this->Form->control('rg', ['label' => ['text' => 'Digite o RG do motorista do veículo'], 'class' => 'form-control']); ?>
+            <?php echo $this->Form->submit('Buscar', ['type' => 'Submit', 'class' => 'button']); ?>
+            <?php echo $this->Form->end(); ?>
+        </div>
+        
+        <input type="radio" name="tabs" id="tab_saida" <?= ($saida) ? 'checked' : '' ?> >
+        <label for="tab_saida">Busca por data</label>
+        <div class="tab-content">
+            <?php echo $this->Form->create($abastecimentognv_vazio, ['type' => 'get', 'valueSources' => ['query', 'context']]) ?>
+            <?php echo $this->Form->control('saida', ['type' => 'date', 'label' => ['text' => 'Digite a data do abastecimento'], 'class' => 'form-control']); ?>
             <?php echo $this->Form->submit('Buscar', ['type' => 'Submit', 'class' => 'button']); ?>
             <?php echo $this->Form->end(); ?>
         </div>
@@ -95,6 +108,7 @@ $observacoes = $this->getRequest()->getQuery('observacoes');
             <?php if ($email):  ?><h3>Resultado da busca para o email <?= $email ?></h3><?php endif; ?>
             <?php if ($motorista):  ?><h3>Resultado da busca para o motorista <?= $motorista ?></h3><?php endif; ?>
             <?php if ($rg):  ?><h3>Resultado da busca para o RG <?= $rg ?></h3><?php endif; ?>
+            <?php if ($saida):  ?><h3>Resultado da busca para a data <?= DateTime::parse($saida)->i18nFormat('dd/MM/yyyy') ?></h3><?php endif; ?>
             <?php if ($placa):  ?><h3>Resultado da busca para a placa <?= $placa ?></h3><?php endif; ?>
             <?php if ($prefixo):  ?><h3>Resultado da busca para o prefixo <?= $prefixo ?></h3><?php endif; ?>
             <?php if ($observacoes):  ?><h3>Resultado da busca em observações para o termo "<?= $observacoes ?>"</h3><?php endif; ?>
@@ -112,6 +126,7 @@ $observacoes = $this->getRequest()->getQuery('observacoes');
                             <th><?= $this->Paginator->sort('email', 'E-mail'); ?></th>
                             <th><?= $this->Paginator->sort('motorista', 'Motorista'); ?></th>
                             <th><?= $this->Paginator->sort('rg', 'RG'); ?></th>
+                            <th><?= $this->Paginator->sort('saida', 'Data'); ?></th>
                             <th><?= $this->Paginator->sort('placa', 'Placa'); ?></th>
                             <th><?= $this->Paginator->sort('prefixo', 'Prefixo'); ?></th>
                             <th><?= $this->Paginator->sort('observacoes', 'Observações'); ?></th>
@@ -133,6 +148,7 @@ $observacoes = $this->getRequest()->getQuery('observacoes');
                             <td><?= $this->Text->autoLinkEmails($abastecimentognv->user->email) ?></td>
                             <td><?= $abastecimentognv->motorista; ?></td>
                             <td><?= $abastecimentognv->rg; ?></td>
+                            <td><?= $abastecimentognv->saida; ?></td>
                             <td><?= $abastecimentognv->placa; ?></td>
                             <td><?= $abastecimentognv->prefixo; ?></td>
                             <td><?= $abastecimentognv->observacoes; ?></td>
@@ -150,6 +166,7 @@ $observacoes = $this->getRequest()->getQuery('observacoes');
             <?php if ($email):  ?><h3>Nenhum resultado encontrado para o email <?= $email ?></h3><?php endif; ?>
             <?php if ($motorista):  ?><h3>Nenhum resultado encontrado para o motorista <?= $motorista ?></h3><?php endif; ?>
             <?php if ($rg):  ?><h3>Nenhum resultado encontrado para o RG <?= $rg ?></h3><?php endif; ?>
+            <?php if ($saida):  ?><h3>Nenhum resultado encontrado para a data <?= $saida ?></h3><?php endif; ?>
             <?php if ($placa):  ?><h3>Nenhum resultado encontrado para a placa <?= $placa ?></h3><?php endif; ?>
             <?php if ($prefixo):  ?><h3>Nenhum resultado encontrado para o prefixo <?= $prefixo ?></h3><?php endif; ?>
             <?php if ($observacoes):  ?><h3>Nenhum resultado encontrado para em observacoes para o termo <?= $observacoes ?></h3><?php endif; ?>

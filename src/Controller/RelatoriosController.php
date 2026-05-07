@@ -221,7 +221,7 @@ class RelatoriosController extends AppController
         if ($observacoes) { $condition = ['Relatorios.observacoes LIKE' => '%' . $observacoes . '%']; }
         
         $result = $this->Relatorios->find('all',  ['conditions' => $condition ])->contain(['Users']);
-        $relatorios = $this->paginate($result);
+        $relatorios = $this->paginate($result, ['limit' => 200]);
         $this->set(compact('relatorios'));
 
         $this->set(compact('relatorio_vazio'));

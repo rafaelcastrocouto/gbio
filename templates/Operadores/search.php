@@ -44,7 +44,7 @@ $observacoes = $this->getRequest()->getQuery('observacoes');
         <label for="tab_id">Busca por ID</label>
         <div class="tab-content">
             <?php echo $this->Form->create($operador_vazio, ['type' => 'get', 'valueSources' => ['query', 'context']]) ?>
-            <?php echo $this->Form->control('id', ['type' => 'text', 'label' => ['text' => 'Digite o número de id do operador'], 'class' => 'form-control']); ?>
+            <?php echo $this->Form->control('id', ['type' => 'text', 'label' => ['text' => 'Digite o número de ID do operador'], 'class' => 'form-control']); ?>
             <?php echo $this->Form->submit('Buscar', ['type' => 'Submit', 'class' => 'button']); ?>
             <?php echo $this->Form->end(); ?>
         </div>

@@ -181,6 +181,14 @@ class AbastecimentognvsController extends AppController
         $rg = $this->getRequest()->getQuery('rg');
         if ($rg) { $condition = ['Abastecimentognvs.rg' => $rg]; }
                 
+        $saida = $this->getRequest()->getQuery('saida');
+        if ($saida) { 
+            $condition = [
+                'Abastecimentognvs.saida >=' => $saida . ' 00:00:00', 
+                'Abastecimentognvs.saida <=' => $saida . ' 23:59:59'
+            ]; 
+        }
+                
         $placa = $this->getRequest()->getQuery('placa');
         if ($placa) { $condition = ['Abastecimentognvs.placa' => $placa]; }
                 
@@ -191,7 +199,7 @@ class AbastecimentognvsController extends AppController
         if ($observacoes) { $condition = ['Abastecimentognvs.observacoes LIKE' => '%' . $observacoes . '%']; }
         
         $result = $this->Abastecimentognvs->find('all',  ['conditions' => $condition ])->contain(['Users']);
-        $abastecimentognvs = $this->paginate($result);
+        $abastecimentognvs = $this->paginate($result, ['limit' => 200]);
         $this->set(compact('abastecimentognvs'));
         
         $this->set(compact('abastecimentognv_vazio'));

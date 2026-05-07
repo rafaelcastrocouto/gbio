@@ -203,29 +203,29 @@
         <a id="excelexport" download="relatorio.xls" class="button" href="#" onclick="return ExcellentExport.excel(this, 'tabela_relatorio_export', 'Relatorio');">Exportar para Excel</a>
         <script>
             // formata uma copia da tabela para exportar para excel
-            const formula_table = document.querySelector('#tabela_relatorio').cloneNode(true);
-            formula_table.id = 'tabela_relatorio_export';
-            formula_table.classList.add('hidden');
-            document.currentScript.before(formula_table);
+            const export_table = document.querySelector('#tabela_relatorio').cloneNode(true);
+            export_table.id = 'tabela_relatorio_export';
+            export_table.classList.add('hidden');
+            document.currentScript.before(export_table);
             document.querySelector('#excelexport').download = 'relatorio_'+document.querySelector('#date').textContent+'.xls';
 
             //remove a 1a coluna de acoes
-            const col_rem_span = document.querySelectorAll('#tabela_relatorio_formula .col_rem_span');
+            const col_rem_span = document.querySelectorAll('#tabela_relatorio_export .col_rem_span');
             for (let col of col_rem_span) col.colSpan = 1;
-            const actions = document.querySelectorAll('#tabela_relatorio_formula .actions');
+            const actions = document.querySelectorAll('#tabela_relatorio_export .actions');
             for (let a of actions) a.remove();
             
             // remove dados dos clientes
-            const th_clientes = document.querySelector('#tabela_relatorio_formula .th_consumo_clientes');
+            const th_clientes = document.querySelector('#tabela_relatorio_export .th_consumo_clientes');
             th_clientes.remove();
-            const td_cliente = document.querySelectorAll('#tabela_relatorio_formula .td_consumo');
+            const td_cliente = document.querySelectorAll('#tabela_relatorio_export .td_consumo');
             for (let td of td_cliente) td.remove();
             
             // substitui formulas 
             const start = 4;
             
             // formula biogas cumulativo do mes
-            const volume_biogas_dia = document.querySelectorAll('#tabela_relatorio_formula .td_volume_biogas_dia');
+            const volume_biogas_dia = document.querySelectorAll('#tabela_relatorio_export .td_volume_biogas_dia');
             for (let td of volume_biogas_dia) {
                 const volume_biogas_mes = td.nextElementSibling;
                 const previous_tr = td.parentElement.previousElementSibling;
@@ -238,7 +238,7 @@
             }
             
             // formula biometano cumulativo do mes
-            const volume_biometano_dia = document.querySelectorAll('#tabela_relatorio_formula .td_volume_total_dia');
+            const volume_biometano_dia = document.querySelectorAll('#tabela_relatorio_export .td_volume_total_dia');
             for (let td of volume_biometano_dia) {
                 const volume_biometano_mes = td.nextElementSibling;
                 const previous_tr = td.parentElement.previousElementSibling;
@@ -262,7 +262,7 @@
             
             // substitui valores finais
             const average_str = 'MEDIA';
-            const rows = document.querySelectorAll('#tabela_relatorio_formula .ch4_media_metano');
+            const rows = document.querySelectorAll('#tabela_relatorio_export .ch4_media_metano');
             const last = start + rows.length - 1;
             
             const dispenser_pad = 11;
@@ -273,10 +273,10 @@
             const CI = getExcelColumnName(media_clientes_pad + window.parsedClientsLength);
             const EI = getExcelColumnName(energia_pad + window.parsedClientsLength);
             
-            document.querySelector('#tabela_relatorio_formula .ch4_media_metano_sum').innerHTML = '='+average_str+'(E'+start+':E'+last+')';
-            document.querySelector('#tabela_relatorio_formula .media_clientes').innerHTML = '='+average_str+'('+CI+start+':'+CI+last+')';
-            document.querySelector('#tabela_relatorio_formula .dispenser_total').innerHTML = '='+sum_str+'('+DI+start+':'+DI+last+')';
-            document.querySelector('#tabela_relatorio_formula .energia_total').innerHTML = '='+sum_str+'('+EI+start+':'+EI+last+')';
+            document.querySelector('#tabela_relatorio_export .ch4_media_metano_sum').innerHTML = '='+average_str+'(E'+start+':E'+last+')';
+            document.querySelector('#tabela_relatorio_export .media_clientes').innerHTML = '='+average_str+'('+CI+start+':'+CI+last+')';
+            document.querySelector('#tabela_relatorio_export .dispenser_total').innerHTML = '='+sum_str+'('+DI+start+':'+DI+last+')';
+            document.querySelector('#tabela_relatorio_export .energia_total').innerHTML = '='+sum_str+'('+EI+start+':'+EI+last+')';
             
             function getExcelColumnName(n) {
               let result = ''; // Initialize the result variable to store the Excel column title

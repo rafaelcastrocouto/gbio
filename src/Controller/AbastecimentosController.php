@@ -194,6 +194,9 @@ class AbastecimentosController extends AppController
         $certificado = $this->getRequest()->getQuery('certificado');
         if ($certificado) { $condition = ['Abastecimentos.certificado' => $certificado]; }
                 
+        $saida = $this->getRequest()->getQuery('saida');
+        if ($saida) { $condition = ['Abastecimentos.saida' => $saida]; }
+                
         $placa = $this->getRequest()->getQuery('placa');
         if ($placa) { $condition = ['Abastecimentos.placa' => $placa]; }
                 
@@ -201,7 +204,7 @@ class AbastecimentosController extends AppController
         if ($observacoes) { $condition = ['Abastecimentos.observacoes LIKE' => '%' . $observacoes . '%']; }
         
         $result = $this->Abastecimentos->find('all',  ['conditions' => $condition ])->contain(['Users']);
-        $abastecimentos = $this->paginate($result);
+        $abastecimentos = $this->paginate($result, ['limit' => 200]);
         $this->set(compact('abastecimentos'));
         
         $this->set(compact('abastecimento_vazio'));

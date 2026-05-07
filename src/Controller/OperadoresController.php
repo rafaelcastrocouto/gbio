@@ -192,8 +192,7 @@ class OperadoresController extends AppController
         if ($observacoes) { $condition = ['Operadores.observacoes LIKE' => '%' . $observacoes . '%']; }
         
         $result = $this->Operadores->find('all',  ['conditions' => $condition ])->contain(['Users']);
-        //pr($result); die();
-        $operadores = $this->paginate($result);
+        $operadores = $this->paginate($result, ['limit' => 200]);
         $this->set(compact('operadores'));
         
         $this->set(compact('operador_vazio'));
