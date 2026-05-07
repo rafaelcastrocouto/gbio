@@ -221,12 +221,6 @@ class RelatoriosController extends AppController
         if ($observacoes) { $condition = ['Relatorios.observacoes LIKE' => '%' . $observacoes . '%']; }
         
         $result = $this->Relatorios->find('all',  ['conditions' => $condition ])->contain(['Users']);
-        // $result->select([
-        //     'data' => $result->func()->date_format([
-        //         'Relatorios.data' => 'identifier',
-        //         "'%d/%m/%Y'" => 'literal'
-        //     ])
-        // ])->enableAutoFields(true);
         $relatorios = $this->paginate($result, ['limit' => 200]);
         $this->set(compact('relatorios'));
 

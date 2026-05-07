@@ -6,7 +6,6 @@
 
 declare(strict_types=1);
 
-use Cake\I18n\Date;
 
 $nome = $this->getRequest()->getQuery('nome');
 $email = $this->getRequest()->getQuery('email');
@@ -77,6 +76,10 @@ $observacoes = $this->getRequest()->getQuery('observacoes');
             <?php echo $this->Form->control('saida', ['label' => ['text' => 'Digite a data do abastecimento'], 'class' => 'form-control']); ?>
             <?php echo $this->Form->submit('Buscar', ['type' => 'Submit', 'class' => 'button']); ?>
             <?php echo $this->Form->end(); ?>
+            <?php echo $this->Form->create($abastecimento_vazio, ['type' => 'get', 'valueSources' => ['query', 'context']]) ?>
+            <?php echo $this->Form->control('saida', ['value' => (string)$saida, 'type' => 'text', 'label' => ['text' => 'Use esse campo para formulas (yyyy-mm-%)'], 'class' => 'form-control', 'placeholder' => 'yyyy-mm-dd']); ?>
+            <?php echo $this->Form->submit('Buscar', ['type' => 'Submit', 'class' => 'button']); ?>
+            <?php echo $this->Form->end(); ?>
         </div>
         
         <input type="radio" name="tabs" id="tab_placa" <?= ($placa) ? 'checked' : '' ?> >
@@ -108,7 +111,7 @@ $observacoes = $this->getRequest()->getQuery('observacoes');
             <?php if ($controle):  ?><h3>Resultado da busca para o número de controle <?= $controle ?></h3><?php endif; ?>
             <?php if ($nf):  ?><h3>Resultado da busca para o NF <?= $nf ?></h3><?php endif; ?>
             <?php if ($certificado):  ?><h3>Resultado da busca para o certificado <?= $certificado ?></h3><?php endif; ?>
-            <?php if ($saida):  ?><h3>Resultado da busca para a data <?= Date::parse($saida)->i18nFormat('dd/MM/yyyy') ?></h3><?php endif; ?>
+            <?php if ($saida):  ?><h3>Resultado da busca para a data <?= $saida ?></h3><?php endif; ?>
             <?php if ($placa):  ?><h3>Resultado da busca para a placa <?= $placa ?></h3><?php endif; ?>
             <?php if ($observacoes):  ?><h3>Resultado da busca em observações para o termo "<?= $observacoes ?>"</h3><?php endif; ?>
     
@@ -201,7 +204,7 @@ $observacoes = $this->getRequest()->getQuery('observacoes');
             <?php if ($controle):  ?><h3>Nenhum resultado encontrado para o número de controle <?= $controle ?></h3><?php endif; ?>
             <?php if ($nf):  ?><h3>Nenhum resultado encontrado para o NF <?= $nf ?></h3><?php endif; ?>
             <?php if ($certificado):  ?><h3>Nenhum resultado encontrado para o certificado <?= $certificado ?></h3><?php endif; ?>
-            <?php if ($saida):  ?><h3>Nenhum resultado encontrado para a data <?= Date::parse($saida)->i18nFormat('dd/MM/yyyy') ?></h3><?php endif; ?>
+            <?php if ($saida):  ?><h3>Nenhum resultado encontrado para a data <?= $saida ?></h3><?php endif; ?>
             <?php if ($placa):  ?><h3>Nenhum resultado encontrado para a placa <?= $placa ?></h3><?php endif; ?>
             <?php if ($observacoes):  ?><h3>Nenhum resultado encontrado para em observacoes para o termo <?= $observacoes ?></h3><?php endif; ?>
         <?php endif; ?>

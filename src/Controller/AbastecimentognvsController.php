@@ -6,6 +6,7 @@ namespace App\Controller;
 use Authorization\Exception\ForbiddenException;
 use Cake\Event\EventInterface;
 
+
 /**
  * Abastecimentognvs Controller
  *
@@ -182,11 +183,15 @@ class AbastecimentognvsController extends AppController
         if ($rg) { $condition = ['Abastecimentognvs.rg' => $rg]; }
                 
         $saida = $this->getRequest()->getQuery('saida');
-        if ($saida) { 
-            $condition = [
-                'Abastecimentognvs.saida >=' => $saida . ' 00:00:00', 
-                'Abastecimentognvs.saida <=' => $saida . ' 23:59:59'
-            ]; 
+        if ($saida) { // if valid date check all values in that day
+            if (strtotime($saida)) {
+                $condition = [
+                    'Abastecimentognvs.saida >=' => $saida . ' 00:00:00', 
+                    'Abastecimentognvs.saida <=' => $saida . ' 23:59:59'
+                ];
+            } else { // use % formulas
+                $condition = ['Abastecimentognvs.saida LIKE' => $saida];
+            }
         }
                 
         $placa = $this->getRequest()->getQuery('placa');

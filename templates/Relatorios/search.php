@@ -7,8 +7,6 @@
 declare(strict_types=1);
 
 
-use Cake\I18n\DateTime;
-
 $nome = $this->getRequest()->getQuery('nome');
 $email = $this->getRequest()->getQuery('email');
 $id = $this->getRequest()->getQuery('id');
@@ -58,7 +56,7 @@ $observacoes = $this->getRequest()->getQuery('observacoes');
             <?php echo $this->Form->submit('Buscar data', ['type' => 'Submit', 'class' => 'button']); ?>
             <?php echo $this->Form->end(); ?>
             <?php echo $this->Form->create($relatorio_vazio, ['type' => 'get', 'valueSources' => ['query', 'context']]) ?>
-            <?php echo $this->Form->control('data', ['type' => 'text', 'label' => ['text' => 'Use esse campo para formulas (yyyy-mm-%)'], 'class' => 'form-control', 'placeholder' => 'yyyy-mm-dd']); ?>
+            <?php echo $this->Form->control('data', ['value' => (string)$saida, 'type' => 'text', 'label' => ['text' => 'Use esse campo para formulas (yyyy-mm-%)'], 'class' => 'form-control', 'placeholder' => 'yyyy-mm-dd']); ?>
             <?php echo $this->Form->submit('Buscar fórmula', ['type' => 'Submit', 'class' => 'button']); ?>
             <?php echo $this->Form->end(); ?>
         </div>

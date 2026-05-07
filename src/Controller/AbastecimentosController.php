@@ -195,7 +195,7 @@ class AbastecimentosController extends AppController
         if ($certificado) { $condition = ['Abastecimentos.certificado' => $certificado]; }
                 
         $saida = $this->getRequest()->getQuery('saida');
-        if ($saida) { $condition = ['Abastecimentos.saida' => $saida]; }
+        if ($saida) { $condition = ['Abastecimentos.saida LIKE' => $saida]; }
                 
         $placa = $this->getRequest()->getQuery('placa');
         if ($placa) { $condition = ['Abastecimentos.placa' => $placa]; }
