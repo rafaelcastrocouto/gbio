@@ -33,6 +33,7 @@ if ($user_session) { $user_data = $user_session->getOriginalData(); }
                     <th><?= $this->Paginator->sort('nome', 'Nome') ?></th>
                     <th><?= $this->Paginator->sort('cnpj', 'CNPJ') ?></th>
                     <th><?= $this->Paginator->sort('email', 'E-mail') ?></th>
+                    <th><?= $this->Paginator->sort('endereco', 'Endereço') ?></th>
                     <th><?= $this->Paginator->sort('url', 'Link') ?></th>
                     <th><?= $this->Paginator->sort('observacoes', 'Observações') ?></th>
                 </tr>
@@ -51,8 +52,9 @@ if ($user_session) { $user_data = $user_session->getOriginalData(); }
                     <td><?= $this->Html->link($instituicao->nome, ['controller' => 'instituicoes', 'action' => 'view', $instituicao->id]) ?></td>
                     <td><?= h($instituicao->cnpj) ?></td>
                     <td><?= $instituicao->email ? $this->Text->autoLinkEmails($instituicao->email) : '' ?></td>
+                    <td><?= h($instituicao->endereco) ?></td>
                     <td><?= $instituicao->url ? $this->Html->link($instituicao->url) : '' ?></td>
-                    <td><?= h($instituicao->observacoes) ?></td>
+                    <td><?= $instituicao->observacoes ?></td>
                 </tr>
                 <?php endforeach; ?>
             </tbody>

@@ -22,6 +22,7 @@
                     <th><?= $this->Paginator->sort('nome', 'Nome') ?></th>
                     <th><?= $this->Paginator->sort('cpf', 'CPF') ?></th>
                     <th><?= $this->Paginator->sort('email', 'E-mail') ?></th>
+                    <th><?= $this->Paginator->sort('endereco', 'Endereço') ?></th>
                     <th><?= $this->Paginator->sort('celular', 'Celular') ?></th>
                     <th><?= $this->Paginator->sort('observacoes', 'Observações') ?></th>
                 </tr>
@@ -38,6 +39,7 @@
                     <td><?= $this->Html->link($operador->user ? $operador->user->nome : '', ['action' => 'view', $operador->id]) ?></td>
                     <td><?= h($operador->cpf) ?></td>
                     <td><?= ($operador->user and $operador->user->email) ? $this->Text->autoLinkEmails($operador->user->email) : '' ?></td>
+                    <td><?= h($operador->endereco) ?></td>
                     <td><?= h($operador->celular) ?></td>
                     <td><?= h($operador->observacoes) ?></td>
                 </tr>

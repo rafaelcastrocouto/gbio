@@ -21,6 +21,7 @@
                     <th><?= $this->Paginator->sort('nome', 'Nome') ?></th>
                     <th><?= $this->Paginator->sort('cpf', 'CPF') ?></th>
                     <th><?= $this->Paginator->sort('email', 'E-mail') ?></th>
+                    <th><?= $this->Paginator->sort('endereco', 'Endereço') ?></th>
                     <th><?= $this->Paginator->sort('celular', 'Celular') ?></th>
                     <th><?= $this->Paginator->sort('observacoes', 'Observações') ?></th>
                 </tr>
@@ -37,6 +38,7 @@
                     <td><?= $this->Html->link($supervisor->user->nome, ['action' => 'view', $supervisor->id]) ?></td>
                     <td><?= h($supervisor->cpf) ?></td>
                     <td><?= ($supervisor->user and $supervisor->user->email) ? $this->Text->autoLinkEmails($supervisor->user->email) : '' ?></td>
+                    <td><?= h($supervisor->endereco) ?></td>
                     <td><?= h($supervisor->celular) ?></td>
                     <td><?= h($supervisor->observacoes) ?></td>
                 </tr>

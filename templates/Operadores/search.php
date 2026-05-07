@@ -6,10 +6,10 @@
 
 declare(strict_types=1);
 
-$nome = $this->getRequest()->getQuery('nome');
-$email = $this->getRequest()->getQuery('email');
 $id = $this->getRequest()->getQuery('id');
+$nome = $this->getRequest()->getQuery('nome');
 $cpf = $this->getRequest()->getQuery('cpf');
+$email = $this->getRequest()->getQuery('email');
 $endereco = $this->getRequest()->getQuery('endereco');
 $celular = $this->getRequest()->getQuery('celular');
 $observacoes = $this->getRequest()->getQuery('observacoes');
@@ -109,8 +109,8 @@ $observacoes = $this->getRequest()->getQuery('observacoes');
                             <th class="actions"><?= __('Ações') ?></th>
                             <th><?= $this->Paginator->sort('id', 'ID'); ?></th>
                             <th><?= $this->Paginator->sort('nome', 'Nome'); ?></th>
-                            <th><?= $this->Paginator->sort('email', 'E-mail'); ?></th>
                             <th><?= $this->Paginator->sort('cpf', 'CPF'); ?></th>
+                            <th><?= $this->Paginator->sort('email', 'E-mail'); ?></th>
                             <th><?= $this->Paginator->sort('endereco', 'Endereço'); ?></th>
                             <th><?= $this->Paginator->sort('celular', 'Celular'); ?></th>
                             <th><?= $this->Paginator->sort('observacoes', 'Observações'); ?></th>
@@ -129,8 +129,8 @@ $observacoes = $this->getRequest()->getQuery('observacoes');
                             </td>                        
                             <td><?= $this->Html->link((string)$operador->id, ['action' => 'view', $operador->id]); ?></td>
                             <td><?= $this->Html->link($operador->user->nome, ['controler' => 'Users', 'action' => 'view', $operador->user->id]); ?></td>
-                            <td><?= $this->Text->autoLinkEmails($operador->user->email) ?></td>
                             <td><?= $operador->cpf; ?></td>
+                            <td><?= $this->Text->autoLinkEmails($operador->user->email) ?></td>
                             <td><?= $operador->endereco; ?></td>
                             <td><?= $operador->celular; ?></td>
                             <td><?= $operador->observacoes; ?></td>
