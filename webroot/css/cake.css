@@ -167,6 +167,8 @@ table td.obs {
 }
 .content form {
     margin: 0;
+    display: inline-block;
+    margin-right: 1em;
 }
 .actions a {
     text-decoration: none;

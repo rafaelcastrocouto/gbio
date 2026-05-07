@@ -103,7 +103,7 @@ $observacoes = $this->getRequest()->getQuery('observacoes');
                 <?= $this->element('paginator'); ?>
             </div>
             <div class="table_wrap">
-                <table>
+                <table id="tabela_operadores">
                     <thead class='thead-light'>
                         <tr>
                             <th class="actions"><?= __('Ações') ?></th>
@@ -137,6 +137,7 @@ $observacoes = $this->getRequest()->getQuery('observacoes');
                         </tr>
                     <?php endforeach; ?>
                 </table>
+                <?= $this->element('export_excel', ['id_da_tabela' => 'tabela_operadores']); ?>
             </div>
             <div class="paginator">
                 <?= $this->element('paginator'); ?>

@@ -84,19 +84,7 @@
                 <?php endforeach; ?>
             </tbody>
         </table>
-        <?= $this->Html->script('excellentexport') ?>
-        <a id="excelexport" download="abastecimento.xls" class="button" href="#" onclick="return ExcellentExport.excel(this, 'tabela_abastecimento_export', 'Relatorio');">Exportar para Excel</a>
-        <script>
-            // formata uma copia da tabela para exportar para excel
-            const export_table = document.querySelector('#tabela_abastecimento').cloneNode(true);
-            export_table.id = 'tabela_abastecimento_export';
-            export_table.classList.add('hidden');
-            document.currentScript.before(export_table);
-            
-            //remove a 1a coluna de acoes
-            const actions = document.querySelectorAll('#tabela_abastecimento_export .actions');
-            for (let a of actions) a.remove();
-        </script>
+        <?= $this->element('export_excel', ['id_da_tabela' => 'tabela_abastecimento']); ?>
     </div>
     <div class="paginator">
         <?= $this->element('paginator'); ?>

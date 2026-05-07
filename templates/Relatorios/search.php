@@ -6,6 +6,9 @@
 
 declare(strict_types=1);
 
+
+use Cake\I18n\DateTime;
+
 $nome = $this->getRequest()->getQuery('nome');
 $email = $this->getRequest()->getQuery('email');
 $id = $this->getRequest()->getQuery('id');
@@ -52,7 +55,11 @@ $observacoes = $this->getRequest()->getQuery('observacoes');
         <div class="tab-content">
             <?php echo $this->Form->create($relatorio_vazio, ['type' => 'get', 'valueSources' => ['query', 'context']]) ?>
             <?php echo $this->Form->control('data', ['label' => ['text' => 'Digite a data do relatório'], 'class' => 'form-control']); ?>
-            <?php echo $this->Form->submit('Buscar', ['type' => 'Submit', 'class' => 'button']); ?>
+            <?php echo $this->Form->submit('Buscar data', ['type' => 'Submit', 'class' => 'button']); ?>
+            <?php echo $this->Form->end(); ?>
+            <?php echo $this->Form->create($relatorio_vazio, ['type' => 'get', 'valueSources' => ['query', 'context']]) ?>
+            <?php echo $this->Form->control('data', ['type' => 'text', 'label' => ['text' => 'Use esse campo para formulas (yyyy-mm-%)'], 'class' => 'form-control', 'placeholder' => 'yyyy-mm-dd']); ?>
+            <?php echo $this->Form->submit('Buscar fórmula', ['type' => 'Submit', 'class' => 'button']); ?>
             <?php echo $this->Form->end(); ?>
         </div>
         
@@ -81,7 +88,7 @@ $observacoes = $this->getRequest()->getQuery('observacoes');
                 <?= $this->element('paginator'); ?>
             </div>
             <div class="table_wrap">
-                <table>
+                <table id="tabela_relatorio">
                     <thead class='thead-light'>
                         <tr>
                             <th class="actions"><?= __('Ações') ?></th>
@@ -89,6 +96,17 @@ $observacoes = $this->getRequest()->getQuery('observacoes');
                             <th><?= $this->Paginator->sort('nome', 'Nome'); ?></th>
                             <th><?= $this->Paginator->sort('email', 'E-mail'); ?></th>
                             <th><?= $this->Paginator->sort('data', 'Data'); ?></th>
+                            <th><?= $this->Paginator->sort('ch4_media_biogas', 'CH₄ Média') ?></th>
+                            <th><?= $this->Paginator->sort('co2_media_biogas', 'CO₂ Média') ?></th>
+                            <th><?= $this->Paginator->sort('o2_media_biogas', 'O₂ Média') ?></th>
+                            <th><?= $this->Paginator->sort('ch4_media_metano', 'CH₄ Média') ?></th>
+                            <th><?= $this->Paginator->sort('co2_media_metano', 'CO₂ Média') ?></th>
+                            <th><?= $this->Paginator->sort('o2_media_metano', 'O₂ Média') ?></th>
+                            <th><?= $this->Paginator->sort('n2_media_metano', 'N₂ Média') ?></th>
+                            <th><?= $this->Paginator->sort('volume_biogas_dia', 'Total Dia') ?></th>
+                            <th><?= $this->Paginator->sort('dispenser', 'Dispenser') ?></th>
+                            <th><?= $this->Paginator->sort('energia', 'Energia (KW)') ?></th>
+                            <th><?= $this->Paginator->sort('densidade', 'Densidade (Kg/m³)') ?></th>
                             <th><?= $this->Paginator->sort('observacoes', 'Observações'); ?></th>
                         </tr>
                     </thead>
@@ -107,10 +125,22 @@ $observacoes = $this->getRequest()->getQuery('observacoes');
                             <td><?= $this->Html->link($relatorio->user->nome, ['controler' => 'Users', 'action' => 'view', $relatorio->user->id]); ?></td>
                             <td><?= $this->Text->autoLinkEmails($relatorio->user->email) ?></td>
                             <td><?= $relatorio->data; ?></td>
+                            <td><?= h($relatorio->ch4_media_biogas) ?></td>
+                            <td><?= h($relatorio->co2_media_biogas) ?></td>
+                            <td><?= h($relatorio->o2_media_biogas) ?></td>
+                            <td class="ch4_media_metano"><?= h($relatorio->ch4_media_metano) ?></td>
+                            <td><?= h($relatorio->co2_media_metano) ?></td>
+                            <td><?= h($relatorio->o2_media_metano) ?></td>
+                            <td><?= h($relatorio->n2_media_metano) ?></td>
+                            <td class="td_volume_biogas_dia"><?= h($relatorio->volume_biogas_dia) ?></td>
+                            <td class="dispenser"><?= h($relatorio->dispenser) ?></td>
+                            <td class="energia"><?= h($relatorio->energia) ?></td>
+                            <td><?= h($relatorio->densidade) ?></td>
                             <td><?= $relatorio->observacoes; ?></td>
                         </tr>
                     <?php endforeach; ?>
                 </table>
+                <?= $this->element('export_excel', ['id_da_tabela' => 'tabela_relatorio']); ?>
             </div>
             <div class="paginator">
                 <?= $this->element('paginator'); ?>

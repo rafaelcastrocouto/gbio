@@ -117,7 +117,7 @@ $observacoes = $this->getRequest()->getQuery('observacoes');
                 <?= $this->element('paginator'); ?>
             </div>
             <div class="table_wrap">
-                <table>
+                <table id="tabela_abastecimentognv">
                     <thead class='thead-light'>
                         <tr>
                             <th class="actions"><?= __('Ações') ?></th>
@@ -129,6 +129,9 @@ $observacoes = $this->getRequest()->getQuery('observacoes');
                             <th><?= $this->Paginator->sort('saida', 'Data'); ?></th>
                             <th><?= $this->Paginator->sort('placa', 'Placa'); ?></th>
                             <th><?= $this->Paginator->sort('prefixo', 'Prefixo'); ?></th>
+                            <th><?= $this->Paginator->sort('p_inicial', ['label' => 'Pressão Inicial (bar)']) ?></th>
+                            <th><?= $this->Paginator->sort('p_final', ['label' => 'Pressão Final (bar)']) ?></th>
+                            <th><?= $this->Paginator->sort('volume', ['label' => 'Volume (m³)']) ?></th>
                             <th><?= $this->Paginator->sort('observacoes', 'Observações'); ?></th>
                         </tr>
                     </thead>
@@ -149,12 +152,16 @@ $observacoes = $this->getRequest()->getQuery('observacoes');
                             <td><?= $abastecimentognv->motorista; ?></td>
                             <td><?= $abastecimentognv->rg; ?></td>
                             <td><?= $abastecimentognv->saida; ?></td>
-                            <td><?= $abastecimentognv->placa; ?></td>
-                            <td><?= $abastecimentognv->prefixo; ?></td>
-                            <td><?= $abastecimentognv->observacoes; ?></td>
+                            <td><?= h($abastecimentognv->placa) ?></td>
+                            <td><?= h($abastecimentognv->prefixo) ?></td>
+                            <td><?= h($abastecimentognv->p_inicial) ?></td>
+                            <td><?= h($abastecimentognv->p_final) ?></td>
+                            <td><?= h($abastecimentognv->volume) ?></td>
+                            <td><?= h($abastecimentognv->observacoes) ?></td>
                         </tr>
                     <?php endforeach; ?>
                 </table>
+                <?= $this->element('export_excel', ['id_da_tabela' => 'tabela_abastecimentognv']); ?>
             </div>
             <div class="paginator">
                 <?= $this->element('paginator'); ?>

@@ -59,7 +59,7 @@ $id = $this->getRequest()->getQuery('id');
                 <?= $this->element('paginator'); ?>
             </div>
             <div class="table_wrap">
-                <table>
+                <table id="tabela_usuarios">
                     <thead class='thead-light'>
                         <tr>
                             <th class="actions"><?= __('Ações') ?></th>
@@ -98,6 +98,7 @@ $id = $this->getRequest()->getQuery('id');
                         </tr>
                     <?php endforeach; ?>
                 </table>
+                <?= $this->element('export_excel', ['id_da_tabela' => 'tabela_usuarios']); ?>
             </div>
             <div class="paginator">
                 <?= $this->element('paginator'); ?>

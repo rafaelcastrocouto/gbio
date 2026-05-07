@@ -54,24 +54,12 @@ if ($user_session) { $user_data = $user_session->getOriginalData(); }
                     <td><?= $instituicao->email ? $this->Text->autoLinkEmails($instituicao->email) : '' ?></td>
                     <td><?= h($instituicao->endereco) ?></td>
                     <td><?= $instituicao->url ? $this->Html->link($instituicao->url) : '' ?></td>
-                    <td><?= $instituicao->observacoes ?></td>
+                    <td><?= h($instituicao->observacoes) ?></td>
                 </tr>
                 <?php endforeach; ?>
             </tbody>
         </table>
-        <?= $this->Html->script('excellentexport') ?>
-        <a id="excelexport" download="instituicoes.xls" class="button" href="#" onclick="return ExcellentExport.excel(this, 'tabela_instituicoes_export', 'Supervisores');">Exportar para Excel</a>
-        <script>
-            // formata uma copia da tabela para exportar para excel
-            const export_table = document.querySelector('#tabela_instituicoes').cloneNode(true);
-            export_table.id = 'tabela_instituicoes_export';
-            export_table.classList.add('hidden');
-            document.currentScript.before(export_table);
-            
-            //remove a 1a coluna de acoes
-            const actions = document.querySelectorAll('#tabela_instituicoes_export .actions');
-            for (let a of actions) a.remove();
-        </script>
+        <?= $this->element('export_excel', ['id_da_tabela' => 'tabela_instituicoes']); ?>
     </div>
     <div class="paginator">
         <?= $this->element('paginator'); ?>
