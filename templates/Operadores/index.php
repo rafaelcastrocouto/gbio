@@ -35,10 +35,10 @@
                         <?= $this->Html->link(__('✏️'), ['action' => 'edit', $operador->id]) ?>
                         <?= $this->Form->postLink(__('❌'), ['action' => 'delete', $operador->id], ['confirm' => __('Tem certeza que deseja deletar o operador {0}?', $operador->nome)]) ?>
                     </td>
-                    <td><?= $this->Html->link((string)$operador->id, ['action' => 'view', $operador->id]) ?></td>
-                    <td><?= $this->Html->link($operador->user ? $operador->user->nome : '', ['action' => 'view', $operador->id]) ?></td>
+                    <td><?= $this->Html->link((string)$operador->id ?? 'id', ['action' => 'view', $operador->id]) ?></td>
+                    <td><?= $this->Html->link($operador->user->nome ?? 'sem nome', ['action' => 'view', $operador->id]) ?></td>
                     <td><?= h($operador->cpf) ?></td>
-                    <td><?= ($operador->user and $operador->user->email) ? $this->Text->autoLinkEmails($operador->user->email) : '' ?></td>
+                    <td><?= ($operador->user and $operador->user->email) ? $this->Text->autoLinkEmails($operador->user->email) : 'Erro: É necessário registrar um email' ?></td>
                     <td><?= h($operador->endereco) ?></td>
                     <td><?= h($operador->celular) ?></td>
                     <td><?= h($operador->observacoes) ?></td>

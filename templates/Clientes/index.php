@@ -33,10 +33,10 @@
                         <?= $this->Html->link(__('✏️'), ['action' => 'edit', $cliente->id]) ?>
                         <?= $this->Form->postLink(__('❌'), ['action' => 'delete', $cliente->id], ['confirm' => __('Tem certeza que deseja deletar o cliente {0}?', $cliente->nome)]) ?>
                     </td>
-                    <td><?= $this->Html->link((string)$cliente->id, ['action' => 'view', $cliente->id]) ?></td>
-                    <td><?= $this->Html->link($cliente->nome, ['action' => 'view', $cliente->id]) ?></td>
+                    <td><?= $this->Html->link((string)$cliente->id ?? 'id', ['action' => 'view', $cliente->id]) ?></td>
+                    <td><?= $this->Html->link($cliente->nome ?? 'sem nome', ['action' => 'view', $cliente->id]) ?></td>
                     <td><?= h($cliente->cpf) ?></td>
-                    <td><?= ($cliente->email) ? $this->Text->autoLinkEmails($cliente->email) : '' ?></td>
+                    <td><?= $cliente->email ? $this->Text->autoLinkEmails($cliente->email) : 'Erro: É necessário registrar um email' ?></td>
                     <td><?= h($cliente->celular) ?></td>
                     <td><?= h($cliente->observacoes) ?></td>
                 </tr>

@@ -49,9 +49,9 @@ if ($user_session) { $user_data = $user_session->getOriginalData(); }
                         <?php endif; ?>
                         
                     </td>
-                    <td><?= $this->Html->link((string)$user->id, ['action' => 'view', $user->id]) ?></td>
-                    <td><?= $this->Html->link($user->nome, ['action' => 'view', $user->id]) ?></td>
-                    <td><?= $user->email ? $this->Text->autoLinkEmails($user->email) : '' ?></td>
+                    <td><?= $this->Html->link((string)$user->id ?? 'id', ['action' => 'view', $user->id]) ?></td>
+                    <td><?= $this->Html->link($user->nome ?? 'sem nome', ['action' => 'view', $user->id]) ?></td>
+                    <td><?= $user->email ? $this->Text->autoLinkEmails($user->email) : 'Erro: É necessário registrar um email' ?></td>
                     <td><?php 
                         $roles = [];
                         if ($user->administrador) array_push($roles, 'Administrador');

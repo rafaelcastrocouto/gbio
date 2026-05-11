@@ -31,7 +31,7 @@
                 </tr>
                 <tr>
                     <th><?= __('Email') ?></th>
-                    <td><?= ($cliente->email) ? $this->Text->autoLinkEmails($cliente->email) : '' ?></td>
+                    <td><?= ($cliente->email) ? $this->Text->autoLinkEmails($cliente->email) : 'É necessário registrar um email' ?></td>
                 </tr>
                 <tr>
                     <th><?= __('Endereco') ?></th>

@@ -63,7 +63,7 @@ if ($user_session) { $user_data = $user_session->getOriginalData(); }
                             <td class="actions">
                                 <?= $this->Html->link(__('🔍'), ['controller' => 'administradores', 'action' => 'view', $user->administrador->id]) ?>
                             </td>
-                            <td><?= $this->Html->link((string)$user->administrador->id, ['controller' => 'administradores', 'action' => 'view', $user->administrador->id]) ?></td>
+                            <td><?= $this->Html->link((string)$user->administrador->id ?? 'id', ['controller' => 'administradores', 'action' => 'view', $user->administrador->id]) ?></td>
                         </tr>
                     </table>
                 </div>
@@ -89,7 +89,7 @@ if ($user_session) { $user_data = $user_session->getOriginalData(); }
                                 <?= $this->Html->link(__('✏️'), ['controller' => 'operadores', 'action' => 'edit', $user->operador->id]) ?>
                                 <?= $this->Form->postLink(__('❌'), ['controller' => 'operadores', 'action' => 'delete', $user->operador->id], ['confirm' => __('Tem certeza que deseja deletar o operador {0}?', $user->operador->nome)]) ?>
                             </td>
-                            <td><?= $this->Html->link((string)$user->operador->id, ['controller' => 'operadores', 'action' => 'view', $user->operador->id]) ?></td>
+                            <td><?= $this->Html->link((string)$user->operador->id ?? 'id', ['controller' => 'operadores', 'action' => 'view', $user->operador->id]) ?></td>
                             <td><?= h($user->operador->cpf) ?></td>
                             <td><?= h($user->operador->endereco) ?></td>
                             <td><?= h($user->operador->celular) ?></td>
@@ -122,7 +122,7 @@ if ($user_session) { $user_data = $user_session->getOriginalData(); }
                                 <?= $this->Html->link(__('✏️'), ['controller' => 'supervisores', 'action' => 'edit', $user->supervisor->id]) ?>
                                 <?= $this->Form->postLink(__('❌'), ['controller' => 'supervisores', 'action' => 'delete', $user->supervisor->id], ['confirm' => __('Tem certeza que deseja deletar o supervisor {0}?', $user->supervisor->nome)]) ?>
                             </td>
-                            <td><?= $this->Html->link((string)$user->supervisor->id, ['controller' => 'supervisores', 'action' => 'view', $user->supervisor->id]) ?></td>
+                            <td><?= $this->Html->link((string)$user->supervisor->id ?? 'id', ['controller' => 'supervisores', 'action' => 'view', $user->supervisor->id]) ?></td>
                             <td><?= h($user->supervisor->cpf) ?></td>
                             <td><?= h($user->supervisor->endereco) ?></td>
                             <td><?= h($user->supervisor->celular) ?></td>

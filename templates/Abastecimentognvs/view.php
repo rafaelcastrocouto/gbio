@@ -24,15 +24,15 @@
                 </tr>
                 <tr>
                     <th><?= __('Autor') ?></th>
-                    <td><?= $this->Html->link($abastecimentognv->user->nome, ['controller' => 'users', 'action' => 'view', $abastecimentognv->user->id]) ?></td>
+                    <td><?= $this->Html->link($abastecimentognv->user->nome ?? 'sem nome', ['controller' => 'users', 'action' => 'view', $abastecimentognv->user->id]) ?></td>
                 </tr>
                 <tr>
                     <th><?= __('Instituição') ?></th>
-                    <td><?= $this->Html->link($abastecimentognv->instituicao->nome, ['controller' => 'instituicoes', 'action' => 'view', $abastecimentognv->instituicao->id]) ?></td>
+                    <td><?= $this->Html->link($abastecimentognv->instituicao->nome ?? 'sem nome', ['controller' => 'instituicoes', 'action' => 'view', $abastecimentognv->instituicao->id]) ?></td>
                 </tr>
                 <tr>
                     <th><?= __('Cliente') ?></th>
-                    <td><?= $this->Html->link($abastecimentognv->cliente->nome, ['controller' => 'clientes', 'action' => 'view', $abastecimentognv->cliente->id]) ?></td>
+                    <td><?= $this->Html->link($abastecimentognv->cliente->nome ?? 'sem nome', ['controller' => 'clientes', 'action' => 'view', $abastecimentognv->cliente->id]) ?></td>
                 </tr>
                 <tr>
                     <th><?= __('Data de Saída') ?></th>

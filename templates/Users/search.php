@@ -83,9 +83,9 @@ $id = $this->getRequest()->getQuery('id');
                                 <?= $this->Html->link(__('🔑'), ['action' => 'editpassword', $user->id]) ?>
                                 <?= $this->Form->postLink(__('❌'), ['action' => 'delete', $user->id], ['confirm' => __('Tem certeza que deseja deletar o user {0}?', $user->controle)]) ?>
                             </td>                        
-                            <td><?= $this->Html->link((string)$user->id, ['action' => 'view', $user->id]); ?></td>
-                            <td><?= $this->Html->link($user->nome, ['controler' => 'Users', 'action' => 'view', $user->id]); ?></td>
-                            <td><?= $this->Text->autoLinkEmails($user->email) ?></td>
+                            <td><?= $this->Html->link((string)$user->id ?? 'id', ['action' => 'view', $user->id]); ?></td>
+                            <td><?= $this->Html->link($user->nome ?? 'sem nome', ['controler' => 'Users', 'action' => 'view', $user->id]); ?></td>
+                            <td><?= $user->email ? $this->Text->autoLinkEmails($user->email) : 'Erro: É necessário registrar um email' ?></td>
                             <td><?php 
                                 $roles = [];
                                 if ($user->administrador) array_push($roles, 'Administrador');

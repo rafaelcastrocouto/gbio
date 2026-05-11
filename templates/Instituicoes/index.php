@@ -47,11 +47,11 @@ if ($user_session) { $user_data = $user_session->getOriginalData(); }
                             <?= $this->Html->link(__('✏️'), ['action' => 'edit', $instituicao->id]) ?>
                             <?= $this->Form->postLink(__('❌'), ['action' => 'delete', $instituicao->id], ['confirm' => __('Tem certeza que deseja deletar a instituição {0}?', $instituicao->nome)]) ?>
                         </td>
-                        <td><?= $this->Html->link((string)$instituicao->id, ['action' => 'view', $instituicao->id]) ?></td>                    
+                        <td><?= $this->Html->link((string)$instituicao->id ?? 'id', ['action' => 'view', $instituicao->id]) ?></td>                    
                     <?php endif; ?>
-                    <td><?= $this->Html->link($instituicao->nome, ['controller' => 'instituicoes', 'action' => 'view', $instituicao->id]) ?></td>
+                    <td><?= $this->Html->link($instituicao->nome ?? 'sem nome', ['controller' => 'instituicoes', 'action' => 'view', $instituicao->id]) ?></td>
                     <td><?= h($instituicao->cnpj) ?></td>
-                    <td><?= $instituicao->email ? $this->Text->autoLinkEmails($instituicao->email) : '' ?></td>
+                    <td><?= $instituicao->email ? $this->Text->autoLinkEmails($instituicao->email) : 'É necessário registrar um email'?></td>
                     <td><?= h($instituicao->endereco) ?></td>
                     <td><?= $instituicao->url ? $this->Html->link($instituicao->url) : '' ?></td>
                     <td><?= h($instituicao->observacoes) ?></td>

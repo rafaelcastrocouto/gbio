@@ -119,9 +119,9 @@ $observacoes = $this->getRequest()->getQuery('observacoes');
                                 <?= $this->Html->link(__('✏️'), ['action' => 'edit', $relatorio->id]) ?>
                                 <?= $this->Form->postLink(__('❌'), ['action' => 'delete', $relatorio->id], ['confirm' => __('Tem certeza que deseja deletar o relatorio {0}?', $relatorio->cpf)]) ?>
                             </td>                        
-                            <td><?= $this->Html->link((string)$relatorio->id, ['action' => 'view', $relatorio->id]); ?></td>
-                            <td><?= $this->Html->link($relatorio->user->nome, ['controler' => 'Users', 'action' => 'view', $relatorio->user->id]); ?></td>
-                            <td><?= $this->Text->autoLinkEmails($relatorio->user->email) ?></td>
+                            <td><?= $this->Html->link((string)$relatorio->id ?? 'id', ['action' => 'view', $relatorio->id]); ?></td>
+                            <td><?= $this->Html->link($relatorio->user->nome ?? 'sem nome', ['controler' => 'Users', 'action' => 'view', $relatorio->user->id]); ?></td>
+                            <td><?= $relatorio->user->email ? $this->Text->autoLinkEmails($relatorio->user->email) : 'Erro: É necessário registrar um email' ?></td>
                             <td><?= $relatorio->data; ?></td>
                             <td><?= h($relatorio->ch4_media_biogas) ?></td>
                             <td><?= h($relatorio->co2_media_biogas) ?></td>

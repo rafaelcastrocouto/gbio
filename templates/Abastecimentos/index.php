@@ -54,10 +54,10 @@
                         <?= $this->Html->link(__('✏️'), ['action' => 'edit', $abastecimento->id]) ?>
                         <?= $this->Form->postLink(__('❌'), ['action' => 'delete', $abastecimento->id], ['confirm' => __('Tem certeza que deseja deletar o abastecimento {0}?', $abastecimento->controle)]) ?>
                     </td>
-                    <td><?= $this->Html->link((string)$abastecimento->id, ['action' => 'view', $abastecimento->id]) ?></td>
-                    <!-- <td><?= $this->Html->link((string)$abastecimento->user->id, ['controller' => 'users', 'action' => 'view', $abastecimento->user->id]) ?></td> -->
-                    <!-- <td><?= $this->Html->link($abastecimento->instituicao->nome, ['controller' => 'instituicoes', 'action' => 'view', $abastecimento->instituicao->id]) ?></td> -->
-                    <!-- <td><?= $this->Html->link($abastecimento->cliente->nome, ['controller' => 'clientes', 'action' => 'view', $abastecimento->clientes->id]) ?></td> -->
+                    <td><?= $this->Html->link((string)$abastecimento->id ?? 'id', ['action' => 'view', $abastecimento->id]) ?></td>
+                    <!-- <td><?= $this->Html->link((string)$abastecimento->user->id ?? 'id', ['controller' => 'users', 'action' => 'view', $abastecimento->user->id]) ?></td> -->
+                    <!-- <td><?= $this->Html->link($abastecimento->instituicao->nome ?? 'sem nome', ['controller' => 'instituicoes', 'action' => 'view', $abastecimento->instituicao->id]) ?></td> -->
+                    <!-- <td><?= $this->Html->link($abastecimento->cliente->nome ?? 'sem nome', ['controller' => 'clientes', 'action' => 'view', $abastecimento->clientes->id]) ?></td> -->
                     <td><?= h($abastecimento->controle) ?></td>
                     <td><?= h($abastecimento->nf) ?></td>
                     <td><?= h($abastecimento->certificado) ?></td>

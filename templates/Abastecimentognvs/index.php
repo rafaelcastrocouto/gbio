@@ -41,10 +41,10 @@
                         <?= $this->Html->link(__('✏️'), ['action' => 'edit', $abastecimentognv->id]) ?>
                         <?= $this->Form->postLink(__('❌'), ['action' => 'delete', $abastecimentognv->id], ['confirm' => __('Tem certeza que deseja deletar o abastecimentognv {0}?', $abastecimentognv->controle)]) ?>
                     </td>
-                    <td><?= $this->Html->link((string)$abastecimentognv->id, ['action' => 'view', $abastecimentognv->id]) ?></td>
-                    <td><?= $this->Html->link($abastecimentognv->user->nome, ['controller' => 'users', 'action' => 'view', $abastecimentognv->user->id]) ?></td>
-                    <td><?= $this->Html->link($abastecimentognv->instituicao->nome, ['controller' => 'instituicoes', 'action' => 'view', $abastecimentognv->instituicao->id]) ?></td>
-                    <td><?= $this->Html->link($abastecimentognv->cliente->nome, ['controller' => 'clientes', 'action' => 'view', $abastecimentognv->cliente->id]) ?></td>
+                    <td><?= $this->Html->link((string)$abastecimentognv->id ?? 'id', ['action' => 'view', $abastecimentognv->id]) ?></td>
+                    <td><?= $this->Html->link($abastecimentognv->user->nome ?? 'sem nome', ['controller' => 'users', 'action' => 'view', $abastecimentognv->user->id]) ?></td>
+                    <td><?= $this->Html->link($abastecimentognv->instituicao->nome ?? 'sem nome', ['controller' => 'instituicoes', 'action' => 'view', $abastecimentognv->instituicao->id]) ?></td>
+                    <td><?= $this->Html->link($abastecimentognv->cliente->nome ?? 'sem nome', ['controller' => 'clientes', 'action' => 'view', $abastecimentognv->cliente->id]) ?></td>
                     <td><?= h($abastecimentognv->saida) ?></td>
                     <td><?= h($abastecimentognv->motorista) ?></td>
                     <td><?= h($abastecimentognv->rg) ?></td>

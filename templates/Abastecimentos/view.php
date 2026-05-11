@@ -24,15 +24,15 @@
                 </tr>
                 <tr>
                     <th><?= __('Autor') ?></th>
-                    <td><?= $this->Html->link($abastecimento->user->nome, ['controller' => 'users', 'action' => 'view', $abastecimento->user->id]) ?></td>
+                    <td><?= $this->Html->link($abastecimento->user->nome ?? 'sem nome', ['controller' => 'users', 'action' => 'view', $abastecimento->user->id]) ?></td>
                 </tr>
                 <tr>
                     <th><?= __('Instituição') ?></th>
-                    <td><?= $this->Html->link($abastecimento->instituicao->nome, ['controller' => 'instituicoes', 'action' => 'view', $abastecimento->instituicao->id]) ?></td>
+                    <td><?= $this->Html->link($abastecimento->instituicao->nome ?? 'sem nome', ['controller' => 'instituicoes', 'action' => 'view', $abastecimento->instituicao->id]) ?></td>
                 </tr>
                 <tr>
                     <th><?= __('Cliente') ?></th>
-                    <td><?= $this->Html->link($abastecimento->cliente->nome, ['controller' => 'clientes', 'action' => 'view', $abastecimento->cliente->id]) ?></td>
+                    <td><?= $this->Html->link($abastecimento->cliente->nome ?? 'sem nome', ['controller' => 'clientes', 'action' => 'view', $abastecimento->cliente->id]) ?></td>
                 </tr>
                 <tr>
                     <th><?= __('Nº de Controle') /* todo */ ?></th>

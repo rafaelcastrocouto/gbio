@@ -33,7 +33,7 @@
     <div class="error-container">
         <?= $this->Flash->render() ?>
         <?= $this->fetch('content') ?>
-        <?= $this->Html->link(__('Back'), 'javascript:history.back()') ?>
+        <?= $this->Html->link(__('Voltar'), 'javascript:history.back()') ?>
     </div>
 </body>
 </html>

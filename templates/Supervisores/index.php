@@ -34,10 +34,10 @@
                         <?= $this->Html->link(__('✏️'), ['action' => 'edit', $supervisor->id]) ?>
                         <?= $this->Form->postLink(__('❌'), ['action' => 'delete', $supervisor->id], ['confirm' => __('Tem certeza que deseja deletar o supervisor {0}?', $supervisor->nome)]) ?>
                     </td>
-                    <td><?= $this->Html->link((string)$supervisor->id, ['action' => 'view', $supervisor->id]) ?></td>
-                    <td><?= $this->Html->link($supervisor->user->nome, ['action' => 'view', $supervisor->id]) ?></td>
+                    <td><?= $this->Html->link((string)$supervisor->id ?? 'id', ['action' => 'view', $supervisor->id]) ?></td>
+                    <td><?= $this->Html->link($supervisor->user->nome ?? 'sem nome', ['action' => 'view', $supervisor->id]) ?></td>
                     <td><?= h($supervisor->cpf) ?></td>
-                    <td><?= ($supervisor->user and $supervisor->user->email) ? $this->Text->autoLinkEmails($supervisor->user->email) : '' ?></td>
+                    <td><?= $supervisor->user->email ? $this->Text->autoLinkEmails($supervisor->user->email) : 'Erro: É necessário registrar um email' ?></td>
                     <td><?= h($supervisor->endereco) ?></td>
                     <td><?= h($supervisor->celular) ?></td>
                     <td><?= h($supervisor->observacoes) ?></td>

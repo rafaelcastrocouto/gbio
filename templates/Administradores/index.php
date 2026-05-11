@@ -27,9 +27,9 @@
                     <td class="actions">
                         <?= $this->Html->link(__('🔍'), ['action' => 'view', $administrador->id]) ?>
                     </td>
-                    <td><?= $this->Html->link((string)$administrador->id, ['action' => 'view', $administrador->id]) ?></td>
-                    <td><?= $this->Html->link($administrador->user->nome, ['action' => 'view', $administrador->id]) ?></td>
-                    <td><?= $this->Text->autoLinkEmails($administrador->user->email) ?></td>
+                    <td><?= $this->Html->link((string)$administrador->id ?? 'id', ['action' => 'view', $administrador->id]) ?></td>
+                    <td><?= $this->Html->link($administrador->user->nome ?? 'sem nome', ['action' => 'view', $administrador->id]) ?></td>
+                    <td><?= $administrador->user->email ? $this->Text->autoLinkEmails($administrador->user->email) ? 'Erro: É necessário registrar um email' ?></td>
                 </tr>
                 <?php endforeach; ?>
             </tbody>

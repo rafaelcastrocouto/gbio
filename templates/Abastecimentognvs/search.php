@@ -148,9 +148,9 @@ $observacoes = $this->getRequest()->getQuery('observacoes');
                                 <?= $this->Html->link(__('✏️'), ['action' => 'edit', $abastecimentognv->id]) ?>
                                 <?= $this->Form->postLink(__('❌'), ['action' => 'delete', $abastecimentognv->id], ['confirm' => __('Tem certeza que deseja deletar o abastecimento {0}?', $abastecimentognv->controle)]) ?>
                             </td>                        
-                            <td><?= $this->Html->link((string)$abastecimentognv->id, ['action' => 'view', $abastecimentognv->id]); ?></td>
-                            <td><?= $this->Html->link($abastecimentognv->user->nome, ['controler' => 'Users', 'action' => 'view', $abastecimentognv->user->id]); ?></td>
-                            <td><?= $this->Text->autoLinkEmails($abastecimentognv->user->email) ?></td>
+                            <td><?= $this->Html->link((string)$abastecimentognv->id ?? '', ['action' => 'view', $abastecimentognv->id]); ?></td>
+                            <td><?= $this->Html->link($abastecimentognv->user->nome ?? '', ['controler' => 'Users', 'action' => 'view', $abastecimentognv->user->id]); ?></td>
+                            <td><?= $abastecimentognv->user->email ? $this->Text->autoLinkEmails($abastecimentognv->user->email) : 'Erro: É necessário registrar um email' ?></td>
                             <td><?= $abastecimentognv->motorista; ?></td>
                             <td><?= $abastecimentognv->rg; ?></td>
                             <td><?= $abastecimentognv->saida; ?></td>

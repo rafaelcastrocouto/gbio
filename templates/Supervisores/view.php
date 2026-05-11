@@ -57,9 +57,9 @@
                                 <?= $this->Html->link(__('🔑'), ['controller' => 'Users', 'action' => 'editpassword', $supervisor->user->id]) ?>
                                 <?= $this->Form->postLink(__('❌'), ['controller' => 'Users', 'action' => 'delete', $supervisor->user->id], ['confirm' => __('Tem certeza que deseja deletar o usuário {0}?', $supervisor->user->email)]) ?>
                             </td>
-                            <td><?= $this->Html->link((string)$supervisor->user->id, ['controller' => 'Users', 'action' => 'view', $supervisor->user->id]) ?></td>
-                            <td><?= $this->Html->link($supervisor->user->nome, ['controller' => 'Users', 'action' => 'view', $supervisor->user->id]) ?></td>
-                            <td><?= $supervisor->user->email ? $this->Text->autoLinkEmails($supervisor->user->email) : '' ?></td>
+                            <td><?= $this->Html->link((string)$supervisor->user->id ?? 'id', ['controller' => 'Users', 'action' => 'view', $supervisor->user->id]) ?></td>
+                            <td><?= $this->Html->link($supervisor->user->nome ?? 'sem nome', ['controller' => 'Users', 'action' => 'view', $supervisor->user->id]) ?></td>
+                            <td><?= $supervisor->user->email ? $this->Text->autoLinkEmails($supervisor->user->email) : 'Erro: É necessário registrar um email' ?></td>
                         </tr>
                     </table>
                 </div>

@@ -37,8 +37,8 @@
                                 <?= $this->Html->link(__('✏️'), ['controller' => 'Users', 'action' => 'edit', $administrador->user->id]) ?>
                                 <?= $this->Html->link(__('🔑'), ['controller' => 'Users', 'action' => 'editpassword', $administrador->user->id]) ?>
                             </td>
-                            <td><?= $this->Html->link((string)$administrador->user->id, ['controller' => 'Users', 'action' => 'view', $administrador->user->id]) ?></td>
-                            <td><?= $administrador->user->email ? $this->Text->autoLinkEmails($administrador->user->email) : '' ?></td>
+                            <td><?= $this->Html->link((string)$administrador->user->id ?? 'id', ['controller' => 'Users', 'action' => 'view', $administrador->user->id]) ?></td>
+                            <td><?= $administrador->user->email ? $this->Text->autoLinkEmails($administrador->user->email) : 'Erro: É necessário registrar um email' ?></td>
                             <td><?= h($administrador->user->created) ?></td>
                         </tr>
                     </table>

@@ -162,9 +162,9 @@ $observacoes = $this->getRequest()->getQuery('observacoes');
                                 <?= $this->Html->link(__('✏️'), ['action' => 'edit', $abastecimento->id]) ?>
                                 <?= $this->Form->postLink(__('❌'), ['action' => 'delete', $abastecimento->id], ['confirm' => __('Tem certeza que deseja deletar o abastecimento {0}?', $abastecimento->controle)]) ?>
                             </td>                        
-                            <td><?= $this->Html->link((string)$abastecimento->id, ['action' => 'view', $abastecimento->id]); ?></td>
-                            <td><?= $this->Html->link($abastecimento->user->nome, ['controler' => 'Users', 'action' => 'view', $abastecimento->user->id]); ?></td>
-                            <td><?= $this->Text->autoLinkEmails($abastecimento->user->email) ?></td>
+                            <td><?= $this->Html->link((string)$abastecimento->id ?? 'id', ['action' => 'view', $abastecimento->id]); ?></td>
+                            <td><?= $this->Html->link($abastecimento->user->nome ?? 'sem nome', ['controler' => 'Users', 'action' => 'view', $abastecimento->user->id]); ?></td>
+                            <td><?= $abastecimento->user->email ? $this->Text->autoLinkEmails($abastecimento->user->email) : 'Erro: É necessário registrar um email' ?></td>
                             <td><?= h($abastecimento->controle) ?></td>
                             <td><?= h($abastecimento->nf) ?></td>
                             <td><?= h($abastecimento->certificado) ?></td>
