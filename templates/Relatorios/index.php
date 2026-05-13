@@ -98,19 +98,19 @@
                         <?= $this->Form->postLink(__('❌'), ['action' => 'delete', $relatorio->id], ['confirm' => __('Tem certeza que deseja deletar o relatorio {0}?', $relatorio->data)]) ?>
                     </td>
                     <td class="current_data"><?= h($relatorio->data) ?></td>
-                    <td><?= h($relatorio->ch4_media_biogas) ?></td>
-                    <td><?= h($relatorio->co2_media_biogas) ?></td>
-                    <td><?= h($relatorio->o2_media_biogas) ?></td>
-                    <td class="ch4_media_metano"><?= h($relatorio->ch4_media_metano) ?></td>
-                    <td><?= h($relatorio->co2_media_metano) ?></td>
-                    <td><?= h($relatorio->o2_media_metano) ?></td>
-                    <td><?= h($relatorio->n2_media_metano) ?></td>
+                    <td class="number-format"><?= h($relatorio->ch4_media_biogas) ?></td>
+                    <td class="number-format"><?= h($relatorio->co2_media_biogas) ?></td>
+                    <td class="number-format"><?= h($relatorio->o2_media_biogas) ?></td>
+                    <td class="ch4_media_metano number-format"><?= h($relatorio->ch4_media_metano) ?></td>
+                    <td class="number-format"><?= h($relatorio->co2_media_metano) ?></td>
+                    <td class="number-format"><?= h($relatorio->o2_media_metano) ?></td>
+                    <td class="number-format"><?= h($relatorio->n2_media_metano) ?></td>
                     <td class="td_volume_biogas_dia"><?= h($relatorio->volume_biogas_dia) ?></td>
                     <td class="td_volume_biogas_mes"></td>
                     <td class="td_consumo">
                         <span class="consumo"><?= h($relatorio->consumo_clientes) ?></span>
                     </td>
-                    <td class="dispenser"><?= h($relatorio->dispenser) ?></td>
+                    <td class="dispenser number-format"><?= h($relatorio->dispenser) ?></td>
                     <td class="td_volume_total_dia"></td>
                     <td class="td_volume_total_mes"></td>
                         <script>
@@ -120,10 +120,14 @@
                                 const volume_biogas_dia = parent.querySelector('#tabela_relatorio .td_volume_biogas_dia');
                                 const volume_biogas_mes = parent.querySelector('#tabela_relatorio .td_volume_biogas_mes');
                                 const previous_tr = parent.previousElementSibling;
+                                volume_biogas_dia.textContent = Number(volume_biogas_dia.textContent.replaceAll('.', '').replace(',', '.')).toLocaleString('pt-BR');
                                 if (!previous_tr) volume_biogas_mes.textContent = volume_biogas_dia.textContent;
                                 else {
                                     const previous_td = previous_tr.querySelector('#tabela_relatorio .td_volume_biogas_mes');
-                                    volume_biogas_mes.textContent = Number(previous_td.textContent) + Number(volume_biogas_dia.textContent);
+                                    const previous_td_value = Number(previous_td.textContent.replaceAll('.', '').replace(',', '.'));
+                                    const volume_biogas_dia_value = Number(volume_biogas_dia.textContent.replaceAll('.', '').replace(',', '.'));
+                                    const acc = previous_td_value + volume_biogas_dia_value;
+                                    volume_biogas_mes.textContent = acc.toLocaleString('pt-BR');;
                                 }
                                 
                                 // divide as celulas para incluir os clientes
@@ -132,7 +136,8 @@
                                 const consumo_td =  parent.querySelector('.td_consumo');
                                 for (let clienteId in window.parsedClients) {
                                     const cliente_td = document.createElement('td');
-                                    cliente_td.textContent = Number(consumoData[clienteId]) || 0;
+                                    const cliente_value = Number(consumoData[clienteId]) || 0;
+                                    cliente_td.textContent = cliente_value.toLocaleString('pt-BR');
                                     consumo_td.before(cliente_td); 
                                 }
                                 consumo_td.classList.add('hidden');
@@ -143,19 +148,21 @@
                                     sum += Number(consumoData[clienteId]) || 0;
                                 }
                                 const volume_dia = parent.querySelector('.td_volume_total_dia');
-                                volume_dia.textContent = sum;
+                                volume_dia.textContent = sum.toLocaleString('pt-BR');
 
                                 // calcula o volume cumulativo de biometano no mes
                                 const volume_mes= parent.querySelector('.td_volume_total_mes');
                                 if (!previous_tr) volume_mes.textContent = volume_dia.textContent;
                                 else {
                                     const previous_td = previous_tr.querySelector('#tabela_relatorio .td_volume_total_mes');
-                                    volume_mes.textContent = Number(previous_td.textContent) + Number(volume_dia.textContent);
+                                    const previous_td_value = Number(previous_td.textContent.replaceAll('.', '').replace(',', '.'));
+                                    const volume_dia_value = Number(volume_dia.textContent.replaceAll('.', '').replace(',', '.'));
+                                    volume_mes.textContent = (previous_td_value + volume_dia_value).toLocaleString('pt-BR');
                                 }
                             })()
                         </script>
-                    <td class="energia"><?= h($relatorio->energia) ?></td>
-                    <td><?= h($relatorio->densidade) ?></td>
+                    <td class="energia number-format"><?= h($relatorio->energia) ?></td>
+                    <td class="number-format"><?= h($relatorio->densidade) ?></td>
                     <!-- <td><?= h($relatorio->observacoes) ?></td> -->
                 </tr>
                 <?php endforeach; ?>
@@ -175,30 +182,38 @@
                             // calcula as medias e somas finais 
                             const sum = function (elements) {
                                 let sum = 0;
-                                for (const element of elements) { sum += Number(element.textContent); }
+                                for (const element of elements) { 
+                                    sum += Number(element.textContent.replaceAll('.', '').replace(',', '.')); 
+                                }
                                 return sum;
                             }
                             
                             const ch4_media_metano = document.querySelectorAll('#tabela_relatorio .ch4_media_metano');
                             const media_metano = sum(ch4_media_metano) / ch4_media_metano.length;
-                            document.querySelector('#tabela_relatorio .ch4_media_metano_sum').textContent = media_metano.toFixed(2);
+                            document.querySelector('#tabela_relatorio .ch4_media_metano_sum').textContent = media_metano.toLocaleString('pt-BR');
                             
                             const dado_media_clientes = document.querySelectorAll('#tabela_relatorio .td_volume_total_dia');
                             const media_clientes = sum(dado_media_clientes) / dado_media_clientes.length;
-                            document.querySelector('#tabela_relatorio .media_clientes').textContent = media_clientes.toFixed(2);
+                            document.querySelector('#tabela_relatorio .media_clientes').textContent = media_clientes.toLocaleString('pt-BR');
                             
                             const dispenser_total = document.querySelectorAll('#tabela_relatorio .dispenser');
-                            document.querySelector('#tabela_relatorio .dispenser_total').textContent = sum(dispenser_total);
+                            document.querySelector('#tabela_relatorio .dispenser_total').textContent = sum(dispenser_total).toLocaleString('pt-BR');
 
                             const energia_total = document.querySelectorAll('#tabela_relatorio .energia');
-                            document.querySelector('#tabela_relatorio .energia_total').textContent = sum(energia_total);
-                            
+                            document.querySelector('#tabela_relatorio .energia_total').textContent = sum(energia_total).toLocaleString('pt-BR');
                         })()
                     </script>
                 </tr>
             </tbody>
         </table>
-        
+        <script>
+            // formata os numeros 
+            const cells_to_format = document.querySelectorAll('.number-format');
+            for (let cell of cells_to_format) {
+                const formated_number = cell.textContent.replaceAll('.', '').replace(',', '.');
+                cell.textContent = Number(formated_number).toLocaleString('pt-BR');
+            }
+        </script>
         <?= $this->Html->script('excellentexport') ?>
         <a id="excelexport" download="relatorio.xls" class="button" href="#" onclick="return ExcellentExport.excel(this, 'tabela_relatorio_export', 'Relatorio');">Exportar para Excel</a>
         <script>
